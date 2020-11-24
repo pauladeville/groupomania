@@ -23,6 +23,6 @@
 
 <script>
     export default {
-        name: "NavHome"
+        name: "HomeNav"
     }
 </script>

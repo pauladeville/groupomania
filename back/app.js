@@ -5,8 +5,8 @@ const path = require("path");
 const helmet = require("helmet");
 const expressSanitizer = require('express-sanitizer');
 
-//Importation du module dotenv
-require("dotenv").config();
+const userRoutes = require("./routes/user");
+const postRoutes = require("./routes/post");
 
 //Lancement de l'application express
 const app = express();
@@ -32,7 +32,7 @@ app.use(expressSanitizer());
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 //Enregistrement des routes associées aux endpoints attendus
-// app.use("/api/user", userRoutes);
-// app.use("/api/post", postRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/post", postRoutes);
 
 module.exports = app;
