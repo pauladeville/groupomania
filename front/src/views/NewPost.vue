@@ -1,0 +1,28 @@
+<template>
+    <div id="container">
+        <h1>Ajouter une publication</h1>
+        <form name='newpost'>
+            <fieldset>
+                <label for="title">Titre</label>
+                <input type="text" class="focus" id="title" name="title" placeholder="Titre">
+            </fieldset>
+            <fieldset>
+                <label for="media">Media</label>
+                <input type="file"  class="focus imagepost" id="media" name="media" accept="image/*">
+                <img id="preview" class="">
+            </fieldset>
+            <fieldset>
+                <label for="content">Contenu de l'article</label>
+                <textarea class="focus" id="content" name="content"></textarea>
+            </fieldset>
+            <button type="submit" id="upload" class="focus">Publier le post</button>
+            <button type="reset" class="focus">Réinitialiser</button>
+        </form>
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'NewPost'
+}
+</script>
