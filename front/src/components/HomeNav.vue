@@ -4,7 +4,7 @@
             <ul>
                 <li>
                 <router-link to="/">
-                    <img src="assets/img/logo-groupomania.png" id="logo" alt="Logo de Groupomania" />
+                    <img src="../assets/logo-groupomania.png" id="logo" alt="Logo de Groupomania" />
                 </router-link>
                 </li>
                 <li class="nav-links">

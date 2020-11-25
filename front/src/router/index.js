@@ -18,27 +18,27 @@ const routes = [
   {
     path: '/publier',
     name: 'NewPost',
-    component: NewPost.vue
+    component: NewPost
   },
   {
     path: '/modifier',
     name: 'ModifyPost',
-    component: ModifyPost.vue
+    component: ModifyPost
   },
   {
     path: '/profil',
     name: 'UserProfile',
-    component: UserProfile.vue
+    component: UserProfile
   },
   {
     path: '/inscription',
     name: 'SignUp',
-    component: SignUp.vue
+    component: SignUp
   },
   {
     path: '/forum',
     name: 'Feed',
-    component: Feed.vue
+    component: Feed
   }
 ]
 

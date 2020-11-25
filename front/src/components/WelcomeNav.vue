@@ -1,16 +1,12 @@
 <template>
-
   <header>
-
     <h1>
-      <img src="assets/img/logo-groupomania.png" id="logo" alt="Logo de Groupomania" />
+      <img src="../assets/logo-groupomania.png" id="logo" alt="Logo de Groupomania" />
     </h1>
-    
     <nav>
       <router-link to="/">Se connecter</router-link> |
-      <router-link to="/Signup">S'inscrire</router-link>
+      <router-link to="/inscription">S'inscrire</router-link>
     </nav>
-
   </header>
 </template>
 
@@ -22,7 +18,9 @@ export default {
 
 <style scoped lang="scss">
   header {
-    margin: 50px;
-	  border-bottom: 3px solid #fff;
+    margin: 0;
+    padding: 0;
+    border-bottom: 3px solid #fff;
+    background-color: #d49f00;
   }
 </style>
