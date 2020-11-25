@@ -86,20 +86,25 @@ export default {
     methods: {
         signup() {
             if(this.firstName && this.lastName) {
-                let userProfile = {
-                    firstName: this.firstName,
-                    lastName: this.lastName,
-                    email: this.email,
-                    password: this.password
+                const userProfile = {
+                    "firstName": this.firstName,
+                    "lastName": this.lastName,
+                    "email": this.email,
+                    "password": this.password
                 }
                 let url = "http://localhost:3000/api/user/signup"
+                // let url = "https://reqres.in/api/users"
                 let options = {
                     method: "POST",
                     body: JSON.stringify(userProfile),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 }
                 fetch(url, options)
-                .then(console.log("félicitation grande folle"))
-                .catch(error => console.log(error))
+                    .then(response => response.json())
+                    .then(data => console.log(data))
+                    .catch(error => console.log(error))
             }
             // this.$router.push("forum");
         }

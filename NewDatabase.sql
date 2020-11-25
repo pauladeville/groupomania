@@ -1,0 +1,15 @@
+CREATE DATABASE Groupomania CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE USER 'adminOC' IDENTIFIED BY 'devweb';
+GRANT ALL ON Groupomania.* TO 'adminOC';
+
+USE Groupomania;
+
+CREATE TABLE User (
+	userID SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	firstName VARCHAR(30) NOT NULL,
+	lastName VARCHAR(30) NOT NULL,
+	dateCreation DATETIME NOT NULL,
+	PRIMARY KEY (userID)
+)
+ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
