@@ -93,7 +93,6 @@ export default {
                     "password": this.password
                 }
                 let url = "http://localhost:3000/api/user/signup"
-                // let url = "https://reqres.in/api/users"
                 let options = {
                     method: "POST",
                     body: JSON.stringify(userProfile),
@@ -106,7 +105,7 @@ export default {
                     .then(data => console.log(data))
                     .catch(error => console.log(error))
             }
-            // this.$router.push("forum");
+            this.$router.push("forum");
         }
     }
 }

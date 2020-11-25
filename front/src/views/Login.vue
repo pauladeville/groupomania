@@ -4,9 +4,38 @@
         <WelcomeNav />
 
         <h1>Accédez à votre espace personnel</h1>
-        <form method="post" name="connexion">
+        <form v-on:submit.prevent="login">
             <fieldset>
-                <label for="email">Email *</label>
+                <label for="firstname">Prénom *</label>
+                <input
+                    type="text"
+                    id="firstname"
+                    name="firstname"
+                    required
+                    pattern="^\D*$"
+                    placeholder="Renseignez ici votre prénom"
+                    maxlength="30"
+                    aria-label="Entrez votre prénom"
+                    v-model="firstName"
+                >
+            </fieldset>
+            <fieldset>
+                <label for="lastname">Nom *</label>
+                <input
+                    type="text"
+                    id="lastname"
+                    name="lastname"
+                    required
+                    pattern="^\D*$"
+                    placeholder="Renseignez ici votre nom de famille"
+                    maxlength="30"
+                    aria-label="Entrez votre nom"
+                    v-model="lastName"
+                    >
+            </fieldset>
+
+            <!-- <fieldset> -->
+                <!-- <label for="email">Email *</label> -->
                 <!-- <input
                     type="email"
                     class="form-control"
@@ -20,9 +49,9 @@
                     v-model="email"
                     v-on:input="sendData"
                 > -->
-            </fieldset>
-            <fieldset>
-                <label for="password">Mot de passe *</label>
+            <!-- </fieldset> -->
+            <!-- <fieldset> -->
+                <!-- <label for="password">Mot de passe *</label> -->
                 <!-- <input
                     type="password"
                     class="form-control"
@@ -36,8 +65,8 @@
                     v-model="password"
                     v-on:input="sendData"
                 > -->
-            </fieldset>
-            <button type="submit" v-on:click="login">Se Connecter</button>
+            <!-- </fieldset> -->
+            <button>Se Connecter</button>
         </form>
         <p>{{ errorMessage }}</p>
     </div>
@@ -50,18 +79,30 @@ export default {
     name: 'Login',
     data: () => {
         return {
-            email: "",
-            password: "",
+            firstName: "",
+            lastName: "",
             errorMessage: ""
         }
     },
     methods: {
         login() {
-            // const emailValid = document.getElementById("email").checkValidity();
-            // const passwordValid = document.getElementById("password").checkValidity();
-            // if (emailValid && passwordValid) {
-                this.$router.push("forum");
-            // }
+            if (this.firstName && this.lastName) {
+                const loginUsed = {
+                    "firstName": this.firstName,
+                    "lastName": this.lastName
+                }
+                let url = "http://localhost:3000/api/user/login"
+                let options = {
+                    method: "POST",
+                    body: JSON.stringify(loginUsed),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+                fetch(url, options)
+                    .then(this.$router.push("forum"))
+                    .catch(error => console.log(error))
+            }
         }
     }
 }

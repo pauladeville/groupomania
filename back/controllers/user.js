@@ -6,7 +6,6 @@ const fs = require('fs'); // Permet de gérer les fichiers stockés
 
 // Création de l'utilisateur et hashage du mot de passe
 exports.signup = (req, res, next) => {
-    // const profileReceived = JSON.parse(req.body.userProfile);
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     let sqlSignup = "INSERT INTO User VALUES (NULL, ?, ?, NOW())";
@@ -15,12 +14,29 @@ exports.signup = (req, res, next) => {
         if (error) {
             return res.status(500).json(error.message)
         }
-        res.status(201).json({ message: "Meilleure meuf" });
+        res.status(201).json({ message: "Profil créé" });
     })
 };
 
 // Login de l'utilisateur
 exports.login = (req, res, next) => {
+    const firstNameLogin = req.body.firstName;
+    const lastNameLogin = req.body.lastName;
+    let sqlLogin = "SELECT * FROM User WHERE firstName = ?";
+    mysql.query(sqlLogin, [firstNameLogin], function(error, result) {
+        if(error) {
+            return res.status(500).json(error.message);
+        }
+        if(result.length == 0) {
+            return res.status(401).json({ error: "Profil introuvable"})
+        }
+        if(lastNameLogin == result[0].lastName) {
+            console.log("Utilisateur trouvé, vous pouvez kiffer")
+        }
+        else {
+            console.log("alors là vraiment je vois pas...")
+        }
+    })
 };
 
 // Suppresion d'un utilisateur
