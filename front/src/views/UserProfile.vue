@@ -1,5 +1,6 @@
 <template>
     <div id="container">
+        <HomeNav />
         <h1>Mon profil</h1>
         <form name="profil">
             <fieldset>
@@ -25,11 +26,15 @@
 </template>
 
 <script>
+import HomeNav from '../components/HomeNav'
 export default {
-    name: 'UserProfile'
+    name: 'UserProfile',
+    components: {
+        HomeNav
+    }
 }
 </script>
 
-<style lang="scss" scoped>
-  @import '../style.scss'
+<style lang="css">
+  @import '../style/style.css'
 </style>

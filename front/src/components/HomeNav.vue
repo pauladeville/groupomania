@@ -9,12 +9,12 @@
                 </li>
                 <li class="nav-links">
                 <router-link to="/publier">
-                    <img src="../assets/send.png">
+                    <img class="nav-icon" src="../assets/send.png">
                 </router-link>
                 <router-link to="/profil">
-                    <img src="../assets/user.png">
+                    <img class="nav-icon" src="../assets/user.png">
                 </router-link>
-                <i class="fas fa-sign-out-alt" id="signout"></i>
+                    <img @click="logout" class="nav-icon" src="../assets/logout.png">
                 </li>
             </ul>
         </nav>
@@ -23,10 +23,15 @@
 
 <script>
     export default {
-        name: "HomeNav"
+        name: "HomeNav",
+        methods: {
+            logout() {
+                this.$router.push("/");
+            }
+        }
     }
 </script>
 
-<style lang="scss" scoped>
-  @import '../style.scss'
+<style lang="css">
+  @import '../style/style.css'
 </style>

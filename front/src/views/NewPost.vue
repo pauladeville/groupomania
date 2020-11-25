@@ -1,5 +1,6 @@
 <template>
     <div id="container">
+        <HomeNav />
         <h1>Ajouter une publication</h1>
         <form name='newpost'>
             <fieldset>
@@ -22,11 +23,15 @@
 </template>
 
 <script>
+import HomeNav from '../components/HomeNav'
 export default {
-    name: 'NewPost'
+    name: 'NewPost',
+    components: {
+        HomeNav
+    }
 }
 </script>
 
-<style lang="scss" scoped>
-  @import '../style.scss'
+<style lang="css">
+  @import '../style/style.css'
 </style>

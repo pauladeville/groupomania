@@ -3,7 +3,7 @@
 
         <WelcomeNav />
 
-        <h1>Connectez-vous :</h1>
+        <h1>Accédez à votre espace personnel</h1>
         <form method="post" name="connexion">
             <fieldset>
                 <label for="email">Email *</label>
@@ -67,6 +67,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-  @import '../style.scss'
+<style lang="css">
+  @import '../style/style.css'
 </style>

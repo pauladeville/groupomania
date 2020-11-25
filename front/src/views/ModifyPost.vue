@@ -1,5 +1,6 @@
 <template>
     <div id="container">
+        <HomeNav />
         <h1>Modifier cette publication</h1>
         <form>
             <fieldset>
@@ -17,11 +18,15 @@
 </template>
 
 <script>
+import HomeNav from '../components/HomeNav'
 export default {
-    name: 'ModifyPost'
+    name: 'ModifyPost',
+    components: {
+        HomeNav
+    }
 }
 </script>
 
-<style lang="scss" scoped>
-  @import '../style.scss'
+<style lang="css">
+  @import '../style/style.css'
 </style>

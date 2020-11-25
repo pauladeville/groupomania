@@ -2,7 +2,7 @@
 $bg-color: #d49f00;
 $text-color: #fff;
 
-#app {
+body {
 	width: 100%;
     margin: 0;
     padding: 0;
@@ -56,6 +56,11 @@ nav ul {
     border-radius: 50px;
 }
 
+.nav-icon {
+	width: 40px;
+	margin: 0 20px;
+}
+
 
 .a__title, .a__title:hover, .a__title:visited, .a__title:link {
 	color: #000;
@@ -64,7 +69,7 @@ nav ul {
 
 h1 {
 	text-align: center;
-	margin: 30px;
+	margin: 80px 0;
     text-transform: uppercase;
     font-size: 1.3rem;
 }
@@ -102,6 +107,7 @@ fieldset {
 
 label {
 	display: block;
+	margin: 10px 0;
 }
 
 input {
@@ -109,8 +115,9 @@ input {
 	border-radius: 4px;
 	width: 90%;
 	height: 25px;
-	margin: 5px auto;
+	margin-bottom: 20px;
 	padding: 5px;
+	border: none;
 }
 
 .imagepost {
@@ -122,7 +129,7 @@ textarea {
 	border-radius: 4px;
 	width: 90%;
 	height: 230px;
-	border: 1px solid #ddd;
+	border: none;
 	margin: 5px auto;
 	padding: 5px;
 }
@@ -130,11 +137,12 @@ textarea {
 button {
 	color: $bg-color;
 	background-color: $text-color;
-	border-radius: 5px;
+	border-radius: 4px;
 	padding: 10px;
 	font-size: 1rem;
-    margin: 30px 10px 0 10px;
-    outline: none;
+	margin: 30px 10px 0 10px;
+	cursor: pointer;
+	border: none;
     &:focus {
         color: $text-color;
         background-color: $bg-color;

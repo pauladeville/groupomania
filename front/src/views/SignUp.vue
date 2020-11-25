@@ -3,7 +3,7 @@
 
         <WelcomeNav />
 
-        <h1>Inscription à Groupomania :</h1>
+        <h1>Nouveau sur Groupomania ?</h1>
         <form>
             <fieldset>
                 <label for="firstname">Prénom *</label>
@@ -90,6 +90,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-  @import '../style.scss'
+<style lang="css">
+  @import '../style/style.css'
 </style>
