@@ -49,16 +49,16 @@ nav ul {
 }
 
 .nav-links .router-link-active, .nav-links .router-link-active:hover, .nav-links .router-link-active:visited, .nav-links .router-link-active:link {
-	color: $bg-color;
-	background-color: $text-color;
+	border: $text-color 3px dotted;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
-    border-radius: 50px;
+	border-radius: 50px;
 }
 
 .nav-icon {
-	width: 40px;
+	width: 35px;
 	margin: 0 20px;
+	padding: 17px 0px;
 }
 
 
@@ -136,16 +136,18 @@ textarea {
 
 button {
 	color: $bg-color;
+	font-weight: bold;
 	background-color: $text-color;
 	border-radius: 4px;
-	padding: 10px;
+	padding: 10px 20px;
 	font-size: 1rem;
 	margin: 30px 10px 0 10px;
 	cursor: pointer;
 	border: none;
     &:focus {
-        color: $text-color;
-        background-color: $bg-color;
+		color: $text-color;
+		background-color: lighten($bg-color, 20) ;
+		outline: none;
     }
 }
 

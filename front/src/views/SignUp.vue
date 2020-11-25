@@ -4,10 +4,10 @@
         <WelcomeNav />
 
         <h1>Nouveau sur Groupomania ?</h1>
-        <form>
+        <form v-on:submit.prevent="signup">
             <fieldset>
                 <label for="firstname">Prénom *</label>
-                <!-- <input
+                <input
                     type="text"
                     id="firstname"
                     name="firstname"
@@ -17,11 +17,11 @@
                     maxlength="30"
                     aria-label="Entrez votre prénom"
                     v-model="firstName"
-                > -->
+                >
             </fieldset>
             <fieldset>
                 <label for="lastname">Nom *</label>
-                <!-- <input
+                <input
                     type="text"
                     id="lastname"
                     name="lastname"
@@ -31,11 +31,11 @@
                     maxlength="30"
                     aria-label="Entrez votre nom"
                     v-model="lastName"
-                    > -->
+                    >
             </fieldset>
-            <fieldset>
+            <!-- <fieldset>
                 <label for="email">Email *</label>
-                <!-- <input
+                <input
                     type="email"
                     class="form-control"
                     id="email"
@@ -46,11 +46,11 @@
                     maxlength="60"
                     aria-label="Entrez votre email"
                     v-model="email"
-                > -->
+                >
             </fieldset>
             <fieldset>
                 <label for="password">Mot de passe *</label>
-                <!-- <input
+                <input
                     type="password"
                     class="form-control"
                     id="password"
@@ -61,9 +61,10 @@
                     aria-label="Entrez votre mot de passe"
                     aria-describedby="passwordInfo"
                     v-model="password"
-                > -->
-            </fieldset>
-            <button type="submit" v-on:click="signup">S'inscrire</button>
+                >
+            </fieldset> -->
+            <p>{{ errorMessage }} </p>
+            <button>S'inscrire</button>
         </form>
     </div>
 </template>
@@ -77,14 +78,30 @@ export default {
         return {
             firstName: "",
             lastName: "",
-            email: "",
-            password: "",
+            // email: "",
+            // password: "",
             errorMessage: ""
         }
     },
     methods: {
         signup() {
-            this.$router.push("forum");
+            if(this.firstName && this.lastName) {
+                let userProfile = {
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    email: this.email,
+                    password: this.password
+                }
+                let url = "http://localhost:3000/api/user/signup"
+                let options = {
+                    method: "POST",
+                    body: JSON.stringify(userProfile),
+                }
+                fetch(url, options)
+                .then(console.log("félicitation grande folle"))
+                .catch(error => console.log(error))
+            }
+            // this.$router.push("forum");
         }
     }
 }

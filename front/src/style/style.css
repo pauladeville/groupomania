@@ -45,16 +45,16 @@ nav ul a, nav ul a:hover, nav ul a:visited, nav ul a:link {
 }
 
 .nav-links .router-link-active, .nav-links .router-link-active:hover, .nav-links .router-link-active:visited, .nav-links .router-link-active:link {
-  color: #d49f00;
-  background-color: #fff;
+  border: #fff 3px dotted;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
 }
 
 .nav-icon {
-  width: 40px;
+  width: 35px;
   margin: 0 20px;
+  padding: 17px 0px;
 }
 
 .a__title, .a__title:hover, .a__title:visited, .a__title:link {
@@ -130,9 +130,10 @@ textarea {
 
 button {
   color: #d49f00;
+  font-weight: bold;
   background-color: #fff;
   border-radius: 4px;
-  padding: 10px;
+  padding: 10px 20px;
   font-size: 1rem;
   margin: 30px 10px 0 10px;
   cursor: pointer;
@@ -140,7 +141,8 @@ button {
 }
 button:focus {
   color: #fff;
-  background-color: #d49f00;
+  background-color: #ffce3b;
+  outline: none;
 }
 
 .erreur__formulaire input, .form-group.erreur__formulaire textarea {

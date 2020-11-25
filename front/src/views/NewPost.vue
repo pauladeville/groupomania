@@ -16,8 +16,7 @@
                 <label for="content">Contenu de l'article</label>
                 <textarea class="focus" id="content" name="content"></textarea>
             </fieldset>
-            <button type="submit" id="upload" class="focus">Publier le post</button>
-            <button type="reset" class="focus">Réinitialiser</button>
+            <button type="submit" id="upload">Publier le post</button>
         </form>
     </div>
 </template>

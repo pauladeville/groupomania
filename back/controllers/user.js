@@ -6,6 +6,8 @@ const fs = require('fs'); // Permet de gérer les fichiers stockés
 
 // Création de l'utilisateur et hashage du mot de passe
 exports.signup = (req, res, next) => {
+    // const profileReceived = JSON.parse(req.body.userProfile);
+    console.log("YESSSSS")
 };
 
 // Login de l'utilisateur
