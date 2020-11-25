@@ -9,10 +9,10 @@
                 </li>
                 <li class="nav-links">
                 <router-link to="/publier">
-                    <i class="fas fa-pen"></i>
+                    <img src="../assets/send.png">
                 </router-link>
                 <router-link to="/profil">
-                    <i class="fas fa-user"></i>
+                    <img src="../assets/user.png">
                 </router-link>
                 <i class="fas fa-sign-out-alt" id="signout"></i>
                 </li>
@@ -26,3 +26,7 @@
         name: "HomeNav"
     }
 </script>
+
+<style lang="scss" scoped>
+  @import '../style.scss'
+</style>

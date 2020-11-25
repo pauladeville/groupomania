@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    <main id="main">
-      <router-view></router-view>
-    </main>
+    <h1>coucou</h1>
+    <router-view></router-view>
   </div>
 </template>
+
+<style lang="scss" scoped>
+  @import 'style.scss'
+</style>

@@ -1,7 +1,7 @@
 <template>
   <div id="container">
     <HomeNav />
-    <h1>Fil d\'actualité</h1>
+    <h1>Fil d'actualité</h1>
   </div>
 </template>
 
@@ -15,3 +15,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  @import '../style.scss'
+</style>

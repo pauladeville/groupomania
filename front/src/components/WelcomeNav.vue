@@ -16,11 +16,6 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-  header {
-    margin: 0;
-    padding: 0;
-    border-bottom: 3px solid #fff;
-    background-color: #d49f00;
-  }
+<style lang="scss" scoped>
+  @import '../style.scss'
 </style>

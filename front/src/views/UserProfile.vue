@@ -29,3 +29,7 @@ export default {
     name: 'UserProfile'
 }
 </script>
+
+<style lang="scss" scoped>
+  @import '../style.scss'
+</style>

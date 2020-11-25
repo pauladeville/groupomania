@@ -26,3 +26,7 @@ export default {
     name: 'NewPost'
 }
 </script>
+
+<style lang="scss" scoped>
+  @import '../style.scss'
+</style>

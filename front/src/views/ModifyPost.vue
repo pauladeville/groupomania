@@ -21,3 +21,7 @@ export default {
     name: 'ModifyPost'
 }
 </script>
+
+<style lang="scss" scoped>
+  @import '../style.scss'
+</style>

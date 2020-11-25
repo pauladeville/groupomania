@@ -1,0 +1,242 @@
+// COULEURS
+$bg-color: #d49f00;
+$text-color: #fff;
+
+#app {
+	width: 100%;
+    margin: 0;
+    padding: 0;
+	background-color: $bg-color;
+	color: $text-color;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	text-align: center;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    width: 80%;
+	margin: 40px auto;
+	justify-content: space-between;
+	align-items: center;
+    flex-wrap: wrap;
+    li i {
+        font-size: 1.5rem;
+        margin: 20px;
+    }
+    a, a:hover, a:visited, a:link {
+        color: #FFFFFF;
+        text-decoration: none;
+    } 
+}
+
+.logo {
+	width: 18rem;
+	height: 3.125rem;
+	margin-bottom: 30px;
+}
+
+#signout, #signout:hover, #signout:visited, #signout:link {
+	color: #9c0049;
+	text-decoration: none;
+}
+
+.nav-links {
+	display: flex;
+	justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links .router-link-active, .nav-links .router-link-active:hover, .nav-links .router-link-active:visited, .nav-links .router-link-active:link {
+	color: $bg-color;
+	background-color: $text-color;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+}
+
+
+.a__title, .a__title:hover, .a__title:visited, .a__title:link {
+	color: #000;
+}
+
+
+h1 {
+	text-align: center;
+	margin: 30px;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+}
+
+h2 {
+	color: #000;
+}
+
+header {
+	border-bottom: 3px solid #fff;
+}
+
+main {
+	width: 80%;
+	height: 90%;
+	margin: 30px auto;
+	padding: 0.5rem 10%;
+}
+
+form {
+	max-width: 650px;
+	margin: auto;
+	padding: 35px 20px;
+    border: 2px solid #fff;
+    background-color: darken($bg-color, 5);
+}
+
+#adresseclient {
+	margin: 8px;
+}
+
+fieldset {
+    border: none;
+}
+
+label {
+	display: block;
+}
+
+input {
+	background-color: #fff;
+	border-radius: 4px;
+	width: 90%;
+	height: 25px;
+	margin: 5px auto;
+	padding: 5px;
+}
+
+.imagepost {
+	border: 0px solid #ddd;
+}
+
+textarea {
+	outline: none;
+	border-radius: 4px;
+	width: 90%;
+	height: 230px;
+	border: 1px solid #ddd;
+	margin: 5px auto;
+	padding: 5px;
+}
+
+button {
+	color: $bg-color;
+	background-color: $text-color;
+	border-radius: 5px;
+	padding: 10px;
+	font-size: 1rem;
+    margin: 30px 10px 0 10px;
+    outline: none;
+    &:focus {
+        color: $text-color;
+        background-color: $bg-color;
+    }
+}
+
+.erreur__formulaire input, .form-group.erreur__formulaire textarea {
+	border: 2px solid #9c0049;
+}
+
+.form-group.erreur__formulaire label {
+	color: #9c0049;
+}
+
+.erreur__formulaire::after {
+	content: 'Ce champs est invalide';
+	display: block;
+	color: #9c0049;
+	padding: 5px 0;
+	font-size: .9rem;
+}
+/*liste post*/
+#post-list {
+	display: -webkit-flex;
+	display: flex;
+	max-width: 650px;
+	height: 100%;
+	margin: auto;
+	margin-bottom: 1rem;
+	flex-direction: column;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+}
+.post-contenant__index {
+	width: 100%;
+	height: auto;
+	margin: 1% 1%;
+	text-align: center;
+	order: 0;
+	flex-grow: 0;
+	flex-shrink: 0;
+	flex-basis: auto;
+	align-self: stretch;
+	-webkit-box-shadow: 0px 0px 0.5rem #000000;
+	-moz-box-shadow: 0px 0px 0.5rem #000000;
+	box-shadow: 0px 0px 0.5rem #000000;
+}
+/*article*/
+.post-image {
+	max-height: 200px;
+	transform: scale(1);
+}
+.poster {
+	text-align: left;
+	padding: 8px;
+	color: #001935;
+}
+.user-name {
+	font-weight: bold;
+	text-transform: capitalize;
+}
+.post-date {
+	font-weight: lighter;
+	font-size: 0.7rem;
+}
+.body-post {
+	padding: 8px;
+	text-align: justify;
+	font-weight: lighter;
+}
+.action {
+	text-align: left;
+	padding: 8px;
+}
+.post-contenu a {
+	color: black;
+}
+@media (max-width: 700px) {
+    main {
+		padding: 15px;
+    }
+	nav ul {
+		display: block;;
+    }
+	.nav-links {
+        justify-content: center;
+        margin-top: 25px;
+    }
+
+	#post-list {
+		display: -webkit-flex;
+		display: flex;
+		flex-wrap: wrap;
+		flex-wrap: -webkit-wrap;
+		max-width: 100%;
+		height: 100%;
+		margin: auto;
+		margin-bottom: 1rem;
+		flex-direction: column;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
+    }
+}
