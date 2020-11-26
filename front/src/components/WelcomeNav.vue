@@ -4,8 +4,8 @@
       <img src="../assets/logo-groupomania.png" id="logo" alt="Logo de Groupomania" />
     </h1>
     <nav>
-      <router-link to="/">Se connecter</router-link> |
-      <router-link to="/inscription">S'inscrire</router-link>
+      <router-link to="/" class="welcome-links">Se connecter</router-link>
+      <router-link to="/inscription" class="welcome-links">S'inscrire</router-link>
     </nav>
   </header>
 </template>

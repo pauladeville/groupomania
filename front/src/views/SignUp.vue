@@ -105,7 +105,8 @@ export default {
                     .then(data => console.log(data))
                     .catch(error => console.log(error))
             }
-            this.$router.push("forum");
+            // this.$router.push("forum");
+            // localStorage.setItem("userId", data)
         }
     }
 }

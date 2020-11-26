@@ -66,9 +66,9 @@
                     v-on:input="sendData"
                 > -->
             <!-- </fieldset> -->
+            <p>{{ errorMessage }}</p>
             <button>Se Connecter</button>
         </form>
-        <p>{{ errorMessage }}</p>
     </div>
 </template>
 
@@ -100,7 +100,18 @@ export default {
                     }
                 }
                 fetch(url, options)
-                    .then(this.$router.push("forum"))
+                    .then(res => res.json())
+                    .then(data => console.log(data))
+
+                        // if (res.status >= 200 && res.status <= 299) {
+                        //     res.json()
+                        //     this.$router.push("forum")
+                        // }
+                        // else {
+                        //     throw Error(res.status),
+                        //     this.errorMessage = "Vérifiez que vous avez bien entré vos identifiants"
+                        // }
+                    // })
                     .catch(error => console.log(error))
             }
         }

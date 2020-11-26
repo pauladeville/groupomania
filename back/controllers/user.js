@@ -3,6 +3,7 @@ const dotenv = require("dotenv").config();
 const bcrypt = require('bcrypt'); // Pour crypter le mot de passe
 const jwt = require('jsonwebtoken'); // Génère un token sécurisé
 const fs = require('fs'); // Permet de gérer les fichiers stockés
+const { response } = require('express');
 
 // Création de l'utilisateur et hashage du mot de passe
 exports.signup = (req, res, next) => {
@@ -28,13 +29,20 @@ exports.login = (req, res, next) => {
             return res.status(500).json(error.message);
         }
         if(result.length == 0) {
-            return res.status(401).json({ error: "Profil introuvable"})
+            return res.status(404).json({ error: "Profil introuvable"})
         }
         if(lastNameLogin == result[0].lastName) {
-            console.log("Utilisateur trouvé, vous pouvez kiffer")
+            return res.status(200).json({
+                userId: result[0].userId,
+                token: jwt.sign(
+                    {userId: result[0].userId},
+                    process.env.TOKEN,
+                    {expiresIn: "24h"}
+                )
+            })
         }
         else {
-            console.log("alors là vraiment je vois pas...")
+            return res.status(401).json({ error: "Le nom et le prénom ne correspondent pas"})
         }
     })
 };
