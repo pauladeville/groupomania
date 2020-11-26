@@ -21,8 +21,10 @@ exports.signup = (req, res, next) => {
 
 // Login de l'utilisateur
 exports.login = (req, res, next) => {
+    //récupérer les identifiants transmis par le front
     const firstNameLogin = req.body.firstName;
     const lastNameLogin = req.body.lastName;
+    //recherche mySQL
     let sqlLogin = "SELECT * FROM User WHERE firstName = ?";
     mysql.query(sqlLogin, [firstNameLogin], function(error, result) {
         if(error) {
@@ -31,9 +33,10 @@ exports.login = (req, res, next) => {
         if(result.length == 0) {
             return res.status(404).json({ error: "Profil introuvable"})
         }
+        //si le profil correspond, renvoyer un token
         if(lastNameLogin == result[0].lastName) {
             return res.status(200).json({
-                userId: result[0].userId,
+                userID: result[0].userID,
                 token: jwt.sign(
                     {userId: result[0].userId},
                     process.env.TOKEN,
@@ -42,7 +45,7 @@ exports.login = (req, res, next) => {
             })
         }
         else {
-            return res.status(401).json({ error: "Le nom et le prénom ne correspondent pas"})
+            return res.status(401).json({ error: "Le nom et le prénom ne correspondent pas."})
         }
     })
 };

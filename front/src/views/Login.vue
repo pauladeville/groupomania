@@ -87,6 +87,7 @@ export default {
     methods: {
         login() {
             if (this.firstName && this.lastName) {
+                //construction de l'objet "identifiants" à envoyer à l'API
                 const loginUsed = {
                     "firstName": this.firstName,
                     "lastName": this.lastName
@@ -101,17 +102,19 @@ export default {
                 }
                 fetch(url, options)
                     .then(res => res.json())
-                    .then(data => console.log(data))
-
-                        // if (res.status >= 200 && res.status <= 299) {
-                        //     res.json()
-                        //     this.$router.push("forum")
-                        // }
-                        // else {
-                        //     throw Error(res.status),
-                        //     this.errorMessage = "Vérifiez que vous avez bien entré vos identifiants"
-                        // }
-                    // })
+                    .then((res) => {
+                        //si l'API valide les données et renvoie un token
+                        if (res.userID) {
+                            //afficher le token et accéder à la page d'accueil
+                            localStorage.setItem("userID", res.userID)
+                            localStorage.setItem("token", res.token)
+                            console.log(localStorage)
+                            this.$router.push("forum")
+                        } else {
+                            //sinon afficher le message d'erreur correspondant sous le formulaire
+                            this.errorMessage = res.error
+                        }
+                    })
                     .catch(error => console.log(error))
             }
         }
