@@ -101,7 +101,7 @@ exports.modify = (req, res, next) => {
     };
     console.log(updatedProfile);
     let sqlModify = "UPDATE User SET firstName=?, lastName=? WHERE userID=?";
-    let values = [firstName, lastName, userID];
+    let values = [updatedProfile.firstName, updatedProfile.lastName, updatedProfile.userID];
     mysql.query(sqlModify, values, function(error, result) {
         if (error) {
             return res.status(500).json(error.message);

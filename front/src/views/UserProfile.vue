@@ -61,6 +61,8 @@ export default {
             fetch(url, options)
                 .then(response => response.json())
                 .then(data => console.log(data))
+                .then(            this.setProfile()
+)
                 .catch(error => console.log(error))
         }
         // getUser() {
