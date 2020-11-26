@@ -2,15 +2,15 @@
     <div id="container">
         <HomeNav />
         <h1>Mon profil</h1>
-        <form name="profil">
-            <!-- <fieldset>
-                <label for="new-lastName">Votre nom n'est pas {{ lastName }} ?</label>
-                <input id="new-lastName" class="focus" placeholder="Votre vrai nom" name="new-ast_name" required>
+        <form v-on:submit.prevent="modifyProfile">
+            <fieldset>
+                <label for="newLastName">Votre nom n'est pas {{ userProfile.lastName }} ?</label>
+                <input id="newLastName" class="focus" placeholder="Votre vrai nom" name="new-ast_name" required>
             </fieldset>
             <fieldset>
-                <label for="new-firstname">Votre prénom n'est pas {{ firstName }} ?</label>
-                <input id="new-firstName" placeholder="Votre vrai prénom" name="new-first_name" required>
-            </fieldset> -->
+                <label for="newFirstname">Votre prénom n'est pas {{ userProfile.firstName }} ?</label>
+                <input id="newFirstName" placeholder="Votre vrai prénom" name="new-first_name" required>
+            </fieldset>
             <!-- <fieldset>
                 <label for="new-email">Nouvel email</label>
                 <input id="new-email" placeholder="Email" type="email" name="new-email" required>
@@ -34,27 +34,50 @@ export default {
     },
     data() {
         return {
-            userID: localStorage.getItem("userID"),
-            user: {}
+            userProfile: {}
         }
     },
     methods: {
-        getUser() {
-            let url = `http://localhost:3000/api/user/${ this.userID }/profile`
+        setProfile() {
+            let exProfile = JSON.parse(localStorage.getItem("userProfile"))
+            console.log(exProfile)
+            this.userProfile = exProfile
+        },
+        modifyProfile() {
+            let newProfile = {
+                newLastName: document.getElementById("newLastName").value,
+                newFirstName: document.getElementById("newFirstName").value
+            }
+            console.log(newProfile)
+            let url = `http://localhost:3000/api/user/${ this.userID }/modify`
             let options = {
-                method: "GET",
+                method: "PUT",
                 // headers: {
                 //     'Content-Type': 'application/json'
-                // }
+                // },
+                body: JSON.stringify(newProfile)
             }
             fetch(url, options)
                 .then(response => response.json())
                 .then(data => console.log(data))
                 .catch(error => console.log(error))
         }
+        // getUser() {
+        //     let url = `http://localhost:3000/api/user/${ this.userID }/profile`
+        //     let options = {
+        //         method: "GET",
+        //         // headers: {
+        //         //     'Content-Type': 'application/json'
+        //         // }
+        //     }
+        //     fetch(url, options)
+        //         .then(response => response.json())
+        //         .then(data => console.log(data))
+        //         .catch(error => console.log(error))
+        // }
     },
     mounted() {
-        this.getUser();
+        this.setProfile();
     }
 }
 </script>

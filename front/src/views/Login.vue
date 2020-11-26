@@ -88,7 +88,7 @@ export default {
         login() {
             if (this.firstName && this.lastName) {
                 //construction de l'objet "identifiants" à envoyer à l'API
-                const loginUsed = {
+                let loginUsed = {
                     "firstName": this.firstName,
                     "lastName": this.lastName
                 }
@@ -104,12 +104,11 @@ export default {
                     .then(res => res.json())
                     .then((res) => {
                         //si l'API valide les données et renvoie un token
-                        if (res.userID) {
-                            //afficher le token et accéder à la page d'accueil
-                            localStorage.setItem("userID", res.userID)
+                        if (res.userProfile && res.token) {
+                            localStorage.setItem("userProfile", JSON.stringify(res.userProfile))
                             localStorage.setItem("token", res.token)
                             console.log(localStorage)
-                            this.$router.push("forum")
+                            this.$router.push("forum");
                         } else {
                             //sinon afficher le message d'erreur correspondant sous le formulaire
                             this.errorMessage = res.error
@@ -118,6 +117,9 @@ export default {
                     .catch(error => console.log(error))
             }
         }
+    },
+    mounted() {
+        localStorage.clear();
     }
 }
 </script>

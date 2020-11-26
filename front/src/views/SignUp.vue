@@ -85,7 +85,7 @@ export default {
         signup() {
             if(this.firstName && this.lastName) {
                 //construction de l'objet "profil" à envoyer à l'API
-                const userProfile = {
+                let userProfile = {
                     "firstName": this.firstName,
                     "lastName": this.lastName,
                 }
@@ -98,22 +98,26 @@ export default {
                     }
                 }
                 fetch(url, options)
-                    .then(response => response.json())
-                    .then((response) => {
-                        if (response.userID) {
-                            localStorage.setItem("userID", response.userID)
-                            localStorage.setItem("token", response.token)
+                    .then(res => res.json())
+                    .then((res) => {
+                        if (res.userProfile && res.token) {
+                            localStorage.setItem("userProfile", JSON.stringify(res.userProfile))
+                            localStorage.setItem("token", res.token)
                             console.log(localStorage)
                             this.$router.push("forum");
                         } else {
                             //sinon afficher le message d'erreur correspondant sous le formulaire
-                            this.errorMessage = response.error
+                            this.errorMessage = res.error
                         }
                     })
                     .catch(error => console.log(error))
             }
         }
+    },
+    mounted() {
+        localStorage.clear();
     }
+
 }
 </script>
 
