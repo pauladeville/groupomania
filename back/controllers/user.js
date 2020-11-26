@@ -13,9 +13,25 @@ exports.signup = (req, res, next) => {
     let values = [firstName, lastName];
     mysql.query(sqlSignup, values, function(error, result) {
         if (error) {
-            return res.status(500).json(error.message)
+            console.log(error)
+        } else {
+            console.log("Utilisateur créé")
         }
-        res.status(201).json({ message: "Profil créé" });
+    });
+    let sqlLogin = "SELECT userID FROM User WHERE firstName = ?";
+    mysql.query(sqlLogin, [firstName], function(error, result) {
+        if (error) {
+            return res.status(500).json(error.message)
+        } else {
+            return res.status(200).json({
+                userID: result[0].userID,
+                token: jwt.sign(
+                    { userID: result[0].userID },
+                    process.env.TOKEN,
+                    { expiresIn: "24h" }
+                )
+            })
+        }
     })
 };
 
@@ -30,17 +46,17 @@ exports.login = (req, res, next) => {
         if(error) {
             return res.status(500).json(error.message);
         }
-        if(result.length == 0) {
+        else if(result.length == 0) {
             return res.status(404).json({ error: "Profil introuvable"})
         }
         //si le profil correspond, renvoyer un token
-        if(lastNameLogin == result[0].lastName) {
+        else if(lastNameLogin == result[0].lastName) {
             return res.status(200).json({
                 userID: result[0].userID,
                 token: jwt.sign(
-                    {userId: result[0].userId},
+                    { userID: result[0].userID },
                     process.env.TOKEN,
-                    {expiresIn: "24h"}
+                    { expiresIn: "24h" }
                 )
             })
         }

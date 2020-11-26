@@ -78,19 +78,16 @@ export default {
         return {
             firstName: "",
             lastName: "",
-            // email: "",
-            // password: "",
             errorMessage: ""
         }
     },
     methods: {
         signup() {
             if(this.firstName && this.lastName) {
+                //construction de l'objet "profil" à envoyer à l'API
                 const userProfile = {
                     "firstName": this.firstName,
                     "lastName": this.lastName,
-                    "email": this.email,
-                    "password": this.password
                 }
                 let url = "http://localhost:3000/api/user/signup"
                 let options = {
@@ -102,11 +99,19 @@ export default {
                 }
                 fetch(url, options)
                     .then(response => response.json())
-                    .then(data => console.log(data))
+                    .then((response) => {
+                        if (response.userID) {
+                            localStorage.setItem("userID", response.userID)
+                            localStorage.setItem("token", response.token)
+                            console.log(localStorage)
+                            this.$router.push("forum");
+                        } else {
+                            //sinon afficher le message d'erreur correspondant sous le formulaire
+                            this.errorMessage = response.error
+                        }
+                    })
                     .catch(error => console.log(error))
             }
-            // this.$router.push("forum");
-            // localStorage.setItem("userId", data)
         }
     }
 }
