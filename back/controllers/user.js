@@ -72,6 +72,16 @@ exports.delete = (req, res, next) => {
 
 // Récupérer le profil d'un utilisateur
 exports.profile = (req, res, next) => {
+    let userID = req.params["id"];
+    let sqlGet = "SELECT * FROM User WHERE userID = ?";
+    mysql.query(sqlGet, [userID], function(error, result) {
+        if(error) {
+            return res.status(500).json(error.message);
+        }
+        else {
+            return res.status(200).json({ message: "voici les informations du profil "})
+        }
+    })
 };
 
 // Modifier un profil

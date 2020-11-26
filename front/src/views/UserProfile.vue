@@ -3,14 +3,14 @@
         <HomeNav />
         <h1>Mon profil</h1>
         <form name="profil">
-            <fieldset>
+            <!-- <fieldset>
                 <label for="new-lastName">Votre nom n'est pas {{ lastName }} ?</label>
                 <input id="new-lastName" class="focus" placeholder="Votre vrai nom" name="new-ast_name" required>
             </fieldset>
             <fieldset>
                 <label for="new-firstname">Votre prénom n'est pas {{ firstName }} ?</label>
                 <input id="new-firstName" placeholder="Votre vrai prénom" name="new-first_name" required>
-            </fieldset>
+            </fieldset> -->
             <!-- <fieldset>
                 <label for="new-email">Nouvel email</label>
                 <input id="new-email" placeholder="Email" type="email" name="new-email" required>
@@ -34,17 +34,18 @@ export default {
     },
     data() {
         return {
+            userID: localStorage.getItem("userID"),
             user: {}
         }
     },
     methods: {
         getUser() {
-            let url = `http://localhost:3000/api/user/${this.$route.params.id}`
+            let url = `http://localhost:3000/api/user/${ this.userID }/profile`
             let options = {
                 method: "GET",
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                // headers: {
+                //     'Content-Type': 'application/json'
+                // }
             }
             fetch(url, options)
                 .then(response => response.json())

@@ -3,7 +3,7 @@
         <nav>
             <ul>
                 <li>
-                <router-link to="/">
+                <router-link to="/forum">
                     <img src="../assets/logo-groupomania.png" id="logo" alt="Logo de Groupomania" />
                 </router-link>
                 </li>
