@@ -94,4 +94,24 @@ exports.profile = (req, res, next) => {
 
 // Modifier un profil
 exports.modify = (req, res, next) => {
+    let updatedProfile = {
+        userID: req.params["id"],
+        firstName: req.body.newFirstName,
+        lastName: req.body.newLastName,
+    };
+    console.log(updatedProfile);
+    let sqlModify = "UPDATE User SET firstName=?, lastName=? WHERE userID=?";
+    let values = [firstName, lastName, userID];
+    mysql.query(sqlModify, values, function(error, result) {
+        if (error) {
+            return res.status(500).json(error.message);
+        }
+        if (result.affectedRows == 0) {
+            return res.status(400).json({ message: "La modification n'a pas pu aboutir" });
+        }
+        else {
+            res.status(200).json({ message: "Modification effectuée" });
+        }
+})
+    
 };

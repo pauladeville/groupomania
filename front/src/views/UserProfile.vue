@@ -4,13 +4,14 @@
         <h1>Mon profil</h1>
         <form v-on:submit.prevent="modifyProfile">
             <fieldset>
-                <label for="newLastName">Votre nom n'est pas {{ userProfile.lastName }} ?</label>
-                <input id="newLastName" class="focus" placeholder="Votre vrai nom" name="new-ast_name" required>
-            </fieldset>
-            <fieldset>
                 <label for="newFirstname">Votre prénom n'est pas {{ userProfile.firstName }} ?</label>
                 <input id="newFirstName" placeholder="Votre vrai prénom" name="new-first_name" required>
             </fieldset>
+            <fieldset>
+                <label for="newLastName">Votre nom n'est pas {{ userProfile.lastName }} ?</label>
+                <input id="newLastName" class="focus" placeholder="Votre vrai nom" name="new-ast_name" required>
+            </fieldset>
+
             <!-- <fieldset>
                 <label for="new-email">Nouvel email</label>
                 <input id="new-email" placeholder="Email" type="email" name="new-email" required>
@@ -34,28 +35,28 @@ export default {
     },
     data() {
         return {
-            userProfile: {}
+            userProfile: {},
         }
     },
     methods: {
         setProfile() {
-            let exProfile = JSON.parse(localStorage.getItem("userProfile"))
-            console.log(exProfile)
-            this.userProfile = exProfile
+            let storedProfile = JSON.parse(localStorage.getItem("userProfile"))
+            console.log(storedProfile)
+            this.userProfile = storedProfile
         },
         modifyProfile() {
-            let newProfile = {
+            let profileToSend = {
+                userID: this.userProfile.userID,
+                newFirstName: document.getElementById("newFirstName").value,
                 newLastName: document.getElementById("newLastName").value,
-                newFirstName: document.getElementById("newFirstName").value
             }
-            console.log(newProfile)
-            let url = `http://localhost:3000/api/user/${ this.userID }/modify`
+            let url = `http://localhost:3000/api/user/${ this.userProfile.userID }/modify`
             let options = {
                 method: "PUT",
-                // headers: {
-                //     'Content-Type': 'application/json'
-                // },
-                body: JSON.stringify(newProfile)
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(profileToSend)
             }
             fetch(url, options)
                 .then(response => response.json())
