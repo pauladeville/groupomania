@@ -24,11 +24,7 @@ exports.signup = (req, res, next) => {
             return res.status(500).json(error.message)
         } else {
             return res.status(200).json({
-                userProfile: {
-                    userID: result[0].userID,
-                    firstName: result[0].firstName,
-                    lastName: result[0].lastName,
-                },
+                userID: result[0].userID,
                 token: jwt.sign(
                     { userID: result[0].userID },
                     process.env.TOKEN,
@@ -56,11 +52,7 @@ exports.login = (req, res, next) => {
         //si le profil correspond, renvoyer un token
         else if(lastNameLogin == result[0].lastName) {
             return res.status(200).json({
-                userProfile: {
-                    userID: result[0].userID,
-                    firstName: result[0].firstName,
-                    lastName: result[0].lastName,
-                },
+                userID: result[0].userID,
                 token: jwt.sign(
                     { userID: result[0].userID },
                     process.env.TOKEN,
@@ -81,13 +73,13 @@ exports.delete = (req, res, next) => {
 // Récupérer le profil d'un utilisateur
 exports.profile = (req, res, next) => {
     let userID = req.params["id"];
-    let sqlGet = "SELECT * FROM User WHERE userID = ?";
+    let sqlGet = "SELECT firstName, lastName FROM User WHERE userID=?";
     mysql.query(sqlGet, [userID], function(error, result) {
         if(error) {
             return res.status(500).json(error.message);
         }
         else {
-            return res.status(200).json({ message: "voici les informations du profil "})
+            return res.status(200).json(result);
         }
     })
 };

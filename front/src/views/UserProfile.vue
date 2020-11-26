@@ -35,34 +35,49 @@ export default {
     },
     data() {
         return {
-            userProfile: {},
+            userProfile: {
+                firstName: "",
+                lastName: ""
+            },
         }
     },
     methods: {
         setProfile() {
-            let storedProfile = JSON.parse(localStorage.getItem("userProfile"))
-            console.log(storedProfile)
-            this.userProfile = storedProfile
+            let storedID = localStorage.getItem("userID");
+            console.log(storedID);
+            let url = `http://localhost:3000/api/user/${ storedID }/profile`;
+            let options = {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+            fetch(url, options)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    this.userProfile.firstName = data[0].firstName;
+                    this.userProfile.lastName = data[0].lastName;
+                })
+                .catch(error => console.log(error))
         },
         modifyProfile() {
             let profileToSend = {
                 userID: this.userProfile.userID,
                 newFirstName: document.getElementById("newFirstName").value,
                 newLastName: document.getElementById("newLastName").value,
-            }
-            let url = `http://localhost:3000/api/user/${ this.userProfile.userID }/modify`
+            };
+            let url = `http://localhost:3000/api/user/${ this.userProfile.userID }/modify`;
             let options = {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(profileToSend)
-            }
+            };
             fetch(url, options)
                 .then(response => response.json())
                 .then(data => console.log(data))
-                .then(            this.setProfile()
-)
                 .catch(error => console.log(error))
         }
         // getUser() {

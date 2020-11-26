@@ -100,8 +100,8 @@ export default {
                 fetch(url, options)
                     .then(res => res.json())
                     .then((res) => {
-                        if (res.userProfile && res.token) {
-                            localStorage.setItem("userProfile", JSON.stringify(res.userProfile))
+                        if (res.userID && res.token) {
+                            localStorage.setItem("userID", res.userID)
                             localStorage.setItem("token", res.token)
                             console.log(localStorage)
                             this.$router.push("forum");
