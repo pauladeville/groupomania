@@ -1,8 +1,8 @@
 <template>
     <div id="container">
         <HomeNav />
-        <h1>Mon profil</h1>
-        <form v-on:submit.prevent="modifyProfile">
+        <h1>Modifier mon profil</h1>
+        <form>
             <fieldset>
                 <label for="newFirstname">Votre prénom n'est pas {{ userProfile.firstName }} ?</label>
                 <input id="newFirstName" placeholder="Votre vrai prénom" name="new-first_name" required>
@@ -20,8 +20,9 @@
                 <label for="new-password">Nouveau mot de passe</label>
                 <input id="new-password" placeholder="Email" type="email" name="new-password" required>
             </fieldset> -->
-            <button type="submit" id="modification" class="focus">Modifier mon profil</button>
-            <button id="delete-user" class="focus">Supprimer mon compte</button>
+            <p>{{ updateMessage }}</p>
+            <button v-on:click="modifyProfile" id="modify-user">Modifier mon profil</button>
+            <button v-on:click="deleteProfile" id="delete-user">Supprimer mon compte</button>
         </form>
     </div>
 </template>
@@ -35,7 +36,9 @@ export default {
     },
     data() {
         return {
+            updateMessage: "",
             userProfile: {
+                userID: "",
                 firstName: "",
                 lastName: ""
             },
@@ -43,9 +46,8 @@ export default {
     },
     methods: {
         setProfile() {
-            let storedID = localStorage.getItem("userID");
-            console.log(storedID);
-            let url = `http://localhost:3000/api/user/${ storedID }/profile`;
+            this.userProfile.userID = localStorage.getItem("userID");
+            let url = `http://localhost:3000/api/user/${ this.userProfile.userID }/profile`;
             let options = {
                 method: "GET",
                 headers: {
@@ -63,7 +65,6 @@ export default {
         },
         modifyProfile() {
             let profileToSend = {
-                userID: this.userProfile.userID,
                 newFirstName: document.getElementById("newFirstName").value,
                 newLastName: document.getElementById("newLastName").value,
             };
@@ -76,23 +77,17 @@ export default {
                 body: JSON.stringify(profileToSend)
             };
             fetch(url, options)
-                .then(response => response.json())
-                .then(data => console.log(data))
+                .then(res => res.json())
+                .then((res) => {
+                    if(res >= 200 && res <= 299){
+                        this.$router.push("profil");
+                    }
+                })
                 .catch(error => console.log(error))
+        },
+        deleteProfile() {
+            this.updateMessage = "BYE !"
         }
-        // getUser() {
-        //     let url = `http://localhost:3000/api/user/${ this.userID }/profile`
-        //     let options = {
-        //         method: "GET",
-        //         // headers: {
-        //         //     'Content-Type': 'application/json'
-        //         // }
-        //     }
-        //     fetch(url, options)
-        //         .then(response => response.json())
-        //         .then(data => console.log(data))
-        //         .catch(error => console.log(error))
-        // }
     },
     mounted() {
         this.setProfile();

@@ -1,6 +1,9 @@
 // COULEURS
-$bg-color: #d49f00;
+$bg-color: #C17817;
+// d49f00 //C17817
 $text-color: #fff;
+$accent-color: #9C0124;
+$complement-color: #587B7F;
 
 body {
 	width: 100%;
@@ -26,7 +29,7 @@ nav ul {
         margin: 20px;
     }
     a, a:hover, a:visited, a:link {
-        color: #FFFFFF;
+        color: $text-color;
         text-decoration: none;
     } 
 }
@@ -38,7 +41,7 @@ nav ul {
 }
 
 #signout, #signout:hover, #signout:visited, #signout:link {
-	color: #9c0049;
+	color: $accent-color;
 	text-decoration: none;
 }
 
@@ -98,7 +101,7 @@ h2 {
 }
 
 header {
-	border-bottom: 3px solid #fff;
+	border-bottom: 3px solid $text-color;
 }
 
 main {
@@ -112,8 +115,12 @@ form {
 	max-width: 650px;
 	margin: auto;
 	padding: 35px 20px;
-    border: 2px solid #fff;
-    background-color: darken($bg-color, 5);
+    border: 2px solid $text-color;
+	background-color: $complement-color;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	
 }
 
 #adresseclient {
@@ -130,7 +137,7 @@ label {
 }
 
 input {
-	background-color: #fff;
+	background-color: $text-color;
 	border-radius: 4px;
 	width: 90%;
 	height: 25px;
@@ -140,7 +147,7 @@ input {
 }
 
 .imagepost {
-	border: 0px solid #ddd;
+	border: 0px solid $text-color;
 }
 
 textarea {
@@ -170,18 +177,23 @@ button {
     }
 }
 
+#delete-user {
+	background-color: $accent-color;
+	color: $text-color;
+}
+
 .erreur__formulaire input, .form-group.erreur__formulaire textarea {
-	border: 2px solid #9c0049;
+	border: 2px solid $accent-color;
 }
 
 .form-group.erreur__formulaire label {
-	color: #9c0049;
+	color: $accent-color;
 }
 
 .erreur__formulaire::after {
 	content: 'Ce champs est invalide';
 	display: block;
-	color: #9c0049;
+	color: $accent-color;
 	padding: 5px 0;
 	font-size: .9rem;
 }

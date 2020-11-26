@@ -2,7 +2,7 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  background-color: #d49f00;
+  background-color: #C17817;
   color: #fff;
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
@@ -23,7 +23,7 @@ nav ul li i {
   margin: 20px;
 }
 nav ul a, nav ul a:hover, nav ul a:visited, nav ul a:link {
-  color: #FFFFFF;
+  color: #fff;
   text-decoration: none;
 }
 
@@ -34,7 +34,7 @@ nav ul a, nav ul a:hover, nav ul a:visited, nav ul a:link {
 }
 
 #signout, #signout:hover, #signout:visited, #signout:link {
-  color: #9c0049;
+  color: #9C0124;
   text-decoration: none;
 }
 
@@ -53,7 +53,7 @@ nav ul a, nav ul a:hover, nav ul a:visited, nav ul a:link {
 }
 .welcome-links.router-link-exact-active, .welcome-links.router-link-exact-active:hover {
   background-color: #fff;
-  color: #d49f00;
+  color: #C17817;
   padding: 0 10px;
   -webkit-border-top-left-radius: 4px;
   -webkit-border-top-right-radius: 4px;
@@ -107,7 +107,10 @@ form {
   margin: auto;
   padding: 35px 20px;
   border: 2px solid #fff;
-  background-color: #bb8c00;
+  background-color: #587B7F;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
 }
 
 #adresseclient {
@@ -134,7 +137,7 @@ input {
 }
 
 .imagepost {
-  border: 0px solid #ddd;
+  border: 0px solid #fff;
 }
 
 textarea {
@@ -148,7 +151,7 @@ textarea {
 }
 
 button {
-  color: #d49f00;
+  color: #C17817;
   font-weight: bold;
   background-color: #fff;
   border-radius: 4px;
@@ -160,22 +163,27 @@ button {
 }
 button:focus {
   color: #fff;
-  background-color: #ffce3b;
+  background-color: #ebaa53;
   outline: none;
 }
 
+#delete-user {
+  background-color: #9C0124;
+  color: #fff;
+}
+
 .erreur__formulaire input, .form-group.erreur__formulaire textarea {
-  border: 2px solid #9c0049;
+  border: 2px solid #9C0124;
 }
 
 .form-group.erreur__formulaire label {
-  color: #9c0049;
+  color: #9C0124;
 }
 
 .erreur__formulaire::after {
   content: "Ce champs est invalide";
   display: block;
-  color: #9c0049;
+  color: #9C0124;
   padding: 5px 0;
   font-size: 0.9rem;
 }

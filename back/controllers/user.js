@@ -91,15 +91,15 @@ exports.modify = (req, res, next) => {
         firstName: req.body.newFirstName,
         lastName: req.body.newLastName,
     };
-    console.log(updatedProfile);
+    // console.log(updatedProfile);
     let sqlModify = "UPDATE User SET firstName=?, lastName=? WHERE userID=?";
     let values = [updatedProfile.firstName, updatedProfile.lastName, updatedProfile.userID];
     mysql.query(sqlModify, values, function(error, result) {
         if (error) {
-            return res.status(500).json(error.message);
+            res.status(500).json(error.message);
         }
         if (result.affectedRows == 0) {
-            return res.status(400).json({ message: "La modification n'a pas pu aboutir" });
+            res.status(400).json({ message: "La modification n'a pas pu aboutir" });
         }
         else {
             res.status(200).json({ message: "Modification effectuée" });
