@@ -7,10 +7,14 @@ const { response } = require('express');
 
 // Création de l'utilisateur et hashage du mot de passe
 exports.signup = (req, res, next) => {
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
-    let sqlSignup = "INSERT INTO User VALUES (NULL, ?, ?, NOW())";
-    let values = [firstName, lastName];
+    let userProfile = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password
+    }
+    let sqlSignup = "INSERT INTO User VALUES (NULL, ?, ?, ?, ?, DEFAULT, NOW())";
+    let values = [userProfile.firstName, userProfile.lastName, userProfile.email, userProfile.password];
     mysql.query(sqlSignup, values, function(error, result) {
         if (error) {
             console.log(error)
@@ -18,8 +22,8 @@ exports.signup = (req, res, next) => {
             console.log("Utilisateur créé")
         }
     });
-    let sqlLogin = "SELECT * FROM User WHERE firstName = ?";
-    mysql.query(sqlLogin, [firstName], function(error, result) {
+    let sqlToken = "SELECT * FROM User WHERE email=?";
+    mysql.query(sqlToken, [userProfile.email], function(error, result) {
         if (error) {
             return res.status(500).json(error.message)
         } else {
@@ -38,11 +42,11 @@ exports.signup = (req, res, next) => {
 // Login de l'utilisateur
 exports.login = (req, res, next) => {
     //récupérer les identifiants transmis par le front
-    const firstNameLogin = req.body.firstName;
-    const lastNameLogin = req.body.lastName;
+    const emailLogin = req.body.email;
+    const passwordLogin = req.body.password;
     //recherche mySQL
-    let sqlLogin = "SELECT * FROM User WHERE firstName = ?";
-    mysql.query(sqlLogin, [firstNameLogin], function(error, result) {
+    let sqlLogin = "SELECT * FROM User WHERE email=?";
+    mysql.query(sqlLogin, [emailLogin], function(error, result) {
         if(error) {
             return res.status(500).json(error.message);
         }
@@ -50,7 +54,7 @@ exports.login = (req, res, next) => {
             return res.status(404).json({ error: "Profil introuvable"})
         }
         //si le profil correspond, renvoyer un token
-        else if(lastNameLogin == result[0].lastName) {
+        else if(passwordLogin == result[0].password) {
             return res.status(200).json({
                 userID: result[0].userID,
                 token: jwt.sign(
@@ -113,6 +117,6 @@ exports.modify = (req, res, next) => {
         else {
             res.status(200).json({ message: "Modification effectuée" });
         }
-})
+    })
     
 };

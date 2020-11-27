@@ -16,6 +16,11 @@ export default {
 };
 </script>
 
-<style lang="css">
-  @import '../style/style.css'
+<style lang="css" scoped>
+  @import '../style/style.css';
+  nav {
+    display: inline-block;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
 </style>

@@ -16,18 +16,15 @@ body {
 	text-align: center;
 }
 
-nav ul {
+nav {
     display: flex;
     list-style: none;
     width: 80%;
 	margin: 40px auto;
 	justify-content: space-between;
 	align-items: center;
-    flex-wrap: wrap;
-    li i {
-        font-size: 1.5rem;
-        margin: 20px;
-    }
+	flex-wrap: wrap;
+	padding: 0;
     a, a:hover, a:visited, a:link {
         color: $text-color;
         text-decoration: none;
@@ -35,8 +32,8 @@ nav ul {
 }
 
 .logo {
-	width: 18rem;
-	height: 3.125rem;
+	width: 18em;
+	height: 3.125em;
 	margin-bottom: 30px;
 }
 
@@ -46,9 +43,8 @@ nav ul {
 }
 
 .nav-links {
-	display: flex;
-	justify-content: space-between;
-    align-items: center;
+	display: grid;
+	grid-template-columns: 80px 80px 80px;
 }
 
 .welcome-links {
@@ -71,7 +67,7 @@ nav ul {
 }
 
 .nav-links .router-link-active, .nav-links .router-link-active:hover, .nav-links .router-link-active:visited, .nav-links .router-link-active:link {
-	border: $text-color 3px dotted;
+	background-color: $complement-color;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
 	border-radius: 50px;
@@ -80,7 +76,7 @@ nav ul {
 .nav-icon {
 	width: 35px;
 	margin: 0 20px;
-	padding: 17px 0px;
+	padding: 20px 0px;
 }
 
 
@@ -115,12 +111,15 @@ form {
 	max-width: 650px;
 	margin: auto;
 	padding: 35px 20px;
-    border: 2px solid $text-color;
 	background-color: $complement-color;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 	
+}
+
+.bold-text {
+	font-weight: bold;
 }
 
 #adresseclient {
@@ -142,7 +141,7 @@ input {
 	width: 90%;
 	height: 25px;
 	margin-bottom: 20px;
-	padding: 5px;
+	padding: 5px 10px;
 	border: none;
 }
 
@@ -157,7 +156,7 @@ textarea {
 	height: 230px;
 	border: none;
 	margin: 5px auto;
-	padding: 5px;
+	padding: 10px;
 }
 
 .alert-msg {
@@ -166,7 +165,6 @@ textarea {
 
 button {
 	color: $complement-color;
-	font-weight: bold;
 	background-color: $text-color;
 	border-radius: 4px;
 	padding: 10px 20px;
@@ -258,12 +256,12 @@ button {
 .post-contenu a {
 	color: black;
 }
-@media (max-width: 700px) {
+@media (max-width: 800px) {
     main {
 		padding: 15px;
     }
 	nav ul {
-		display: block;;
+		display: block;
     }
 	.nav-links {
         justify-content: center;

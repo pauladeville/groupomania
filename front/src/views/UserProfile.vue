@@ -4,21 +4,20 @@
         <h1>Modifier mon profil</h1>
         <form>
             <fieldset>
-                <label for="newFirstname">Votre prénom n'est pas {{ userProfile.firstName }} ?</label>
-                <input id="newFirstName" placeholder="Votre vrai prénom" name="new-first_name">
+                <label for="newFirstname">Votre prénom n'est pas <span class="bold-text">{{ userProfile.firstName }}</span> ?</label>
+                <input id="newFirstName" placeholder="Votre vrai prénom">
             </fieldset>
             <fieldset>
-                <label for="newLastName">Votre nom n'est pas {{ userProfile.lastName }} ?</label>
-                <input id="newLastName" class="focus" placeholder="Votre vrai nom" name="new-ast_name">
+                <label for="newLastName">Votre nom n'est pas <span class="bold-text">{{ userProfile.lastName }}</span> ?</label>
+                <input id="newLastName" placeholder="Votre vrai nom">
             </fieldset>
-
             <!-- <fieldset>
-                <label for="new-email">Nouvel email</label>
-                <input id="new-email" placeholder="Email" type="email" name="new-email" required>
+                <label for="newEmail">Votre nom n'est pas <span class="bold-text">{{ userProfile.email }}</span> ?</label>
+                <input id="newEmail" placeholder="Votre adresse email" type="email">
             </fieldset>
             <fieldset>
-                <label for="new-password">Nouveau mot de passe</label>
-                <input id="new-password" placeholder="Email" type="email" name="new-password" required>
+                <label for="newPassword">Vous souhaitez changer de mot de passe</label>
+                <input id="newPassword" placeholder="Votre nouveau mot de passe" type="password">
             </fieldset> -->
             <p class="alert-msg">{{ updateMessage }}</p>
             <button v-on:click="modifyProfile" id="modify-user">Modifier mon profil</button>
@@ -99,7 +98,7 @@ export default {
             };
             fetch(url, options)
                 .then(res => res.json())
-                .then(this.$router.push("/"))
+                .then(this.$router.push("/inscription"))
                 .catch(error => console.log(error))
         }
     },

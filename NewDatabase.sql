@@ -9,6 +9,9 @@ CREATE TABLE User (
 	userID SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	firstName VARCHAR(30) NOT NULL,
 	lastName VARCHAR(30) NOT NULL,
+	email VARCHAR(60) NOT NULL UNIQUE,
+	password VARCHAR(100) NOT NULL,
+	avatarUrl VARCHAR(150) NOT NULL DEFAULT 'http://localhost:3000/images/avatar.png',
 	dateCreation DATETIME NOT NULL,
 	PRIMARY KEY (userID)
 )

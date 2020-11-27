@@ -6,37 +6,8 @@
         <h1>Accédez à votre espace personnel</h1>
         <form v-on:submit.prevent="login">
             <fieldset>
-                <label for="firstname">Prénom *</label>
+                <label for="email">Email *</label>
                 <input
-                    type="text"
-                    id="firstname"
-                    name="firstname"
-                    required
-                    pattern="^\D*$"
-                    placeholder="Renseignez ici votre prénom"
-                    maxlength="30"
-                    aria-label="Entrez votre prénom"
-                    v-model="firstName"
-                >
-            </fieldset>
-            <fieldset>
-                <label for="lastname">Nom *</label>
-                <input
-                    type="text"
-                    id="lastname"
-                    name="lastname"
-                    required
-                    pattern="^\D*$"
-                    placeholder="Renseignez ici votre nom de famille"
-                    maxlength="30"
-                    aria-label="Entrez votre nom"
-                    v-model="lastName"
-                    >
-            </fieldset>
-
-            <!-- <fieldset> -->
-                <!-- <label for="email">Email *</label> -->
-                <!-- <input
                     type="email"
                     class="form-control"
                     id="email"
@@ -46,13 +17,11 @@
                     name="email"
                     maxlength="60"
                     aria-label="Entrez votre email"
-                    v-model="email"
-                    v-on:input="sendData"
-                > -->
-            <!-- </fieldset> -->
-            <!-- <fieldset> -->
-                <!-- <label for="password">Mot de passe *</label> -->
-                <!-- <input
+                    v-model="email" />
+            </fieldset>
+            <fieldset>
+                <label for="password">Mot de passe *</label>
+                <input
                     type="password"
                     class="form-control"
                     id="password"
@@ -62,10 +31,8 @@
                     name="password"
                     aria-label="Entrez votre mot de passe"
                     aria-describedby="passwordInfo"
-                    v-model="password"
-                    v-on:input="sendData"
-                > -->
-            <!-- </fieldset> -->
+                    v-model="password" />
+            </fieldset>
             <p class="alert-msg">{{ errorMessage }}</p>
             <button>Se Connecter</button>
         </form>
@@ -79,18 +46,18 @@ export default {
     name: 'Login',
     data: () => {
         return {
-            firstName: "",
-            lastName: "",
+            email: "",
+            password: "",
             errorMessage: ""
         }
     },
     methods: {
         login() {
-            if (this.firstName && this.lastName) {
+            if (this.email && this.password) {
                 //construction de l'objet "identifiants" à envoyer à l'API
                 let loginUsed = {
-                    "firstName": this.firstName,
-                    "lastName": this.lastName
+                    "email": this.email,
+                    "password": this.password
                 }
                 let url = "http://localhost:3000/api/user/login"
                 let options = {

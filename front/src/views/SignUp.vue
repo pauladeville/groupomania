@@ -16,7 +16,7 @@
                     placeholder="Renseignez ici votre prénom"
                     maxlength="30"
                     aria-label="Entrez votre prénom"
-                    v-model="firstName"
+                    v-model="userInfo.firstName"
                 >
             </fieldset>
             <fieldset>
@@ -30,10 +30,10 @@
                     placeholder="Renseignez ici votre nom de famille"
                     maxlength="30"
                     aria-label="Entrez votre nom"
-                    v-model="lastName"
+                    v-model="userInfo.lastName"
                     >
             </fieldset>
-            <!-- <fieldset>
+            <fieldset>
                 <label for="email">Email *</label>
                 <input
                     type="email"
@@ -44,8 +44,8 @@
                     placeholder="Entrez une adresse email valide"
                     name="email"
                     maxlength="60"
-                    aria-label="Entrez votre email"
-                    v-model="email"
+                    aria-label="Entrez votre adresse email"
+                    v-model="userInfo.email"
                 >
             </fieldset>
             <fieldset>
@@ -58,11 +58,11 @@
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                     placeholder="Renseignez votre mot de passe"
                     name="password"
-                    aria-label="Entrez votre mot de passe"
+                    aria-label="Choisissez un mot de passe comprenant 1 minuscule, 1 majuscule et 1 chiffre"
                     aria-describedby="passwordInfo"
-                    v-model="password"
+                    v-model="userInfo.password"
                 >
-            </fieldset> -->
+            </fieldset>
             <p class="alert-msg">{{ errorMessage }} </p>
             <button>S'inscrire</button>
         </form>
@@ -76,42 +76,48 @@ export default {
     components: { WelcomeNav },
     data: () => {
         return {
-            firstName: "",
-            lastName: "",
+            userInfo: {
+                firstName: "",
+                lastName: "",
+                email: "",
+                password: ""
+            },
             errorMessage: ""
         }
     },
     methods: {
         signup() {
-            if(this.firstName && this.lastName) {
-                //construction de l'objet "profil" à envoyer à l'API
-                let userProfile = {
-                    "firstName": this.firstName,
-                    "lastName": this.lastName,
-                }
-                let url = "http://localhost:3000/api/user/signup"
-                let options = {
-                    method: "POST",
-                    body: JSON.stringify(userProfile),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }
-                fetch(url, options)
-                    .then(res => res.json())
-                    .then((res) => {
-                        if (res.userID && res.token) {
-                            localStorage.setItem("userID", res.userID)
-                            localStorage.setItem("token", res.token)
-                            console.log(localStorage)
-                            this.$router.push("forum");
-                        } else {
-                            //sinon afficher le message d'erreur correspondant sous le formulaire
-                            this.errorMessage = res.error
-                        }
-                    })
-                    .catch(error => console.log(error))
+            if(this.userInfo.firstName && this.userInfo.lastName && this.userInfo.email && this.userInfo.password) {
+            //construction de l'objet "profil" à envoyer à l'API
+            let userProfile = {
+                "firstName": this.userInfo.firstName,
+                "lastName": this.userInfo.lastName,
+                "email": this.userInfo.email,
+                "password": this.userInfo.password
             }
+            let url = "http://localhost:3000/api/user/signup"
+            let options = {
+                method: "POST",
+                body: JSON.stringify(userProfile),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+            fetch(url, options)
+                .then(res => res.json())
+                .then((res) => {
+                    if (res.userID && res.token) {
+                        localStorage.setItem("userID", res.userID)
+                        localStorage.setItem("token", res.token)
+                        console.log(localStorage)
+                        this.$router.push("forum");
+                    } else {
+                        //sinon afficher le message d'erreur correspondant sous le formulaire
+                        this.errorMessage = res.error
+                    }
+                })
+                .catch(error => console.log(error))
+            }    
         }
     },
     mounted() {
