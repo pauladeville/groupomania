@@ -42,6 +42,7 @@ export default {
                 firstName: "",
                 lastName: ""
             },
+            bearer: 'Bearer ' + localStorage.getItem("token")
         }
     },
     methods: {
@@ -51,6 +52,7 @@ export default {
             let options = {
                 method: "GET",
                 headers: {
+                    'Authorization': this.bearer,
                     'Content-Type': 'application/json'
                 }
             };
@@ -72,6 +74,7 @@ export default {
             let options = {
                 method: "PUT",
                 headers: {
+                    'Authorization': this.bearer,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(profileToSend)
@@ -90,6 +93,7 @@ export default {
             let options = {
                 method: "DELETE",
                 headers: {
+                    'Authorization': this.bearer,
                     'Content-Type': 'application/json'
                 }
             };
