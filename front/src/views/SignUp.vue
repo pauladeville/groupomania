@@ -63,7 +63,7 @@
                     v-model="password"
                 >
             </fieldset> -->
-            <p>{{ errorMessage }} </p>
+            <p class="alert-msg">{{ errorMessage }} </p>
             <button>S'inscrire</button>
         </form>
     </div>

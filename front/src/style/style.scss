@@ -160,8 +160,12 @@ textarea {
 	padding: 5px;
 }
 
+.alert-msg {
+	font-weight: bold;
+}
+
 button {
-	color: $bg-color;
+	color: $complement-color;
 	font-weight: bold;
 	background-color: $text-color;
 	border-radius: 4px;
@@ -172,7 +176,7 @@ button {
 	border: none;
     &:focus {
 		color: $text-color;
-		background-color: lighten($bg-color, 20) ;
+		background-color: lighten($complement-color, 30) ;
 		outline: none;
     }
 }

@@ -66,7 +66,7 @@
                     v-on:input="sendData"
                 > -->
             <!-- </fieldset> -->
-            <p>{{ errorMessage }}</p>
+            <p class="alert-msg">{{ errorMessage }}</p>
             <button>Se Connecter</button>
         </form>
     </div>

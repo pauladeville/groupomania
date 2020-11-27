@@ -150,8 +150,12 @@ textarea {
   padding: 5px;
 }
 
+.alert-msg {
+  font-weight: bold;
+}
+
 button {
-  color: #C17817;
+  color: #587B7F;
   font-weight: bold;
   background-color: #fff;
   border-radius: 4px;
@@ -163,7 +167,7 @@ button {
 }
 button:focus {
   color: #fff;
-  background-color: #ebaa53;
+  background-color: #abc2c5;
   outline: none;
 }
 
