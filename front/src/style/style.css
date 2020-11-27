@@ -174,20 +174,16 @@ button:focus {
   color: #fff;
 }
 
-.erreur__formulaire input, .form-group.erreur__formulaire textarea {
-  border: 2px solid #9C0124;
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 120px;
+  margin-bottom: 20px;
 }
 
-.form-group.erreur__formulaire label {
-  color: #9C0124;
-}
-
-.erreur__formulaire::after {
-  content: "Ce champs est invalide";
-  display: block;
-  color: #9C0124;
-  padding: 5px 0;
-  font-size: 0.9rem;
+input[type=file] {
+  color: #535353;
+  padding: 8px 5px 5px 8px;
 }
 
 /*liste post*/

@@ -184,21 +184,18 @@ button {
 	color: $text-color;
 }
 
-.erreur__formulaire input, .form-group.erreur__formulaire textarea {
-	border: 2px solid $accent-color;
+.avatar {
+	width: 120px;
+	height: 120px;
+	border-radius: 120px;
+	margin-bottom: 20px;
 }
 
-.form-group.erreur__formulaire label {
-	color: $accent-color;
+input[type="file"] {
+	color: rgb(83, 83, 83);
+	padding: 8px 5px 5px 8px;
 }
 
-.erreur__formulaire::after {
-	content: 'Ce champs est invalide';
-	display: block;
-	color: $accent-color;
-	padding: 5px 0;
-	font-size: .9rem;
-}
 /*liste post*/
 #post-list {
 	display: -webkit-flex;

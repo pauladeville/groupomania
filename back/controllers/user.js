@@ -86,7 +86,7 @@ exports.delete = (req, res, next) => {
 // Récupérer le profil d'un utilisateur
 exports.profile = (req, res, next) => {
     let userID = req.params["id"];
-    let sqlGet = "SELECT firstName, lastName FROM User WHERE userID=?";
+    let sqlGet = "SELECT * FROM User WHERE userID=?";
     mysql.query(sqlGet, [userID], function(error, result) {
         if(error) {
             return res.status(500).json(error.message);
@@ -118,5 +118,34 @@ exports.modify = (req, res, next) => {
             res.status(200).json({ message: "Modification effectuée" });
         }
     })
-    
 };
+
+//Met à jour l'avatar depuis la page profil
+exports.avatar = (req, res, next) => {
+    if(req.file) {
+        console.log("ok")
+    } else {
+        console.log("toujours pas")
+    }
+    // let avartarUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    // let userID = req.params["id"];
+    // //recherche de l'avatar actuel pour pouvoir le supprimer
+    // let sqlGetUrl = "SELECT avatarUrl FROM User WHERE userID=?";
+    // mysql.query(sqlGetUrl, [userID], function(error, result) {
+    //     if(error) {
+    //         return res.status(500).json(error.message);
+    //     }
+    //     else {
+    //         let exAvatar = result[0].avartarUrl.split("/images/")[1];
+    //         //remplacement de l'URL
+    //         sqlChangeAvatar = "UPDATE User SET avatarUrl=? WHERE userID=?";
+    //         mysql.query(sqlChangeAvatar, [avartarUrl, userID], function (error, result) {
+    //             if(error) {
+    //                 return res.status(501).json(error.message)
+    //             } else {
+    //                 return res.status(200).json({ message: "Avatar modifié !"})
+    //             }
+    //         })
+    //     }
+    // })    
+}

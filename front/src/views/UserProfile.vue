@@ -4,6 +4,11 @@
         <h1>Modifier mon profil</h1>
         <form>
             <fieldset>
+                <img class="avatar" :src="userProfile.avatarUrl">
+                <label for="newAvatarUrl">Changer de photo de profil</label>
+                <input v-on:change="updateAvatar" id="newAvatarUrl" type="file" accept="image/*">
+            </fieldset>
+            <fieldset>
                 <label for="newFirstname">Votre prénom n'est pas <span class="bold-text">{{ userProfile.firstName }}</span> ?</label>
                 <input id="newFirstName" placeholder="Votre vrai prénom">
             </fieldset>
@@ -39,7 +44,10 @@ export default {
             userProfile: {
                 userID: "",
                 firstName: "",
-                lastName: ""
+                lastName: "",
+                // email: "",
+                // password: "",
+                avatarUrl: ""
             },
             bearer: 'Bearer ' + localStorage.getItem("token")
         }
@@ -61,14 +69,37 @@ export default {
                     console.log(data);
                     this.userProfile.firstName = data[0].firstName;
                     this.userProfile.lastName = data[0].lastName;
+                    // this.userProfile.email = data[0].email;
+                    // this.userProfile.password = data[0].password;
+                    this.userProfile.avatarUrl = data[0].avatarUrl;
                 })
+                .catch(error => console.log(error))
+        },
+        previewFiles(event) {
+            console.log(event.target.files)
+        },
+        updateAvatar(event) {
+            let image = event.target.files[0];
+            let url = `http://localhost:3000/api/user/${ this.userProfile.userID }`;
+            let options = {
+                method: "POST",
+                headers: {
+                    'Authorization': this.bearer,
+                },
+                body: image
+            };
+            fetch(url, options)
+                .then(res => res.json())
                 .catch(error => console.log(error))
         },
         modifyProfile() {
             let profileToSend = {
                 newFirstName: document.getElementById("newFirstName").value,
                 newLastName: document.getElementById("newLastName").value,
+                // newEmail: document.getElementById("newEmail").value,
+                // newPassword: document.getElementById("newPassword").value,
             };
+            console.log(profileToSend);
             let url = `http://localhost:3000/api/user/${ this.userProfile.userID }`;
             let options = {
                 method: "PUT",
