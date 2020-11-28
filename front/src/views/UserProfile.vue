@@ -76,21 +76,19 @@ export default {
                 .catch(error => console.log(error))
         },
         updateAvatar(event) {
-            console.log(event.target.files[0]);
-            const image = event.target.files[0];
             const formData = new FormData();
-            formData.append("image", image);
+            formData.append("image", event.target.files[0]);
             let url = `http://localhost:3000/api/user/${ this.userProfile.userID }`;
             let options = {
                 method: "POST",
                 headers: {
                     'Authorization': this.bearer,
-                    // 'Content-Type': 'application/json'
                 },
                 body: formData
             };
             fetch(url, options)
                 .then(res => res.json())
+                .then(this.$router.go())
                 .catch(error => console.log(error))
         },
         modifyProfile() {
@@ -112,11 +110,7 @@ export default {
             };
             fetch(url, options)
                 .then(res => res.json())
-                .then((res) => {
-                    if(res >= 200 && res <= 299){
-                        this.$router.push("profil");
-                    }
-                })
+                .then(this.$router.go())
                 .catch(error => console.log(error))
         },
         deleteProfile() {

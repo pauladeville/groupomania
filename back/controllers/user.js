@@ -131,18 +131,19 @@ exports.avatar = (req, res, next) => {
         } else {
             let exAvatarName = result[0].avatarUrl.split("/images/")[1];
             let sqlChangeAvatar = "UPDATE User SET avatarUrl=? WHERE userID=?";
-            if(exAvatarName ==! "avatar.png") {
-                fs.unlink(`images/${exAvatarName}`), (error) => {
-                    if(error) throw error }
-            } else {
-                mysql.query(sqlChangeAvatar, [newAvartarUrl, userID], function (error, result) {
-                    if(error) {
-                        return res.status(501).json({message: "La modification n'a pas pu aboutir"})
-                    } else {
-                        return res.status(200).json({ message: "Avatar modifié !"})
-                    }
+            if(exAvatarName != "avatar.png") {
+                fs.unlink(`images/${exAvatarName}`, (error) => {
+                    if(error) throw error;
+                    console.log("Suppression de l'avatar précédent");
                 })
-            }
+            } 
+            mysql.query(sqlChangeAvatar, [newAvartarUrl, userID], function (error, result) {
+                if(error) {
+                    return res.status(501).json({message: "La modification n'a pas pu aboutir"})
+                } else {
+                    return res.status(201).json({ message: "Avatar modifié !"})
+                }
+            })
         }
     })
 }
