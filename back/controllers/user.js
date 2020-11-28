@@ -3,7 +3,6 @@ const dotenv = require("dotenv").config();
 const bcrypt = require('bcrypt'); // Pour crypter le mot de passe
 const jwt = require('jsonwebtoken'); // Génère un token sécurisé
 const fs = require('fs'); // Permet de gérer les fichiers stockés
-const { response } = require('express');
 
 // Création de l'utilisateur et hashage du mot de passe
 exports.signup = (req, res, next) => {
@@ -123,29 +122,26 @@ exports.modify = (req, res, next) => {
 //Met à jour l'avatar depuis la page profil
 exports.avatar = (req, res, next) => {
     if(req.file) {
-        console.log("ok")
-    } else {
-        console.log("toujours pas")
+        console.log(req.file)
+        let avartarUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        let userID = req.params["id"];
+        //recherche de l'avatar actuel pour pouvoir le supprimer
+        let sqlGetUrl = "SELECT avatarUrl FROM User WHERE userID=?";
+        mysql.query(sqlGetUrl, [userID], function(error, result) {
+            if(result =! "http://localhost:3000/images/avatar.png") {
+                let exAvatar = result[0].avartarUrl.split("/images/")[1];
+                //remplacement de l'URL
+                sqlChangeAvatar = "UPDATE User SET avatarUrl=? WHERE userID=?";
+                mysql.query(sqlChangeAvatar, [avartarUrl, userID], function (error, result) {
+                    if(error) {
+                        return res.status(501).json(error.message)
+                    } else {
+                        return res.status(200).json({ message: "Avatar modifié !"})
+                    }
+                })
+            }
+        })    
+        } else {
+        res.status(404).json({ message: "La modification n'a pas pu aboutir" })
     }
-    // let avartarUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    // let userID = req.params["id"];
-    // //recherche de l'avatar actuel pour pouvoir le supprimer
-    // let sqlGetUrl = "SELECT avatarUrl FROM User WHERE userID=?";
-    // mysql.query(sqlGetUrl, [userID], function(error, result) {
-    //     if(error) {
-    //         return res.status(500).json(error.message);
-    //     }
-    //     else {
-    //         let exAvatar = result[0].avartarUrl.split("/images/")[1];
-    //         //remplacement de l'URL
-    //         sqlChangeAvatar = "UPDATE User SET avatarUrl=? WHERE userID=?";
-    //         mysql.query(sqlChangeAvatar, [avartarUrl, userID], function (error, result) {
-    //             if(error) {
-    //                 return res.status(501).json(error.message)
-    //             } else {
-    //                 return res.status(200).json({ message: "Avatar modifié !"})
-    //             }
-    //         })
-    //     }
-    // })    
 }

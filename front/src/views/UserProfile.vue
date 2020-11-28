@@ -75,18 +75,19 @@ export default {
                 })
                 .catch(error => console.log(error))
         },
-        previewFiles(event) {
-            console.log(event.target.files)
-        },
         updateAvatar(event) {
-            let image = event.target.files[0];
+            console.log(event.target.files[0]);
+            const image = event.target.files[0];
+            const formData = new FormData();
+            formData.append("image", image);
             let url = `http://localhost:3000/api/user/${ this.userProfile.userID }`;
             let options = {
                 method: "POST",
                 headers: {
                     'Authorization': this.bearer,
+                    // 'Content-Type': 'application/json'
                 },
-                body: image
+                body: formData
             };
             fetch(url, options)
                 .then(res => res.json())
