@@ -114,7 +114,15 @@ exports.modify = (req, res, next) => {
             res.status(400).json({ message: "La modification n'a pas pu aboutir" });
         }
         else {
-            res.status(200).json({ message: "Modification effectuée" });
+            // si la MaJ a été effectuée, renvoyer toutes les données
+            let sqlGet = "SELECT * FROM User WHERE userID=?";
+            mysql.query(sqlGet, [updatedProfile.userID], function(error, result) {
+                if (error) {
+                    res.status(500).json(error.message);
+                } else {
+                    res.status(200).json(result);
+                }
+            })
         }
     })
 };
@@ -134,14 +142,13 @@ exports.avatar = (req, res, next) => {
             if(exAvatarName != "avatar.png") {
                 fs.unlink(`images/${exAvatarName}`, (error) => {
                     if(error) throw error;
-                    console.log("Suppression de l'avatar précédent");
                 })
             } 
             mysql.query(sqlChangeAvatar, [newAvartarUrl, userID], function (error, result) {
                 if(error) {
                     return res.status(501).json({message: "La modification n'a pas pu aboutir"})
                 } else {
-                    return res.status(201).json({ message: "Avatar modifié !"})
+                    return res.status(201).json(newAvartarUrl)
                 }
             })
         }

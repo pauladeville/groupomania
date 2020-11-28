@@ -2,7 +2,7 @@
     <div id="container">
         <HomeNav />
         <h1>Modifier mon profil</h1>
-        <form>
+        <form id="profile-form">
             <fieldset>
                 <img class="avatar" :src="userProfile.avatarUrl">
                 <label for="newAvatarUrl">Changer de photo de profil</label>
@@ -88,7 +88,9 @@ export default {
             };
             fetch(url, options)
                 .then(res => res.json())
-                .then(this.$router.go())
+                .then(data => {
+                    this.userProfile.avatarUrl = data
+                })
                 .catch(error => console.log(error))
         },
         modifyProfile() {
@@ -110,7 +112,12 @@ export default {
             };
             fetch(url, options)
                 .then(res => res.json())
-                .then(this.$router.go())
+                .then(data => {
+                    // récupérer le profil mis à jour
+                    this.userProfile = data[0]
+                    //réinitialiser les champs de formulaire
+                    document.getElementById("profile-form").reset();
+                })
                 .catch(error => console.log(error))
         },
         deleteProfile() {
