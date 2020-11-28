@@ -3,39 +3,65 @@ const dotenv = require("dotenv").config();
 const bcrypt = require('bcrypt'); // Pour crypter le mot de passe
 const jwt = require('jsonwebtoken'); // Génère un token sécurisé
 const fs = require('fs'); // Permet de gérer les fichiers stockés
+const passwordValidator = require("password-validator");
+const emailValidator = require("email-validator");
+const sanitize = require('express-sanitizer');
+
+//Création du schéma de mot de passe
+const passwordSchema = new passwordValidator();
+passwordSchema
+    .is().min(5) // 6 caractères min
+    .is().max(20) // 12 caractères max
+    .has().not().spaces() // Pas d'espace
 
 // Création de l'utilisateur et hashage du mot de passe
 exports.signup = (req, res, next) => {
-    let userProfile = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: req.body.password
+    //Messages d'erreur si champ non validé
+    if(!emailValidator.validate((req.body.email))) {
+        return res.status(400).json({ message: "Assurez-vous d'avoir entré une adresse email valide"})        
     }
-    let sqlSignup = "INSERT INTO User VALUES (NULL, ?, ?, ?, ?, DEFAULT, NOW())";
-    let values = [userProfile.firstName, userProfile.lastName, userProfile.email, userProfile.password];
-    mysql.query(sqlSignup, values, function(error, result) {
-        if (error) {
-            console.log(error)
-        } else {
-            console.log("Utilisateur créé")
-        }
-    });
-    let sqlToken = "SELECT * FROM User WHERE email=?";
-    mysql.query(sqlToken, [userProfile.email], function(error, result) {
-        if (error) {
-            return res.status(500).json(error.message)
-        } else {
-            return res.status(200).json({
-                userID: result[0].userID,
-                token: jwt.sign(
-                    { userID: result[0].userID },
-                    process.env.TOKEN,
-                    { expiresIn: "24h" }
-                )
+    else if (!passwordSchema.validate((req.body.password))) {
+        return res.status(400).json({ message: "Votre mot de passe doit contenir au moins 5 caractères"})        
+    } else {
+        //Hashage x10 du mdp + salage
+        bcrypt.hash(req.body.password, 10)
+            .then(hash => {
+                let userProfile = {
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    email: req.body.email,
+                    password: hash
+                }
+                let sqlSignup = "INSERT INTO User VALUES (NULL, ?, ?, ?, ?, DEFAULT, NOW())";
+                let values = [userProfile.firstName, userProfile.lastName, userProfile.email, userProfile.password];
+                mysql.query(sqlSignup, values, function(error, result) {
+                    if (error) {
+                        return res.status(500).json(error.message)
+                    } else {
+                        return res.status(201).json({ message: "Utilisateur créé" })
+                    }
+                });
+                let sqlToken = "SELECT userID FROM User WHERE email=?";
+                mysql.query(sqlToken, [userProfile.email], function(error, result) {
+                    if (error) {
+                        return res.status(500).json(error.message)
+                    } else {
+                        return res.status(200).json({
+                            userID: result[0].userID,
+                            token: jwt.sign(
+                                { userID: result[0].userID },
+                                process.env.TOKEN,
+                                { expiresIn: "24h" }
+                            )
+                        })
+                    }
+                })
+        
+            })
+            .catch((error) => {
+                return res.status(500).json(error)
             })
         }
-    })
 };
 
 // Login de l'utilisateur
@@ -44,27 +70,31 @@ exports.login = (req, res, next) => {
     const emailLogin = req.body.email;
     const passwordLogin = req.body.password;
     //recherche mySQL
-    let sqlLogin = "SELECT * FROM User WHERE email=?";
+    let sqlLogin = "SELECT password FROM User WHERE email=?";
     mysql.query(sqlLogin, [emailLogin], function(error, result) {
         if(error) {
-            return res.status(500).json(error.message);
+            return res.status(500).json({ message: "Erreur sur notre serveur. Veuillez réessayer plus tard." });
         }
         else if(result.length == 0) {
-            return res.status(404).json({ error: "Profil introuvable"})
+            return res.status(404).json({ message: "Vous n'êtes pas encore inscrit"})
         }
-        //si le profil correspond, renvoyer un token
-        else if(passwordLogin == result[0].password) {
-            return res.status(200).json({
-                userID: result[0].userID,
-                token: jwt.sign(
-                    { userID: result[0].userID },
-                    process.env.TOKEN,
-                    { expiresIn: "24h" }
-                )
-            })
-        }
+        //si le mot de passe correspond, renvoyer un token
         else {
-            return res.status(401).json({ error: "Le nom et le prénom ne correspondent pas."})
+            bcrypt.compare(passwordLogin, result[0].password)
+            .then(valid => {
+                if(!valid) {
+                    return res.status(401).json({ message: "Votre mot de passe est incorrect." })
+                }
+                return res.status(200).json({
+                    userID: result[0].userID,
+                    token: jwt.sign(
+                        { userID: result[0].userID },
+                        process.env.TOKEN,
+                        { expiresIn: "24h" }
+                    )
+                })
+            })
+            .catch(error => res.status(500).json(error))
         }
     })
 };

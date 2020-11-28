@@ -3,7 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const helmet = require("helmet");
-const expressSanitizer = require('express-sanitizer');
+const sanitize = require('express-sanitizer');
 
 const userRoutes = require("./routes/user");
 const postRoutes = require("./routes/post");
@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 // Protège contre les failles XSS
-app.use(expressSanitizer());
+app.use(sanitize());
 
 //Dossier images statique (avec un path dynamique)
 app.use("/images", express.static(path.join(__dirname, "images")));

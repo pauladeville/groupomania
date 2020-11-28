@@ -40,7 +40,6 @@
                     class="form-control"
                     id="email"
                     required
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                     placeholder="Entrez une adresse email valide"
                     name="email"
                     maxlength="60"
@@ -55,7 +54,6 @@
                     class="form-control"
                     id="password"
                     required
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                     placeholder="Renseignez votre mot de passe"
                     name="password"
                     aria-label="Choisissez un mot de passe comprenant 1 minuscule, 1 majuscule et 1 chiffre"
@@ -95,6 +93,7 @@ export default {
                 "email": this.userInfo.email,
                 "password": this.userInfo.password
             }
+            console.log(userProfile)
             let url = "http://localhost:3000/api/user/signup"
             let options = {
                 method: "POST",
@@ -113,7 +112,7 @@ export default {
                         this.$router.push("forum");
                     } else {
                         //sinon afficher le message d'erreur correspondant sous le formulaire
-                        this.errorMessage = res.error
+                        this.errorMessage = res.message
                     }
                 })
                 .catch(error => console.log(error))

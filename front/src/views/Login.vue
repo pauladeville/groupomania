@@ -11,7 +11,6 @@
                     type="email"
                     class="form-control"
                     id="email"
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                     required
                     placeholder="Entrez une adresse email valide"
                     name="email"
@@ -25,7 +24,6 @@
                     type="password"
                     class="form-control"
                     id="password"
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                     required
                     placeholder="Renseignez votre mot de passe"
                     name="password"
@@ -59,6 +57,7 @@ export default {
                     "email": this.email,
                     "password": this.password
                 }
+                console.log(loginUsed)
                 let url = "http://localhost:3000/api/user/login"
                 let options = {
                     method: "POST",
@@ -78,7 +77,7 @@ export default {
                             this.$router.push("forum");
                         } else {
                             //sinon afficher le message d'erreur correspondant sous le formulaire
-                            this.errorMessage = res.error
+                            this.errorMessage = res.message
                         }
                     })
                     .catch(error => console.log(error))
