@@ -121,27 +121,29 @@ exports.modify = (req, res, next) => {
 
 //Met à jour l'avatar depuis la page profil
 exports.avatar = (req, res, next) => {
-    if(req.file) {
-        console.log(req.file)
-        let avartarUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-        let userID = req.params["id"];
-        //recherche de l'avatar actuel pour pouvoir le supprimer
-        let sqlGetUrl = "SELECT avatarUrl FROM User WHERE userID=?";
-        mysql.query(sqlGetUrl, [userID], function(error, result) {
-            if(result =! "http://localhost:3000/images/avatar.png") {
-                let exAvatar = result[0].avartarUrl.split("/images/")[1];
-                //remplacement de l'URL
-                sqlChangeAvatar = "UPDATE User SET avatarUrl=? WHERE userID=?";
-                mysql.query(sqlChangeAvatar, [avartarUrl, userID], function (error, result) {
+    const newAvartarUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+    const userID = req.params["id"];
+    //recherche de l'avatar actuel pour pouvoir le supprimer 
+    let sqlExUrl = "SELECT avatarUrl FROM User WHERE userID=?";
+    mysql.query(sqlExUrl, [userID], function(error, result) {
+        if(error){
+            return res.status(500).json(error)
+        } else {
+            let exAvatarName = result[0].avatarUrl.split("/images/")[1];
+            let sqlChangeAvatar = "UPDATE User SET avatarUrl=? WHERE userID=?";
+            if(exAvatarName ==! "avatar.png") {
+                fs.unlink(`images/${exAvatarName}`), (error) => {
+                    if(error) throw error }
+            } else {
+                mysql.query(sqlChangeAvatar, [newAvartarUrl, userID], function (error, result) {
                     if(error) {
-                        return res.status(501).json(error.message)
+                        return res.status(501).json({message: "La modification n'a pas pu aboutir"})
                     } else {
                         return res.status(200).json({ message: "Avatar modifié !"})
                     }
                 })
             }
-        })    
-        } else {
-        res.status(404).json({ message: "La modification n'a pas pu aboutir" })
-    }
+        }
+    })
 }
+
