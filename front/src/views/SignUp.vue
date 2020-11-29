@@ -4,7 +4,7 @@
         <WelcomeNav />
 
         <h1>Nouveau sur Groupomania ?</h1>
-        <form v-on:submit.prevent="signup">
+        <form v-on:submit.prevent="signup" class="welcome-form">
             <fieldset>
                 <label for="firstname">Prénom *</label>
                 <input

@@ -4,7 +4,7 @@
         <WelcomeNav />
 
         <h1>Accédez à votre espace personnel</h1>
-        <form v-on:submit.prevent="login">
+        <form v-on:submit.prevent="login" class="welcome-form">
             <fieldset>
                 <label for="email">Email *</label>
                 <input

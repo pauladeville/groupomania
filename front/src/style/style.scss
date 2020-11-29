@@ -1,13 +1,13 @@
 // COULEURS
-// $bg-color: #e98c13;
+// $bg-color: #bd968c;
 // $text-color: #fff;
 // $accent-color: #9C0124;
-// $complement-color: #587B7F;
+// $complement-color: #A26769;
 
 $bg-color: #bd968c;
 $text-color: #fff;
 $accent-color: #9C0124;
-$complement-color: #A26769;
+$complement-color: #905153;
 
 
 $box-shadow : 0 0 10px -5px darken($complement-color, 15);
@@ -17,11 +17,16 @@ body {
 	width: 100%;
     margin: 0;
     padding: 0;
-	background-color: $bg-color;
+	background: $bg-color;
+	background: radial-gradient(#D1B2AA 0%, #AC7D71 100%);
 	color: $text-color;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
 	text-align: center;
+}
+
+header {
+	border-bottom: 3px solid $text-color;
 }
 
 nav {
@@ -47,6 +52,7 @@ nav {
 .nav-links {
 	display: grid;
 	grid-template-columns: 80px 80px 80px;
+	padding: 30px;
 }
 
 .nav-links .router-link-active, .nav-links .router-link-active:hover, .nav-links .router-link-active:visited, .nav-links .router-link-active:link {
@@ -93,17 +99,6 @@ h2 {
 	color: #000;
 }
 
-header {
-	border-bottom: 3px solid $text-color;
-}
-
-main {
-	width: 80%;
-	height: 90%;
-	margin: 30px auto;
-	padding: 0.5rem 10%;
-}
-
 form {
 	max-width: 650px;
 	margin: 0 auto 150px auto;
@@ -113,6 +108,17 @@ form {
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	box-shadow: $box-shadow;	
+}
+
+.welcome-form {
+	padding: 50px 20px;
+	input {
+		width: 80%;
+		max-width: none;
+	}
+	button {
+		margin: 20px;
+	}
 }
 
 .bold-text {

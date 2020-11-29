@@ -2,11 +2,16 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  background-color: #bd968c;
+  background: #bd968c;
+  background: radial-gradient(#D1B2AA 0%, #AC7D71 100%);
   color: #fff;
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
   text-align: center;
+}
+
+header {
+  border-bottom: 3px solid #fff;
 }
 
 nav {
@@ -32,14 +37,15 @@ nav a, nav a:hover, nav a:visited, nav a:link {
 .nav-links {
   display: grid;
   grid-template-columns: 80px 80px 80px;
+  padding: 30px;
 }
 
 .nav-links .router-link-active, .nav-links .router-link-active:hover, .nav-links .router-link-active:visited, .nav-links .router-link-active:link {
-  background-color: #A26769;
+  background-color: #905153;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
-  box-shadow: 0 0 10px -5px #754849;
+  box-shadow: 0 0 10px -5px #5f3537;
 }
 
 .nav-icon {
@@ -78,26 +84,26 @@ h2 {
   color: #000;
 }
 
-header {
-  border-bottom: 3px solid #fff;
-}
-
-main {
-  width: 80%;
-  height: 90%;
-  margin: 30px auto;
-  padding: 0.5rem 10%;
-}
-
 form {
   max-width: 650px;
   margin: 0 auto 150px auto;
   padding: 70px 20px;
-  background-color: #A26769;
+  background-color: #905153;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  box-shadow: 0 0 10px -5px #754849;
+  box-shadow: 0 0 10px -5px #5f3537;
+}
+
+.welcome-form {
+  padding: 50px 20px;
+}
+.welcome-form input {
+  width: 80%;
+  max-width: none;
+}
+.welcome-form button {
+  margin: 20px;
 }
 
 .bold-text {
@@ -141,7 +147,7 @@ textarea {
 }
 
 button {
-  color: #A26769;
+  color: #905153;
   background-color: #fff;
   border-radius: 4px;
   padding: 10px 20px;
@@ -154,7 +160,7 @@ button {
 }
 button:focus {
   color: #fff;
-  background-color: #653e3f;
+  background-color: #4f2c2d;
   outline: none;
 }
 button:hover {
@@ -171,7 +177,7 @@ button:hover {
   height: 120px;
   border-radius: 120px;
   margin: 10px auto 50px auto;
-  box-shadow: 0 0 10px -5px #754849;
+  box-shadow: 0 0 10px -5px #5f3537;
 }
 
 input[type=file] {
@@ -236,7 +242,7 @@ input[type=file] {
   }
   nav a.welcome-links.router-link-exact-active, nav a.welcome-links.router-link-exact-active:hover {
     background-color: #bd968c;
-    color: #653e3f;
+    color: #4f2c2d;
     font-weight: bold;
   }
 }
