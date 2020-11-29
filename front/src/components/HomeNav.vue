@@ -6,9 +6,6 @@
             </router-link>
             <ul>
                 <li class="nav-links">
-                <!-- <router-link to="/forum">
-                    <img class="nav-icon" src="../assets/home.png">
-                </router-link> -->
                 <router-link to="/publier">
                     <img class="nav-icon" src="../assets/send.png">
                 </router-link>

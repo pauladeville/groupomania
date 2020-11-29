@@ -4,19 +4,19 @@
         <h1>Ajouter une publication</h1>
         <form name='newpost'>
             <fieldset>
-                <label for="title">Titre</label>
-                <input type="text" class="focus" id="title" name="title" placeholder="Titre">
+                <label for="post-title">Titre</label>
+                <input type="text" id="post-title" name="post-title" placeholder="Titre">
             </fieldset>
             <fieldset>
-                <label for="media">Media</label>
-                <input type="file"  class="focus imagepost" id="media" name="media" accept="image/*">
-                <img id="preview" class="">
+                <label for="post-media">Media</label>
+                <input type="file" id="post-media" name="post-media" accept="image/*">
+                <img id="preview">
             </fieldset>
             <fieldset>
-                <label for="content">Contenu de l'article</label>
-                <textarea class="focus" id="content" name="content"></textarea>
+                <label for="post-content">Contenu de votre publication</label>
+                <textarea id="post-content" name="post-content"></textarea>
             </fieldset>
-            <button type="submit" id="upload">Publier le post</button>
+            <button type="submit" id="post-upload" >Publier le post</button>
         </form>
     </div>
 </template>

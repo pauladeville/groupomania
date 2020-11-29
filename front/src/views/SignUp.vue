@@ -37,7 +37,6 @@
                 <label for="email">Email *</label>
                 <input
                     type="email"
-                    class="form-control"
                     id="email"
                     required
                     placeholder="Entrez une adresse email valide"
@@ -51,7 +50,6 @@
                 <label for="password">Mot de passe *</label>
                 <input
                     type="password"
-                    class="form-control"
                     id="password"
                     required
                     placeholder="Renseignez votre mot de passe"
@@ -93,7 +91,7 @@ export default {
                 "email": this.userInfo.email,
                 "password": this.userInfo.password
             }
-            console.log(userProfile)
+            // console.log(userProfile)
             let url = "http://localhost:3000/api/user/signup"
             let options = {
                 method: "POST",

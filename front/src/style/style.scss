@@ -1,9 +1,17 @@
 // COULEURS
-$bg-color: #C17817;
-// d49f00 //C17817
+// $bg-color: #e98c13;
+// $text-color: #fff;
+// $accent-color: #9C0124;
+// $complement-color: #587B7F;
+
+$bg-color: #bd968c;
 $text-color: #fff;
 $accent-color: #9C0124;
-$complement-color: #587B7F;
+$complement-color: #A26769;
+
+
+$box-shadow : 0 0 10px -5px darken($complement-color, 15);
+
 
 body {
 	width: 100%;
@@ -20,7 +28,7 @@ nav {
     display: flex;
     list-style: none;
     width: 80%;
-	margin: 40px auto;
+	margin: auto;
 	justify-content: space-between;
 	align-items: center;
 	flex-wrap: wrap;
@@ -29,12 +37,6 @@ nav {
         color: $text-color;
         text-decoration: none;
     } 
-}
-
-.logo {
-	width: 18em;
-	height: 3.125em;
-	margin-bottom: 30px;
 }
 
 #signout, #signout:hover, #signout:visited, #signout:link {
@@ -56,13 +58,13 @@ nav {
 	&.router-link-exact-active, &.router-link-exact-active:hover {
 		background-color: $text-color;
 		color: $bg-color;
-		padding: 0 10px;
+		padding: 5px 18px 0 18px;
 		-webkit-border-top-left-radius: 4px;
 		-webkit-border-top-right-radius: 4px;
 		-moz-border-radius-topleft: 4px;
 		-moz-border-radius-topright: 4px;
 		border-top-left-radius: 4px;
-		border-top-right-radius: 4px;
+		border-top-right-radius: 4px;	
 	}
 }
 
@@ -71,6 +73,7 @@ nav {
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
 	border-radius: 50px;
+	box-shadow: $box-shadow;	
 }
 
 .nav-icon {
@@ -87,7 +90,7 @@ nav {
 
 h1 {
 	text-align: center;
-	margin: 80px 0;
+	margin: 90px 0;
     text-transform: uppercase;
     font-size: 1.3rem;
 }
@@ -109,21 +112,17 @@ main {
 
 form {
 	max-width: 650px;
-	margin: auto;
-	padding: 35px 20px;
+	margin: 0 auto 150px auto;
+	padding: 70px 20px;
 	background-color: $complement-color;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	box-shadow: $box-shadow;	
 }
 
 .bold-text {
 	font-weight: bold;
-}
-
-#adresseclient {
-	margin: 8px;
 }
 
 fieldset {
@@ -143,10 +142,6 @@ input {
 	margin-bottom: 20px;
 	padding: 5px 10px;
 	border: none;
-}
-
-.imagepost {
-	border: 0px solid $text-color;
 }
 
 textarea {
@@ -169,14 +164,19 @@ button {
 	border-radius: 4px;
 	padding: 10px 20px;
 	font-size: 1rem;
-	margin: 30px 10px 0 10px;
+	margin: 30px 20px 0 20px;
 	cursor: pointer;
 	border: none;
+	transform: scale(1);
+	transition: transform 300ms ease-in-out;
     &:focus {
 		color: $text-color;
-		background-color: lighten($complement-color, 30) ;
+		background-color: darken($complement-color, 20) ;
 		outline: none;
-    }
+	}
+	&:hover {
+		transform: scale(1.07);
+	}
 }
 
 #delete-user {
@@ -189,6 +189,7 @@ button {
 	height: 120px;
 	border-radius: 120px;
 	margin-bottom: 20px;
+	box-shadow: $box-shadow;
 }
 
 input[type="file"] {
@@ -196,75 +197,20 @@ input[type="file"] {
 	padding: 8px 5px 5px 8px;
 }
 
-/*liste post*/
-#post-list {
-	display: -webkit-flex;
-	display: flex;
-	max-width: 650px;
-	height: 100%;
-	margin: auto;
-	margin-bottom: 1rem;
-	flex-direction: column;
-	align-items: center;
-	align-content: center;
-	justify-content: center;
-}
-.post-contenant__index {
-	width: 100%;
-	height: auto;
-	margin: 1% 1%;
-	text-align: center;
-	order: 0;
-	flex-grow: 0;
-	flex-shrink: 0;
-	flex-basis: auto;
-	align-self: stretch;
-	-webkit-box-shadow: 0px 0px 0.5rem #000000;
-	-moz-box-shadow: 0px 0px 0.5rem #000000;
-	box-shadow: 0px 0px 0.5rem #000000;
-}
-/*article*/
-.post-image {
-	max-height: 200px;
-	transform: scale(1);
-}
-.poster {
-	text-align: left;
-	padding: 8px;
-	color: #001935;
-}
-.user-name {
-	font-weight: bold;
-	text-transform: capitalize;
-}
-.post-date {
-	font-weight: lighter;
-	font-size: 0.7rem;
-}
-.body-post {
-	padding: 8px;
-	text-align: justify;
-	font-weight: lighter;
-}
-.action {
-	text-align: left;
-	padding: 8px;
-}
-.post-contenu a {
-	color: black;
-}
 @media (max-width: 800px) {
     main {
 		padding: 15px;
     }
-	nav ul {
+	nav {
 		display: block;
-    }
+		ul {
+		display: block;
+		}
+	}
 	.nav-links {
         justify-content: center;
         margin-top: 25px;
-    }
-
+	}
 	#post-list {
 		display: -webkit-flex;
 		display: flex;
@@ -278,5 +224,29 @@ input[type="file"] {
 		align-items: center;
 		align-content: center;
 		justify-content: center;
-    }
+	}
+}
+
+@media (max-width: 500px) {
+	#logo {
+		width: 200px;
+	}
+	h1, p, label, input#email, input#password, button {
+		font-size: 0.9em;
+	}
+	nav {
+		a.welcome-links {
+			font-size: 1em;
+			padding: 0;
+			font-weight: normal;
+			display: block;
+			margin-top: 0;
+			&.router-link-exact-active, &.router-link-exact-active:hover {
+				background-color: $bg-color;
+				color: darken($complement-color, 20);
+				font-weight: bold;
+			}
+		}
+	}
+
 }

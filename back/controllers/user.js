@@ -36,9 +36,9 @@ exports.signup = (req, res, next) => {
                 let values = [userProfile.firstName, userProfile.lastName, userProfile.email, userProfile.password];
                 mysql.query(sqlSignup, values, function(error, result) {
                     if (error) {
-                        return res.status(500).json(error.message)
+                        return res.status(500).json()
                     } else {
-                        return res.status(201).json({ message: "Utilisateur créé" })
+                        return res.status(201).json()
                     }
                 });
                 let sqlToken = "SELECT userID FROM User WHERE email=?";

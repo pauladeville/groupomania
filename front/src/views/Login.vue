@@ -9,7 +9,6 @@
                 <label for="email">Email *</label>
                 <input
                     type="email"
-                    class="form-control"
                     id="email"
                     required
                     placeholder="Entrez une adresse email valide"
@@ -22,7 +21,6 @@
                 <label for="password">Mot de passe *</label>
                 <input
                     type="password"
-                    class="form-control"
                     id="password"
                     required
                     placeholder="Renseignez votre mot de passe"
