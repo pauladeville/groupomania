@@ -60,7 +60,7 @@
                 >
             </fieldset>
             <p class="alert-msg">{{ errorMessage }} </p>
-            <button>S'inscrire</button>
+            <button>Créez votre compte</button>
         </form>
     </div>
 </template>

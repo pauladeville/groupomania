@@ -34,25 +34,6 @@ nav a, nav a:hover, nav a:visited, nav a:link {
   grid-template-columns: 80px 80px 80px;
 }
 
-.welcome-links {
-  text-decoration: none;
-  margin: 25px;
-  color: #fff;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-.welcome-links.router-link-exact-active, .welcome-links.router-link-exact-active:hover {
-  background-color: #fff;
-  color: #bd968c;
-  padding: 5px 18px 0 18px;
-  -webkit-border-top-left-radius: 4px;
-  -webkit-border-top-right-radius: 4px;
-  -moz-border-radius-topleft: 4px;
-  -moz-border-radius-topright: 4px;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-}
-
 .nav-links .router-link-active, .nav-links .router-link-active:hover, .nav-links .router-link-active:visited, .nav-links .router-link-active:link {
   background-color: #A26769;
   -webkit-border-radius: 50px;
@@ -67,8 +48,23 @@ nav a, nav a:hover, nav a:visited, nav a:link {
   padding: 20px 0px;
 }
 
-.a__title, .a__title:hover, .a__title:visited, .a__title:link {
-  color: #000;
+.welcome-links {
+  text-decoration: none;
+  margin: 25px;
+  padding: 0 18px;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.welcome-links.router-link-exact-active, .welcome-links.router-link-exact-active:hover {
+  background-color: #fff;
+  color: #bd968c;
+  -webkit-border-top-left-radius: 4px;
+  -webkit-border-top-right-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 
 h1 {
@@ -120,9 +116,10 @@ label {
 input {
   background-color: #fff;
   border-radius: 4px;
-  width: 90%;
+  width: 80%;
+  max-width: 410px;
   height: 25px;
-  margin-bottom: 20px;
+  margin-bottom: 35px;
   padding: 5px 10px;
   border: none;
 }
@@ -133,8 +130,10 @@ textarea {
   width: 90%;
   height: 230px;
   border: none;
-  margin: 5px auto;
+  margin-bottom: 35px;
   padding: 10px;
+  width: 80%;
+  max-width: 410px;
 }
 
 .alert-msg {
@@ -147,11 +146,11 @@ button {
   border-radius: 4px;
   padding: 10px 20px;
   font-size: 1rem;
-  margin: 30px 20px 0 20px;
+  margin: 40px 20px;
   cursor: pointer;
   border: none;
   transform: scale(1);
-  transition: transform 300ms ease-in-out;
+  transition: transform 200ms ease-in-out;
 }
 button:focus {
   color: #fff;
@@ -159,7 +158,7 @@ button:focus {
   outline: none;
 }
 button:hover {
-  transform: scale(1.07);
+  transform: scale(1.05);
 }
 
 #delete-user {
@@ -171,7 +170,7 @@ button:hover {
   width: 120px;
   height: 120px;
   border-radius: 120px;
-  margin-bottom: 20px;
+  margin: 10px auto 50px auto;
   box-shadow: 0 0 10px -5px #754849;
 }
 
@@ -190,6 +189,9 @@ input[type=file] {
   }
   nav ul {
     display: block;
+  }
+  nav img#logo {
+    margin-top: 50px;
   }
 
   .nav-links {
@@ -219,6 +221,10 @@ input[type=file] {
 
   h1, p, label, input#email, input#password, button {
     font-size: 0.9em;
+  }
+
+  #logo {
+    margin-top: 50px;
   }
 
   nav a.welcome-links {

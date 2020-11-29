@@ -1,7 +1,7 @@
 <template>
     <div id="container">
         <HomeNav />
-        <h1>Modifier mon profil</h1>
+        <h1>Modifier votre profil</h1>
         <form id="profile-form">
             <fieldset>
                 <img class="avatar" :src="userProfile.avatarUrl">
@@ -25,8 +25,8 @@
                 <input id="newPassword" placeholder="Votre nouveau mot de passe" type="password">
             </fieldset> -->
             <p class="alert-msg">{{ updateMessage }}</p>
-            <button v-on:click="modifyProfile" id="modify-user">Modifier mon profil</button>
-            <button v-on:click="deleteProfile" id="delete-user">Supprimer mon compte</button>
+            <button v-on:click="modifyProfile" id="modify-user">Modifier votre profil</button>
+            <button v-on:click="deleteProfile" id="delete-user">Supprimer votre compte</button>
         </form>
     </div>
 </template>

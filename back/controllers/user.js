@@ -70,7 +70,7 @@ exports.login = (req, res, next) => {
     const emailLogin = req.body.email;
     const passwordLogin = req.body.password;
     //recherche mySQL
-    let sqlLogin = "SELECT password FROM User WHERE email=?";
+    let sqlLogin = "SELECT * FROM User WHERE email=?";
     mysql.query(sqlLogin, [emailLogin], function(error, result) {
         if(error) {
             return res.status(500).json({ message: "Erreur sur notre serveur. Veuillez réessayer plus tard." });
