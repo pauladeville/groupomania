@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken'); // Génère un token sécurisé
 const fs = require('fs'); // Permet de gérer les fichiers stockés
 const passwordValidator = require("password-validator");
 const emailValidator = require("email-validator");
-const sanitize = require('express-sanitizer');
 
 //Création du schéma de mot de passe
 const passwordSchema = new passwordValidator();
@@ -30,40 +29,42 @@ exports.signup = (req, res, next) => {
                     firstName: req.body.firstName,
                     lastName: req.body.lastName,
                     email: req.body.email,
-                    password: hash
-                }
-                let sqlSignup = "INSERT INTO User VALUES (NULL, ?, ?, ?, ?, DEFAULT, NOW())";
-                let values = [userProfile.firstName, userProfile.lastName, userProfile.email, userProfile.password];
-                mysql.query(sqlSignup, values, function(error, result) {
-                    if (error) {
-                        return res.status(500).json()
-                    } else {
-                        return res.status(201).json()
+                    password: hash,
+                };
+                let sqlCheck = `SELECT * FROM User WHERE email = '${userProfile.email}'`;
+                mysql.query(sqlCheck, function(error, result) {
+                    if(error) {
+                        return res.status(501).json({ message: "Erreur du serveur. Veuillez réésayer plus tard."})
                     }
-                });
-                let sqlToken = "SELECT userID FROM User WHERE email=?";
-                mysql.query(sqlToken, [userProfile.email], function(error, result) {
-                    if (error) {
-                        return res.status(500).json(error.message)
+                    if(result[0]) {
+                        return res.status(401).json({ message: "Un compte a déjà été créé avec cet email !"})
                     } else {
-                        return res.status(200).json({
-                            userID: result[0].userID,
-                            token: jwt.sign(
-                                { userID: result[0].userID },
-                                process.env.TOKEN,
-                                { expiresIn: "24h" }
-                            )
+                        let sqlCreateUser =
+                        `INSERT INTO User (firstName, lastName, email, password, dateCreation)
+                        VALUES ('${userProfile.firstName}', '${userProfile.lastName}', '${userProfile.email}', '${userProfile.password}', NOW())`;
+                        mysql.query(sqlCreateUser, function(error, result) {
+                            if(error) {
+                                return res.status(501).json({ message:'Erreur de notre serveur. Veuillez réessayer dans quelques instants.'})
+                            } if(result) {
+                                res.status(201).json({
+                                    userID: result.insertId,
+                                    token: jwt.sign(
+                                        { userID: result.insertId },
+                                        process.env.TOKEN,
+                                        { expiresIn: "24h" }
+                                    )
+                                })
+                            }
                         })
                     }
-                })
-        
+                }) 
             })
-            .catch((error) => {
-                return res.status(500).json(error)
-            })
-        }
+            .catch(error => {
+                return res.status(501).json({ message:'Erreur de notre serveur. Veuillez réésayer plus tard.'})
+            }) 
+    }
 };
-
+                
 // Login de l'utilisateur
 exports.login = (req, res, next) => {
     //récupérer les identifiants transmis par le front
@@ -183,5 +184,5 @@ exports.avatar = (req, res, next) => {
             })
         }
     })
-}
+};
 

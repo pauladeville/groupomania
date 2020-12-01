@@ -1,14 +1,12 @@
 // COULEURS
-// $bg-color: #bd968c;
-// $text-color: #fff;
-// $accent-color: #9C0124;
-// $complement-color: #A26769;
-
 $bg-color: #bd968c;
 $text-color: #fff;
 $accent-color: #9C0124;
 $complement-color: #905153;
 
+//ROSE : #FFD7D7
+//ROUGE: #FD2D01
+//BLEU: #091F43 
 
 $box-shadow : 0 0 10px -5px darken($complement-color, 15);
 
@@ -18,7 +16,8 @@ body {
     margin: 0;
     padding: 0;
 	background: $bg-color;
-	background: radial-gradient(#D1B2AA 0%, #AC7D71 100%);
+	// background: radial-gradient(#D1B2AA 0%, #AC7D71 100%);
+	background: fixed radial-gradient(lighten($bg-color, 10) 0%, darken($bg-color, 10) 100%);
 	color: $text-color;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;

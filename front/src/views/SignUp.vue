@@ -78,6 +78,10 @@ export default {
                 email: "",
                 password: ""
             },
+            loginUser: {
+                email: "",
+                password: ""
+            },
             errorMessage: ""
         }
     },
@@ -103,19 +107,23 @@ export default {
             fetch(url, options)
                 .then(res => res.json())
                 .then((res) => {
-                    if (res.userID && res.token) {
-                        localStorage.setItem("userID", res.userID)
-                        localStorage.setItem("token", res.token)
-                        console.log(localStorage)
+                    //vérifier la création de l'ID et du token et les stocker dans le localStorage
+                    if(res.userID && res.token){
+                        localStorage.setItem("userID", res.userID);
+                        localStorage.setItem("token", res.token);
+                        console.log(localStorage);
                         this.$router.push("forum");
-                    } else {
+                    }
+                    else {
                         //sinon afficher le message d'erreur correspondant sous le formulaire
                         this.errorMessage = res.message
                     }
                 })
-                .catch(error => console.log(error))
+                .catch(error => {
+                    this.errorMessage = error
+                })
             }    
-        }
+        },
     },
     mounted() {
         localStorage.clear();
