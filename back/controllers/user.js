@@ -129,14 +129,14 @@ exports.profile = (req, res, next) => {
 
 // Modifier un profil
 exports.modify = (req, res, next) => {
+    let userID = req.params["id"]
     let updatedProfile = {
-        userID: req.params["id"],
-        firstName: req.body.newFirstName,
-        lastName: req.body.newLastName,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName
     };
-    // console.log(updatedProfile);
-    let sqlModify = "UPDATE User SET firstName=?, lastName=? WHERE userID=?";
-    let values = [updatedProfile.firstName, updatedProfile.lastName, updatedProfile.userID];
+    console.log(updatedProfile); 
+    let sqlModify = "UPDATE User SET firstName = IFNULL(?, firstName), lastName = IFNULL (?, lastName) WHERE userID = ?";
+    let values = [updatedProfile.firstName, updatedProfile.lastName, userID];
     mysql.query(sqlModify, values, function(error, result) {
         if (error) {
             res.status(500).json(error.message);
@@ -147,11 +147,11 @@ exports.modify = (req, res, next) => {
         else {
             // si la MaJ a été effectuée, renvoyer toutes les données
             let sqlGet = "SELECT * FROM User WHERE userID=?";
-            mysql.query(sqlGet, [updatedProfile.userID], function(error, result) {
+            mysql.query(sqlGet, [userID], function(error, result) {
                 if (error) {
                     res.status(500).json(error.message);
                 } else {
-                    res.status(200).json(result);
+                    res.status(200).json(result); 
                 }
             })
         }

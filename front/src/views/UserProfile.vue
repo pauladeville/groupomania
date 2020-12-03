@@ -10,23 +10,15 @@
             </fieldset>
             <fieldset>
                 <label for="newFirstname">Votre prénom n'est pas <span class="bold-text">{{ userProfile.firstName }}</span> ?</label>
-                <input id="newFirstName" placeholder="Votre vrai prénom">
+                <input v-model="newProfile.firstName" id="newFirstName" placeholder="Votre vrai prénom">
             </fieldset>
             <fieldset>
                 <label for="newLastName">Votre nom n'est pas <span class="bold-text">{{ userProfile.lastName }}</span> ?</label>
-                <input id="newLastName" placeholder="Votre vrai nom">
+                <input v-model="newProfile.lastName" id="newLastName" placeholder="Votre vrai nom">
             </fieldset>
-            <!-- <fieldset>
-                <label for="newEmail">Votre nom n'est pas <span class="bold-text">{{ userProfile.email }}</span> ?</label>
-                <input id="newEmail" placeholder="Votre adresse email" type="email">
-            </fieldset>
-            <fieldset>
-                <label for="newPassword">Vous souhaitez changer de mot de passe</label>
-                <input id="newPassword" placeholder="Votre nouveau mot de passe" type="password">
-            </fieldset> -->
             <p class="alert-msg">{{ updateMessage }}</p>
-            <button v-on:click="modifyProfile" id="modify-user">Modifier votre profil</button>
-            <button v-on:click="deleteProfile" id="delete-user">Supprimer votre compte</button>
+            <button @click="modifyProfile" id="modify-user">Modifier votre profil</button>
+            <button @click="deleteProfile" id="delete-user">Supprimer votre compte</button>
         </form>
     </div>
 </template>
@@ -42,24 +34,25 @@ export default {
         return {
             updateMessage: "",
             userProfile: {
-                userID: "",
+                userID: localStorage.getItem("userID"),
                 firstName: "",
                 lastName: "",
-                // email: "",
-                // password: "",
                 avatarUrl: ""
             },
-            bearer: 'Bearer ' + localStorage.getItem("token")
+            newProfile: {
+                // firstName: this.userProfile.firstName,
+                // lastName: this.userProfile.lastName
+            },
+            // bearer: 'Bearer ' + localStorage.getItem("token")
         }
     },
     methods: {
         setProfile() {
-            this.userProfile.userID = localStorage.getItem("userID");
             let url = `http://localhost:3000/api/user/${ this.userProfile.userID }`;
             let options = {
                 method: "GET",
                 headers: {
-                    'Authorization': this.bearer,
+                    'Authorization': 'Bearer ' + localStorage.getItem("token"),
                     'Content-Type': 'application/json'
                 }
             };
@@ -69,8 +62,6 @@ export default {
                     console.log(data);
                     this.userProfile.firstName = data[0].firstName;
                     this.userProfile.lastName = data[0].lastName;
-                    // this.userProfile.email = data[0].email;
-                    // this.userProfile.password = data[0].password;
                     this.userProfile.avatarUrl = data[0].avatarUrl;
                 })
                 .catch(error => console.log(error))
@@ -81,9 +72,7 @@ export default {
             let url = `http://localhost:3000/api/user/${ this.userProfile.userID }`;
             let options = {
                 method: "POST",
-                headers: {
-                    'Authorization': this.bearer,
-                },
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem("token") },
                 body: formData
             };
             fetch(url, options)
@@ -94,29 +83,22 @@ export default {
                 .catch(error => console.log(error))
         },
         modifyProfile() {
-            let profileToSend = {
-                newFirstName: document.getElementById("newFirstName").value,
-                newLastName: document.getElementById("newLastName").value,
-                // newEmail: document.getElementById("newEmail").value,
-                // newPassword: document.getElementById("newPassword").value,
-            };
-            console.log(profileToSend);
             let url = `http://localhost:3000/api/user/${ this.userProfile.userID }`;
             let options = {
                 method: "PUT",
                 headers: {
-                    'Authorization': this.bearer,
+                    'Authorization': 'Bearer ' + localStorage.getItem("token"),
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(profileToSend)
+                body: JSON.stringify(this.newProfile)
             };
             fetch(url, options)
                 .then(res => res.json())
                 .then(data => {
                     // récupérer le profil mis à jour
-                    this.userProfile = data[0]
+                    this.userProfile = data[0];
                     //réinitialiser les champs de formulaire
-                    document.getElementById("profile-form").reset();
+                    this.newProfile = {}
                 })
                 .catch(error => console.log(error))
         },
@@ -125,7 +107,7 @@ export default {
             let options = {
                 method: "DELETE",
                 headers: {
-                    'Authorization': this.bearer,
+                    'Authorization': 'Bearer ' + localStorage.getItem("token"),
                     'Content-Type': 'application/json'
                 }
             };
@@ -133,7 +115,7 @@ export default {
                 .then(res => res.json())
                 .then(this.$router.push("/inscription"))
                 .catch(error => console.log(error))
-        }
+        },
     },
     mounted() {
         this.setProfile();
