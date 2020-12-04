@@ -125,7 +125,7 @@ exports.profile = (req, res, next) => {
             return res.status(200).json(result);
         }
     })
-};
+}; 
 
 // Modifier un profil
 exports.modify = (req, res, next) => {

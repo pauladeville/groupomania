@@ -39,10 +39,7 @@ export default {
                 lastName: "",
                 avatarUrl: ""
             },
-            newProfile: {
-                // firstName: this.userProfile.firstName,
-                // lastName: this.userProfile.lastName
-            },
+            newProfile: {},
             // bearer: 'Bearer ' + localStorage.getItem("token")
         }
     },
@@ -90,7 +87,7 @@ export default {
                     'Authorization': 'Bearer ' + localStorage.getItem("token"),
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(this.newProfile)
+                body: JSON.stringify(this.newProfile),
             };
             fetch(url, options)
                 .then(res => res.json())
