@@ -3,7 +3,12 @@
     <HomeNav />
     <h1>Fil d'actualité</h1>
     <p class="alert-msg">{{ updateMessage }}</p>
-    <Post v-for="post in postList" v-bind:key="post.postID" :postID="post.postID" />
+    <Post
+      v-for="post in postList"
+      v-bind:key="post.postID"
+      :postID="post.postID"
+      @post-deleted="getPostsList"
+      />
   </div>
 </template>
 

@@ -9,16 +9,18 @@
                     <h3 class="post-info-sender-name">{{ userInfo.firstName }} {{ userInfo.lastName }} </h3>
                 </div>
                 <div class="post-info-time">
-                    <h3>Posté le {{ postInfo.dateSend }}</h3>
-                    <img src="../assets/trash.png" alt="">
+                    <h3>Posté le {{ convertDate }}</h3>
+                    <img v-if="postInfo.userID == visitorID" @click="deletePost" src="../assets/trash.png" alt="">
                 </div>
             </div>
             <div class="post-content">
-                <p class="alert-msg">{{ updateMessage }}</p>
-                <img class="post-content-gif" src="https://via.placeholder.com/300" alt="">
+                <p v-if="updateMessage.lenght >= 1" class="alert-msg">{{ updateMessage }}</p>
+                <img class="post-content-gif" :src="postInfo.gifUrl" alt="">
                 <div class="post-content-text">
-                    <h2>{{ postInfo.title }}</h2>
-                    <p>{{ postInfo.text }}</p>
+                    <div>
+                        <h2>{{ postInfo.title }}</h2>
+                        <p>{{ postInfo.text }}</p>
+                    </div>
                     <div class="post-likes">
                         <img v-if="postInfo.likes >= 1" src="../assets/liked.png" alt="">
                         <img v-else src="../assets/unliked.png" alt="">
@@ -64,53 +66,73 @@
                     firstName: "",
                     lastName: ""
                 },
-                updateMessage: ""
+                updateMessage: "",
+                visitorID: localStorage.getItem("userID")
+            }
+        },
+        computed: {
+            convertDate() {
+                let date = this.postInfo.dateSend.split(/[- T :]/);
+                let convertDate = `${date[2]}/${date[1]}/${date[0]}`;
+                return convertDate;
             }
         },
         methods: {
             getPostInfo() {
-            let url = `http://localhost:3000/api/post/${ this.postID }`;
-            let options = {
-                method: "GET",
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("token"),
-                    'Content-Type': 'application/json'
-                }
-            };
-            fetch(url, options)
-                .then(response => response.json())
-                .then((data) => {
-                    if (data[0].postTitle) {
-                        this.postInfo.title = data[0].postTitle;
-                        this.postInfo.gifUrl = data[0].gifUrl;
-                        this.postInfo.text = data[0].postText;
-                        this.postInfo.likes = data[0].likes;
-                        this.postInfo.dateSend = data[0].dateSend;
-                        this.postInfo.userID = data[0].userID;
+                let url = `http://localhost:3000/api/post/${ this.postID }`;
+                let options = {
+                    method: "GET",
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("token"),
                     }
-                    else {
-                        this.updateMessage = data.message;
-                    }
-                })
-                .catch(error => console.log(error))
+                };
+                fetch(url, options)
+                    .then(response => response.json())
+                    .then((data) => {
+                        if (data[0].postTitle) {
+                            this.postInfo.title = data[0].postTitle;
+                            this.postInfo.gifUrl = data[0].gifUrl;
+                            this.postInfo.text = data[0].postText;
+                            this.postInfo.likes = data[0].likes;
+                            this.postInfo.dateSend = data[0].dateSend;
+                            this.postInfo.userID = data[0].userID;
+                            this.getUserInfo();
+                        }
+                        else {
+                            this.updateMessage = data.message;
+                        }
+                    })
+                    .catch(error => console.log(error))
             },
             getUserInfo() {
-            let url = `http://localhost:3000/api/user/${ this.postInfo.userID }`;
-            let options = {
-                method: "GET",
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("token"),
-                    'Content-Type': 'application/json'
-                }
-            };
-            fetch(url, options)
-                .then(response => response.json())
-                .then(data => {
-                    this.userInfo.avatarUrl = data[0].avatarUrl;
-                    this.userInfo.firstName = data[0].firstName;
-                    this.userInfo.lastName = data[0].lastName;
-                })
-                .catch(error => console.log(error))
+                let url = `http://localhost:3000/api/user/${ this.postInfo.userID }`;
+                let options = {
+                    method: "GET",
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+                    }
+                };
+                fetch(url, options)
+                    .then(response => response.json())
+                    .then(data => {
+                        this.userInfo.avatarUrl = data[0].avatarUrl;
+                        this.userInfo.firstName = data[0].firstName;
+                        this.userInfo.lastName = data[0].lastName;
+                    })
+                    .catch(error => console.log(error))
+            },
+            deletePost() {
+                let url = `http://localhost:3000/api/post/${ this.postID }`;
+                let options = {
+                    method: "DELETE",
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+                    }
+                };
+                fetch(url, options)
+                    .then(response => response.json())
+                    .then(this.$emit("post-deleted"))
+                    .catch(error => console.log(error))
             }
         },
         mounted() {

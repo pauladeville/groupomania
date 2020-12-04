@@ -9,7 +9,6 @@ module.exports = (req, res, next) => {
         const token = req.headers.authorization.split(" ")[1]; //Récupération du token dans le header authorization (suppression du mot clé bearer)
         const decodedToken = jwt.verify(token, process.env.TOKEN); //Décodage du token en objet JS
         const userID = decodedToken.userID; //Extraction du userId depuis le token décodé
-        //Si l'userId contenu par le token ne correspond pas au userId de la requête, renvoie d'une erreur, sinon next passe l'exécution au middleware suivant 
         res.locals.userID = decodedToken.userID;
         next();
     }

@@ -55,7 +55,6 @@ export default {
             fetch(url, options)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
                     this.userProfile.firstName = data[0].firstName;
                     this.userProfile.lastName = data[0].lastName;
                     this.userProfile.avatarUrl = data[0].avatarUrl;

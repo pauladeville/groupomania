@@ -14,20 +14,23 @@
                     required />
             </fieldset>
             <fieldset>
-                <label for="gif-url">URL du gif</label>
+                <label for="gif-url">URL du gif *</label>
                 <input
                     v-model="postInfo.gifUrl"
-                    type="text"
+                    type="url"
                     id="gif-url"
-                    placeholder="Lien vers la page 9GAG"/>
+                    placeholder="Lien vers le fichier GIPHY par exemple"
+                    required
+                    />
                 <img id="preview">
             </fieldset>
             <fieldset>
-                <label for="post-content">Commentaire</label>
+                <label for="post-content">Commentaire *</label>
                 <textarea
                     v-model="postInfo.text"
                     id="post-content"
-                    name="post-content">
+                    name="post-content"
+                    required>
                 </textarea>
             </fieldset>
             <p class="alert-msg">{{ updateMessage }}</p>
@@ -67,8 +70,10 @@ export default {
             fetch(url, options)
                 .then(res => res.json())
                 .then(res => {
+                    if(res.ok) {
+                        this.postInfo = {}
+                    }
                     this.updateMessage = res.message;
-                    this.postInfo = {}
                 })
                 .catch(error => {
                     this.errorMessage = error
