@@ -2,7 +2,7 @@
 
     <div class="post-comment-container">
 
-        <div class="post" :id="postID">
+        <div class="post" :postID="postID">
             <div class="post-info">
                 <div class="post-info-sender">
                     <img class="post-info-sender-avatar" :src="userInfo.avatarUrl" alt="">
@@ -14,6 +14,7 @@
                 </div>
             </div>
             <div class="post-content">
+                <p class="alert-msg">{{ updateMessage }}</p>
                 <img class="post-content-gif" src="https://via.placeholder.com/300" alt="">
                 <div class="post-content-text">
                     <h2>{{ postInfo.title }}</h2>
@@ -43,10 +44,14 @@
 <script>
     export default {
         name: "Post",
+        props: {
+            postID: {
+                type: Number
+            }
+        },
         data: () => {
             return {
-                postInfo : {
-                    postID: "",
+                postInfo: {
                     userID: "",
                     dateSend: "",
                     title: "",
@@ -58,12 +63,13 @@
                     avatarUrl : "",
                     firstName: "",
                     lastName: ""
-                }
+                },
+                updateMessage: ""
             }
         },
         methods: {
             getPostInfo() {
-            let url = `http://localhost:3000/api/post/${ this.postInfo.postID }`;
+            let url = `http://localhost:3000/api/post/${ this.postID }`;
             let options = {
                 method: "GET",
                 headers: {
@@ -73,13 +79,18 @@
             };
             fetch(url, options)
                 .then(response => response.json())
-                .then(data => {
-                    this.postInfo.title = data[0].postTitle;
-                    this.postInfo.gifUrl = data[0].gifUrl;
-                    this.postInfo.text = data[0].postText;
-                    this.postInfo.likes = data[0].likes;
-                    this.postInfo.dateSend = data[0].dateSend;
-                    this.postInfo.userID = data[0].userID;
+                .then((data) => {
+                    if (data[0].postTitle) {
+                        this.postInfo.title = data[0].postTitle;
+                        this.postInfo.gifUrl = data[0].gifUrl;
+                        this.postInfo.text = data[0].postText;
+                        this.postInfo.likes = data[0].likes;
+                        this.postInfo.dateSend = data[0].dateSend;
+                        this.postInfo.userID = data[0].userID;
+                    }
+                    else {
+                        this.updateMessage = data.message;
+                    }
                 })
                 .catch(error => console.log(error))
             },
@@ -101,6 +112,9 @@
                 })
                 .catch(error => console.log(error))
             }
+        },
+        mounted() {
+            this.getPostInfo();
         }
     }
 </script>

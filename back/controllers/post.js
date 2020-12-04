@@ -3,6 +3,15 @@ const fs = require("fs"); // Permet de gérer les fichiers stockés
 
 // Obtenir tous les messages
 exports.getAllPosts = (req, res, next) => {
+    let sqlGetPosts = "SELECT postID FROM Post";
+    mysql.query(sqlGetPosts, function(error, result) {
+        if(error) {
+            return res.status(404).json({ message: "Soyez le premier à publier !"});
+        }
+        else {
+            return res.status(200).json(result);
+        } 
+    }) 
 };
 
 // Obtenir un message
@@ -11,13 +20,13 @@ exports.getOnePost = (req, res, next) => {
     let sqlGetPost = `SELECT * FROM Post WHERE postID=${postID}`;
     mysql.query(sqlGetPost, function(error, result) {
         if(error) {
-            return res.status(404).json(error.message);
+            return res.status(404).json({ message: "Cette publication a été supprimée"});
         }
         else {
             return res.status(200).json(result);
         }
     })
-};
+}; 
 
 
 // Créer un message

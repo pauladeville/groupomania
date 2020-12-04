@@ -249,12 +249,13 @@ input[type=file] {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
-.post-content img {
+.post-content-gif {
   align-self: center;
 }
 .post-content-text {
-  max-width: 400px;
+  width: 40%;
   margin: 15px;
 }
 .post-content-text h2 {
@@ -341,6 +342,14 @@ input[type=file] {
     margin-top: 20px;
     display: block;
   }
+
+  .post-content {
+    padding: 5px;
+    flex-direction: column;
+  }
+  .post-content-text {
+    width: 90%;
+  }
 }
 @media (max-width: 500px) {
   #logo {
@@ -366,7 +375,8 @@ input[type=file] {
   }
 
   .post-content-gif {
-    width: 180px;
+    width: 90%;
+    margin: auto;
   }
 }
 

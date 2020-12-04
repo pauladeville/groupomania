@@ -8,10 +8,10 @@ const multer = require("../middleware/multer-config");
 
 //Application des fonctions pour chaque route + authentification pour toutes les routes + gestion des fichiers entrants pour les routes concernées (post / put)
 router.get("/", auth, postCtrl.getAllPosts);
+router.get("/:id", auth, postCtrl.getOnePost);
 router.post("/", auth, postCtrl.createPost); 
 router.delete("/:id", auth, postCtrl.deletePost);
 router.post("/:id/comment", auth, postCtrl.createComment);
-router.put("/:id", auth, postCtrl.likePost);
-// router.get("/:id", auth, postCtrl.getOnePost);
+router.put("/:id", auth, postCtrl.likePost); 
 
 module.exports = router; 

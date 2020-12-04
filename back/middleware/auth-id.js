@@ -10,8 +10,14 @@ module.exports = (req, res, next) => {
         const decodedToken = jwt.verify(token, process.env.TOKEN); //Décodage du token en objet JS
         const userID = decodedToken.userID; //Extraction du userId depuis le token décodé
         //Si l'userId contenu par le token ne correspond pas au userId de la requête, renvoie d'une erreur, sinon next passe l'exécution au middleware suivant 
-        res.locals.userID = decodedToken.userID;
-        next();
+        if(req.params["id"] && req.params["id"] != userID) {
+            throw "Invalid user ID";
+        } else if(req.params["id"] && req.params["id"] == userID) {
+            next();
+        } else {
+            res.locals.userID = decodedToken.userID;
+            next(); 
+        }
     }
     catch (error) {
         res.status(401).json({error})

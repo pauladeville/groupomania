@@ -268,11 +268,12 @@ input[type="file"] {
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
-	img {
+	align-items: center;
+	&-gif {
 		align-self: center;
 	}
 	&-text {
-		max-width: 400px;
+		width: 40%;
 		margin: 15px;
 		h2 {
 			margin-bottom: 30px;
@@ -359,6 +360,15 @@ input[type="file"] {
 			display: block;
 		}
 	}
+	.post-content {
+		padding: 5px;
+		flex-direction: column;
+		&-gif {
+		}
+		&-text {
+			width: 90%;
+		}
+	}
 }
 
 @media (max-width: 500px) {
@@ -385,7 +395,8 @@ input[type="file"] {
 	}
 	.post-content {
 		&-gif {
-			width: 180px;
+			width: 90%;
+			margin: auto;
 		}
 	}
 }

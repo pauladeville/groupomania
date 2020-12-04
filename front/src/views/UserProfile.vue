@@ -40,7 +40,6 @@ export default {
                 avatarUrl: ""
             },
             newProfile: {},
-            // bearer: 'Bearer ' + localStorage.getItem("token")
         }
     },
     methods: {
