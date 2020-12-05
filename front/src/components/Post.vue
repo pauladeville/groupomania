@@ -10,7 +10,7 @@
                 </div>
                 <div class="post-info-time">
                     <h3>Posté le {{ convertDate }}</h3>
-                    <img v-if="postInfo.userID == visitorID" @click="deletePost" src="../assets/trash.png" alt="">
+                    <img v-if="postInfo.userID == visitorID" @click="deletePost" src="../assets/white-trash.png" alt="">
                 </div>
             </div>
             <div class="post-content">

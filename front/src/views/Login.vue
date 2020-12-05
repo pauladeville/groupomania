@@ -55,7 +55,6 @@ export default {
                     "email": this.email,
                     "password": this.password
                 }
-                console.log(loginUsed)
                 let url = "http://localhost:3000/api/user/login"
                 let options = {
                     method: "POST",

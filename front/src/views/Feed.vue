@@ -35,7 +35,6 @@ export default {
           method: "GET",
           headers: {
               'Authorization': 'Bearer ' + localStorage.getItem("token"),
-              'Content-Type': 'application/json'
           }
       };
       fetch(url, options)
@@ -43,8 +42,9 @@ export default {
           .then((data) => {
               if (data[0]) {
                 this.postList = data;
-              } else {
-                this.updateMessage = data.message;
+              } 
+              else {
+                this.updateMessage = "Soyez le premier à publier !";
               }
           })
           .catch(error => console.log(error))

@@ -95,7 +95,6 @@ export default {
                 "email": this.userInfo.email,
                 "password": this.userInfo.password
             }
-            // console.log(userProfile)
             let url = "http://localhost:3000/api/user/signup"
             let options = {
                 method: "POST",
@@ -111,7 +110,6 @@ export default {
                     if(res.userID && res.token){
                         localStorage.setItem("userID", res.userID);
                         localStorage.setItem("token", res.token);
-                        console.log(localStorage);
                         this.$router.push("forum");
                     }
                     else {

@@ -100,19 +100,6 @@ exports.login = (req, res, next) => {
     })
 };
 
-// Suppresion d'un utilisateur
-exports.delete = (req, res, next) => {
-    let userID = req.params["id"];
-    let sqlDelete = "DELETE FROM User WHERE userID=?";
-    mysql.query(sqlDelete, [userID], function(error, result) {
-        if(error) {
-            return res.status(500).json(error.message);
-        } else {
-            return res.status(200).json();
-        }
-    })
-}
-
 // Récupérer le profil d'un utilisateur
 exports.profile = (req, res, next) => {
     let userID = req.params["id"];
@@ -186,3 +173,28 @@ exports.avatar = (req, res, next) => {
     })
 };
 
+// Suppresion d'un utilisateur
+exports.delete = (req, res, next) => {
+    let userID = req.params["id"];
+    let sqlFindAvatar = `SELECT avatarUrl FROM User WHERE userID=${userID}`;
+    mysql.query(sqlFindAvatar, function(error, result) {
+        if(error){
+            return res.status(500).json(error)
+        } else {
+            let avatarName = result[0].avatarUrl.split("/images/")[1];
+            if(avatarName != "avatar.png") {
+                fs.unlink(`images/${avatarName}`, (error) => {
+                    if(error) throw error;
+                })
+            }
+        }
+    });
+    let sqlDelete = "DELETE FROM User WHERE userID=?";
+    mysql.query(sqlDelete, [userID], function(error, result) {
+        if(error) {
+            return res.status(500).json(error.message);
+        } else {
+            return res.status(200).json();
+        }
+    })
+};

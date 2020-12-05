@@ -49,7 +49,6 @@ export default {
                 method: "GET",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("token"),
-                    'Content-Type': 'application/json'
                 }
             };
             fetch(url, options)
@@ -106,7 +105,6 @@ export default {
                 method: "DELETE",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("token"),
-                    'Content-Type': 'application/json'
                 }
             };
             fetch(url, options)

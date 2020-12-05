@@ -1,7 +1,7 @@
 <template>
     <form v-on:submit.prevent="publish" :postID="postID" class="new-comment">
-        <textarea v-model="newComment.commentText" id="new-comment" placeholder="Commentez cette publication" rows="3" cols="10" required></textarea>
-        <button>Publier</button>
+        <textarea v-model="newComment.commentText" id="new-comment" placeholder="Votre commentaire bienveillant" rows="3" cols="10" required></textarea>
+        <button>Commenter cette publication</button>
     </form>
 </template>
 
