@@ -88,20 +88,20 @@ nav {
 	&.router-link-exact-active, &.router-link-exact-active:hover {
 		background-color: $text-color;
 		color: $bg-color;
-		-webkit-border-top-left-radius: 4px;
-		-webkit-border-top-right-radius: 4px;
-		-moz-border-radius-topleft: 4px;
-		-moz-border-radius-topright: 4px;
-		border-top-left-radius: 4px;
-		border-top-right-radius: 4px;	
+		-webkit-border-top-left-radius: 5px;
+		-webkit-border-top-right-radius: 5px;
+		-moz-border-radius-topleft: 5px;
+		-moz-border-radius-topright: 5px;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;	
 	}
 }
 
 h1 {
 	text-align: center;
 	margin: 90px 0;
-    text-transform: uppercase;
-	font-size: 1.3rem;
+    // text-transform: uppercase;
+	font-size: 2em;
 	font-weight: 700;
 }
 
@@ -143,19 +143,21 @@ label {
 
 input {
 	background-color: $bg-color;
-	border-radius: 4px;
+	border-radius: 5px;
 	width: 80%;
 	max-width: 410px;
 	height: 25px;
 	margin-bottom: 35px;
 	padding: 5px 10px;
 	border: none;
+	outline: none;
+
 }
 
 textarea {
 	background-color: $bg-color;
 	outline: none;
-	border-radius: 4px;
+	border-radius: 5px;
 	width: 90%;
 	height: 100px;
 	border: none;
@@ -173,7 +175,7 @@ textarea {
 button {
 	color: $bg-color;
 	background-color: $text-color;
-	border-radius: 4px;
+	border-radius: 5px;
 	padding: 10px 20px;
 	font-size: .9rem;
 	margin: 40px 20px;
@@ -209,9 +211,19 @@ input[type="file"] {
 }
 
 //FIL D'ACTU
-input#search {
-	border: $text-color solid 3px;
-	padding: 20px;
+#forum-title {
+    margin-bottom: 0;
+  }
+
+#forum-title ~ p {
+	margin-bottom: 90px;
+}
+
+.toggle-button {
+	margin-top: 0;
+	background-color: $complement-color;
+	color: $text-color;
+	border: 1px solid $text-color;
 }
 
 .post-comment-container {
@@ -226,6 +238,7 @@ input#search {
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	box-shadow: $box-shadow;
+	margin-top: 80px;
 	h3 {
 		font-size: 1em;
 		margin-block : 0;
@@ -242,7 +255,7 @@ input#search {
 	justify-content: space-between;
 	align-items: center;
 	flex-wrap: wrap;
-	padding: 20px 40px;
+	padding: 10px 40px;
 	-webkit-border-radius: 5px 5px 0px 0px;
 	-moz-border-radius: 5px 5px 0px 0px;
 	border-radius: 5px 5px 0px 0px;
@@ -276,14 +289,14 @@ input#search {
 }
 
 .post-content {
-	padding: 40px;
+	padding: 60px;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: flex-start;
 	&-gif{
-		max-width: 450px;
+		max-width: 400px;
 	}
 	&-text {
 		width: 40%;
@@ -330,9 +343,6 @@ input#search {
 		.comment-info {
 			font-weight: bold;
 		}
-		.comment-content {
-			font-style: italic;
-		}
 	}
 }
 
@@ -362,7 +372,6 @@ input#search {
 	}
 }
 
-
  //MEDIA QUERIES
 @media (max-width: 1200px) {
 	.post-content {
@@ -376,6 +385,7 @@ input#search {
 			align-items: center;
 		}
 		&-gif {
+			padding-top: 30px;
 			width: 90%;
 			max-width: 350px;
 		}

@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="post-content">
-                <p v-if="updateMessage" class="alert-msg">{{ updateMessage }}</p>
+                <p v-if="updateMessage.length >= 1" class="alert-msg">{{ updateMessage }}</p>
                 <img class="post-content-gif" :src="postInfo.gifUrl" alt="">
                 <div class="post-content-text">
                     <div>
@@ -28,26 +28,23 @@
                     </div>
                 </div>
             </div>
+            <button v-if="!invisibleComs" @click="invisibleComs = true" class="toggle-button">Masquer les commentaires</button>
+            <button v-if="invisibleComs" @click="invisibleComs = false" class="toggle-button">Afficher les commentaires</button>
+
         </div>
-
-        <div class="comment-section">
-
+        <div class="comment-section" v-show="!invisibleComs">
             <Comment
-            v-for="comment in commentList"
-            v-bind:key="comment.commentID"
-            :commentID="comment.commentID"
-            :postID="comment.postID"
-            @comment-deleted="getCommentList"
+                v-for="comment in commentList"
+                v-bind:key="comment.commentID"
+                :commentID="comment.commentID"
+                :postID="comment.postID"
+                @comment-deleted="getCommentList"
             />
-
             <NewComment
-            :postID="this.postID"
-            @comment-published="getCommentList"
+                :postID="this.postID"
+                @comment-published="getCommentList"
             />
-
         </div>
-
-
     </div>
 
 </template>
@@ -85,6 +82,7 @@ export default {
             updateMessage: "",
             visitorID: localStorage.getItem("userID"),
             commentList: [],
+            invisibleComs: true
         }
     },
     computed: {
@@ -92,7 +90,7 @@ export default {
             let date = this.postInfo.dateSend.split(/[- T :]/);
             let convertDate = `${date[2]}/${date[1]}/${date[0]}`;
             return convertDate;
-        }
+        },
     },
     methods: {
         getPostInfo() {

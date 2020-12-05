@@ -1,17 +1,11 @@
 <template>
   <div id="container">
     <HomeNav />
-    <h1>Fil d'actualité</h1>
+    <h1 id="forum-title">Fil d'actualité</h1>
+    <p v-if="postList.length >= 1">{{ postList.length }} publication<span v-if="postList.length >= 2">s</span></p>
+
     <p class="alert-msg">{{ updateMessage }}</p>
 
-    <input
-      id="search"
-      type="search"
-      placeholder="Rechercher un utilisateur..."
-      v-model="searchKey"
-    />
-
-    
     <Post
       v-for="post in postList"
       v-bind:key="post.postID"
@@ -36,7 +30,6 @@ export default {
     return {
       postList: [],
       updateMessage: "",
-      searchKey: ""
     }
   },
   methods: {
@@ -68,5 +61,5 @@ export default {
 </script>
 
 <style lang="css">
-  @import '../style/style.css'
+  @import '../style/style.css';
 </style>

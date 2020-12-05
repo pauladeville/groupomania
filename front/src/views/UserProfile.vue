@@ -16,7 +16,7 @@
                 <label for="newLastName">Votre nom n'est pas <span class="bold-text">{{ userProfile.lastName }}</span> ?</label>
                 <input v-model="newProfile.lastName" id="newLastName" placeholder="Votre vrai nom">
             </fieldset>
-            <p class="alert-msg">{{ updateMessage }}</p>
+            <p v-if="updateMessage.length >= 1" class="alert-msg">{{ updateMessage }}</p>
             <button @click="modifyProfile" id="modify-user">Modifier votre profil</button>
             <button @click="deleteProfile" id="delete-user">Supprimer votre compte</button>
         </form>
