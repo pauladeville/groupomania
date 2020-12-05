@@ -38,11 +38,11 @@
             :commentID="comment.commentID"
             :postID="comment.postID"
             @comment-deleted="getCommentList"
-            @comment-published="getCommentList"
             />
 
             <NewComment
             :postID="this.postID"
+            @comment-published="getCommentList"
             />
 
         </div>

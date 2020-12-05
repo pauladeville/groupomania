@@ -3,12 +3,22 @@
     <HomeNav />
     <h1>Fil d'actualité</h1>
     <p class="alert-msg">{{ updateMessage }}</p>
+
+    <input
+      id="search"
+      type="search"
+      placeholder="Rechercher un utilisateur..."
+      v-model="searchKey"
+    />
+
+    
     <Post
       v-for="post in postList"
       v-bind:key="post.postID"
       :postID="post.postID"
       @post-deleted="getPostsList"
       />
+  
   </div>
 </template>
 
@@ -25,7 +35,8 @@ export default {
   data() {
     return {
       postList: [],
-      updateMessage: ""
+      updateMessage: "",
+      searchKey: ""
     }
   },
   methods: {

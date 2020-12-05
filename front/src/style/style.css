@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap");
 body {
   width: 100%;
   margin: 0;
@@ -12,7 +13,7 @@ body {
 }
 
 #container {
-  padding-bottom: 150px;
+  padding-bottom: 100px;
 }
 
 header {
@@ -159,7 +160,7 @@ button {
   background-color: #000;
   border-radius: 4px;
   padding: 10px 20px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin: 40px 20px;
   cursor: pointer;
   border: none;
@@ -189,6 +190,12 @@ input[type=file] {
 
 #post-upload {
   margin: 0;
+  font-size: 1rem;
+}
+
+input#search {
+  border: #000 solid 3px;
+  padding: 20px;
 }
 
 .post-comment-container {
@@ -325,11 +332,11 @@ input[type=file] {
 .new-comment textarea {
   height: 50px;
   width: 90%;
-  max-width: none;
   margin: 15px auto;
+  background-color: #E7EFED;
 }
 .new-comment button {
-  width: 93%;
+  width: 97%;
   max-width: none;
   margin: 0 auto 20px auto;
   transition: background-color 200ms ease-in-out;
@@ -364,6 +371,10 @@ input[type=file] {
     padding: 15px;
   }
 
+  #container {
+    padding-bottom: 0;
+  }
+
   nav {
     display: block;
   }
@@ -386,6 +397,13 @@ input[type=file] {
   .post-info-time {
     margin-top: 20px;
     display: block;
+  }
+
+  .new-comment textarea {
+    width: 80%;
+  }
+  .new-comment button {
+    width: 80%;
   }
 }
 @media (max-width: 500px) {
@@ -413,6 +431,13 @@ input[type=file] {
 
   .post h2, .post h3 {
     font-size: 0.9em;
+  }
+
+  .new-comment textarea {
+    width: 70%;
+  }
+  .new-comment button {
+    width: 100%;
   }
 }
 
