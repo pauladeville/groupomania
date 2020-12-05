@@ -1,8 +1,8 @@
 // COULEURS
-$bg-color: #bd968c;
-$text-color: #fff;
+$bg-color: #E7EFED;
+$text-color: #000;
 $accent-color: #9C0124;
-$complement-color: #905153;
+$complement-color: #6BB3A1;
 
 //ROSE : #FFD7D7
 //ROUGE: #FD2D01
@@ -16,17 +16,25 @@ body {
     margin: 0;
     padding: 0;
 	background: $bg-color;
-	// background: radial-gradient(#D1B2AA 0%, #AC7D71 100%);
 	background: fixed radial-gradient(lighten($bg-color, 10) 0%, darken($bg-color, 10) 100%);
 	color: $text-color;
 	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
 	font-size: 16px;
 	text-align: center;
 }
 
+#container {
+	padding-bottom: 150px;
+}
+
 //HEADERS ET NAV
 header {
-	border-bottom: 3px solid $text-color;
+	border-bottom: 5px solid $text-color;
+}
+
+#logo{
+	width: 280px;
 }
 
 nav {
@@ -92,13 +100,14 @@ h1 {
 	text-align: center;
 	margin: 90px 0;
     text-transform: uppercase;
-    font-size: 1.3rem;
+	font-size: 1.3rem;
+	font-weight: 700;
 }
 
 //FORMULAIRES
 form {
 	max-width: 650px;
-	margin: 0 auto 150px auto;
+	margin: 0 auto;
 	padding: 70px 20px;
 	background-color: $complement-color;
 	-webkit-border-radius: 5px;
@@ -132,7 +141,7 @@ label {
 }
 
 input {
-	background-color: $text-color;
+	background-color: $bg-color;
 	border-radius: 4px;
 	width: 80%;
 	max-width: 410px;
@@ -143,6 +152,7 @@ input {
 }
 
 textarea {
+	background-color: $bg-color;
 	outline: none;
 	border-radius: 4px;
 	width: 90%;
@@ -152,7 +162,6 @@ textarea {
 	padding: 10px;
 	width: 80%;
 	max-width: 410px;
-
 }
 
 .alert-msg {
@@ -161,7 +170,7 @@ textarea {
 }
 
 button {
-	color: $complement-color;
+	color: $bg-color;
 	background-color: $text-color;
 	border-radius: 4px;
 	padding: 10px 20px;
@@ -183,7 +192,6 @@ button {
 
 #delete-user {
 	background-color: $accent-color;
-	color: $text-color;
 }
 
 .avatar {
@@ -222,7 +230,6 @@ input[type="file"] {
 		margin: 0 10px;
 	}
 	img {
-		box-shadow: $box-shadow;
 		margin: 10px;
 	}
 }
@@ -234,10 +241,11 @@ input[type="file"] {
 	align-items: center;
 	flex-wrap: wrap;
 	padding: 20px 40px;
-	background-color: darken($complement-color, 10);
 	-webkit-border-radius: 5px 5px 0px 0px;
 	-moz-border-radius: 5px 5px 0px 0px;
 	border-radius: 5px 5px 0px 0px;
+	color: $bg-color;
+	background-color: $text-color;
 	&-sender {
 		display: flex;
 		flex-direction: row;
@@ -247,6 +255,8 @@ input[type="file"] {
 		&-avatar {
 			border-radius: 100px;
 			width: 70px;
+			box-shadow: $box-shadow;
+
 		}
 	}
 	&-time {
@@ -272,7 +282,6 @@ input[type="file"] {
 	align-items: flex-start;
 	&-gif{
 		max-width: 450px;
-
 	}
 	&-text {
 		width: 40%;
@@ -288,7 +297,7 @@ input[type="file"] {
 	}
 }
 
-.post-likes {
+.post-claps {
 	margin-top: 30px;
 	display: flex;
 	flex-direction: row;
@@ -296,15 +305,15 @@ input[type="file"] {
 	align-items: center;
 	img {
 		box-shadow: none;
-		width: 30px;
-		height: 30px;
+		width: 40px;
+		height: 40px;
 		cursor: pointer;
 	}
 }
 
 .comment-section {
 	width: 80%;
-	margin: 30px auto;
+	margin: 30px auto 100px auto;
 	div.comment {
 		background-color: $complement-color;
 		box-shadow: $box-shadow;
@@ -358,7 +367,7 @@ input[type="file"] {
 			max-width: 350px;
 		}
 	}
-	.post-likes {
+	.post-claps {
 		justify-content: center;
 	}
 }

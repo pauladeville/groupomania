@@ -1,7 +1,7 @@
 <template>
   <header>
     <h1>
-      <img src="../assets/logo-groupomania.png" id="logo" alt="Logo de Groupomania" />
+      <img src="../assets/logo-groupomania.svg" id="logo" alt="Logo de Groupomania" />
     </h1>
     <nav>
       <router-link to="/" class="welcome-links">Se connecter</router-link>

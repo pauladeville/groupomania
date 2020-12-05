@@ -2,7 +2,7 @@
     <header>
         <nav>
             <router-link to="/forum">
-                <img src="../assets/logo-groupomania.png" id="logo" alt="Logo de Groupomania" />
+                <img src="../assets/logo-groupomania.svg" id="logo" alt="Logo de Groupomania" />
             </router-link>
             <ul>
                 <li class="nav-links">

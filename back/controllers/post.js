@@ -60,10 +60,20 @@ exports.deletePost = (req, res, next) => {
     })
 };
 
+// Gestion des claps
+exports.clapPost = (req, res, next) => {
+    let postID = req.params["id"];
+    let sqlClap = `UPDATE Post SET claps = claps + 1 WHERE postID=${postID}`;
+    mysql.query(sqlClap, function(error, result) {
+        if(error) {
+            return res.status(501).json(error)
+        } if(result) {
+            return res.status(200).json(result)
+        }
+    })
+};
+
 // Créer des commentaires
 exports.createComment = (req, res, next) => {
 };
 
-// Gestion des likes
-exports.likePost = (req, res, next) => {
-};

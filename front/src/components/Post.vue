@@ -21,16 +21,16 @@
                         <h2>{{ postInfo.title }}</h2>
                         <p>{{ postInfo.text }}</p>
                     </div>
-                    <div class="post-likes">
-                        <img v-if="postInfo.likes >= 1" src="../assets/liked.png" alt="">
-                        <img v-else src="../assets/unliked.png" alt="">
-                        <p>{{ postInfo.likes }}</p>
+                    <div class="post-claps">
+                        <img v-if="postInfo.claps >= 1" @click="clapPost" src="../assets/clap.png" alt="">
+                        <img v-else src="../assets/unclap.png" @click="clapPost" alt="">
+                        <p>{{ postInfo.claps }}</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- <div class="comment-section">
+        <div class="comment-section">
             <div class="comment">
                 <p class="comment-info">Le 12/12/2020, Nom de l'Utilisateur a répondu :</p>
                 <p class="comment-content">" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque imperdiet lacinia augue a pulvinar. Donec convallis finibus justo, non blandit augue. "</p>
@@ -38,7 +38,7 @@
             <div class="new-comment">
                 <textarea id="new-comment" placeholder="Commentez cette publication" rows="3" cols="10"></textarea>
             </div>
-        </div> -->
+        </div>
     </div>
 
 </template>
@@ -59,7 +59,7 @@
                     title: "",
                     gifUrl: "",
                     text: "",
-                    likes: ""
+                    claps: ""
                 },
                 userInfo : {
                     avatarUrl : "",
@@ -93,7 +93,7 @@
                             this.postInfo.title = data[0].postTitle;
                             this.postInfo.gifUrl = data[0].gifUrl;
                             this.postInfo.text = data[0].postText;
-                            this.postInfo.likes = data[0].likes;
+                            this.postInfo.claps = data[0].claps;
                             this.postInfo.dateSend = data[0].dateSend;
                             this.postInfo.userID = data[0].userID;
                             this.getUserInfo();
@@ -131,7 +131,24 @@
                 };
                 fetch(url, options)
                     .then(response => response.json())
-                    .then(this.$emit("post-deleted"))
+                    .then(() => {
+                        this.$emit("post-deleted");
+                    })
+                    .catch(error => console.log(error))
+            },
+            clapPost() {
+                let url = `http://localhost:3000/api/post/${ this.postID }`;
+                let options = {
+                    method: "PUT",
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+                    }
+                };
+                fetch(url, options)
+                    .then(response => response.json())
+                    .then(() => {
+                        this.getPostInfo();
+                    })
                     .catch(error => console.log(error))
             }
         },

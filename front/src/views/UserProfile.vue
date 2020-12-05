@@ -73,7 +73,10 @@ export default {
             fetch(url, options)
                 .then(res => res.json())
                 .then(data => {
-                    this.userProfile.avatarUrl = data
+                    this.userProfile.avatarUrl = data;
+                })
+                .then(() => {
+                    this.updateMessage = "Votre photo de profil a bien été mise à jour";
                 })
                 .catch(error => console.log(error))
         },

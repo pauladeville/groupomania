@@ -23,7 +23,7 @@ CREATE TABLE Post (
 	gifUrl VARCHAR(150),
 	postTitle VARCHAR(150) NOT NULL,
 	postText TEXT,
-	likes SMALLINT,
+	claps SMALLINT,
 	dateSend DATETIME NOT NULL,
 	PRIMARY KEY (postID),
 	FOREIGN KEY (userID) REFERENCES User (userID)
@@ -41,3 +41,4 @@ CREATE TABLE Comment (
 	FOREIGN KEY (postID) REFERENCES Post (postID)
 )
 ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
+
