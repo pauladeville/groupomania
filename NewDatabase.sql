@@ -37,6 +37,7 @@ CREATE TABLE Comment (
 	commentText TEXT NOT NULL,
 	dateSend DATETIME NOT NULL,
 	PRIMARY KEY (commentID),
+	UNIQUE INDEX index_postID_comID (postID, commentID),
 	FOREIGN KEY (userID) REFERENCES User (userID),
 	FOREIGN KEY (postID) REFERENCES Post (postID)
 )

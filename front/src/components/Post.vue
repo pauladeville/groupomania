@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="post-content">
-                <p v-if="updateMessage.lenght >= 1" class="alert-msg">{{ updateMessage }}</p>
+                <p v-if="updateMessage" class="alert-msg">{{ updateMessage }}</p>
                 <img class="post-content-gif" :src="postInfo.gifUrl" alt="">
                 <div class="post-content-text">
                     <div>
@@ -31,131 +31,165 @@
         </div>
 
         <div class="comment-section">
-            <div class="comment">
-                <p class="comment-info">Le 12/12/2020, Nom de l'Utilisateur a répondu :</p>
-                <p class="comment-content">" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque imperdiet lacinia augue a pulvinar. Donec convallis finibus justo, non blandit augue. "</p>
-            </div>
-            <div class="new-comment">
-                <textarea id="new-comment" placeholder="Commentez cette publication" rows="3" cols="10"></textarea>
-            </div>
+
+            <Comment
+            v-for="comment in commentList"
+            v-bind:key="comment.commentID"
+            :commentID="comment.commentID"
+            :postID="comment.postID"
+            @comment-deleted="getCommentList"
+            @comment-published="getCommentList"
+            />
+
+            <NewComment
+            :postID="this.postID"
+            />
+
         </div>
+
+
     </div>
 
 </template>
 
 <script>
-    export default {
-        name: "Post",
-        props: {
-            postID: {
-                type: Number
-            }
-        },
-        data: () => {
-            return {
-                postInfo: {
-                    userID: "",
-                    dateSend: "",
-                    title: "",
-                    gifUrl: "",
-                    text: "",
-                    claps: ""
-                },
-                userInfo : {
-                    avatarUrl : "",
-                    firstName: "",
-                    lastName: ""
-                },
-                updateMessage: "",
-                visitorID: localStorage.getItem("userID")
-            }
-        },
-        computed: {
-            convertDate() {
-                let date = this.postInfo.dateSend.split(/[- T :]/);
-                let convertDate = `${date[2]}/${date[1]}/${date[0]}`;
-                return convertDate;
-            }
-        },
-        methods: {
-            getPostInfo() {
-                let url = `http://localhost:3000/api/post/${ this.postID }`;
-                let options = {
-                    method: "GET",
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("token"),
-                    }
-                };
-                fetch(url, options)
-                    .then(response => response.json())
-                    .then((data) => {
-                        if (data[0].postTitle) {
-                            this.postInfo.title = data[0].postTitle;
-                            this.postInfo.gifUrl = data[0].gifUrl;
-                            this.postInfo.text = data[0].postText;
-                            this.postInfo.claps = data[0].claps;
-                            this.postInfo.dateSend = data[0].dateSend;
-                            this.postInfo.userID = data[0].userID;
-                            this.getUserInfo();
-                        }
-                        else {
-                            this.updateMessage = data.message;
-                        }
-                    })
-                    .catch(error => console.log(error))
-            },
-            getUserInfo() {
-                let url = `http://localhost:3000/api/user/${ this.postInfo.userID }`;
-                let options = {
-                    method: "GET",
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("token"),
-                    }
-                };
-                fetch(url, options)
-                    .then(response => response.json())
-                    .then(data => {
-                        this.userInfo.avatarUrl = data[0].avatarUrl;
-                        this.userInfo.firstName = data[0].firstName;
-                        this.userInfo.lastName = data[0].lastName;
-                    })
-                    .catch(error => console.log(error))
-            },
-            deletePost() {
-                let url = `http://localhost:3000/api/post/${ this.postID }`;
-                let options = {
-                    method: "DELETE",
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("token"),
-                    }
-                };
-                fetch(url, options)
-                    .then(response => response.json())
-                    .then(() => {
-                        this.$emit("post-deleted");
-                    })
-                    .catch(error => console.log(error))
-            },
-            clapPost() {
-                let url = `http://localhost:3000/api/post/${ this.postID }`;
-                let options = {
-                    method: "PUT",
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem("token"),
-                    }
-                };
-                fetch(url, options)
-                    .then(response => response.json())
-                    .then(() => {
-                        this.getPostInfo();
-                    })
-                    .catch(error => console.log(error))
-            }
-        },
-        mounted() {
-            this.getPostInfo();
+import Comment from '../components/Comment'
+import NewComment from '../components/NewComment'
+export default {
+    name: "Post",
+    props: {
+        postID: {
+            type: Number
         }
+    },
+    components: {
+        Comment,
+        NewComment
+    },
+    data: () => {
+        return {
+            postInfo: {
+                postID: "",
+                userID: "",
+                dateSend: "",
+                title: "",
+                gifUrl: "",
+                text: "",
+                claps: "",
+            },
+            userInfo : {
+                avatarUrl : "",
+                firstName: "",
+                lastName: ""
+            },
+            updateMessage: "",
+            visitorID: localStorage.getItem("userID"),
+            commentList: [],
+        }
+    },
+    computed: {
+        convertDate() {
+            let date = this.postInfo.dateSend.split(/[- T :]/);
+            let convertDate = `${date[2]}/${date[1]}/${date[0]}`;
+            return convertDate;
+        }
+    },
+    methods: {
+        getPostInfo() {
+            let url = `http://localhost:3000/api/post/${ this.postID }`;
+            let options = {
+                method: "GET",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("token"),
+                }
+            };
+            fetch(url, options)
+                .then(response => response.json())
+                .then((data) => {
+                    if (data[0]) {
+                        this.postInfo.postID = data[0].postID;
+                        this.postInfo.title = data[0].postTitle;
+                        this.postInfo.gifUrl = data[0].gifUrl;
+                        this.postInfo.text = data[0].postText;
+                        this.postInfo.claps = data[0].claps;
+                        this.postInfo.dateSend = data[0].dateSend;
+                        this.postInfo.userID = data[0].userID;
+                        this.getUserInfo();
+                    }
+                    else {
+                        this.updateMessage = data.message;
+                    }
+                })
+                .catch(error => console.log(error))
+        },
+        getUserInfo() {
+            let url = `http://localhost:3000/api/user/${ this.postInfo.userID }`;
+            let options = {
+                method: "GET",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("token"),
+                }
+            };
+            fetch(url, options)
+                .then(response => response.json())
+                .then(data => {
+                    this.userInfo.avatarUrl = data[0].avatarUrl;
+                    this.userInfo.firstName = data[0].firstName;
+                    this.userInfo.lastName = data[0].lastName;
+                })
+                .catch(error => console.log(error))
+        },
+        getCommentList() {
+            let url = `http://localhost:3000/api/comment/${ this.postID }`;
+            let options = {
+                method: "GET",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("token"),
+                }
+            };
+            fetch(url, options)
+                .then(response => response.json())
+                .then((data) => {
+                    this.commentList = data;
+                })
+            .catch(error => console.log(error))
+        },
+        deletePost() {
+            let url = `http://localhost:3000/api/post/${ this.postID }`;
+            let options = {
+                method: "DELETE",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("token"),
+                }
+            };
+            fetch(url, options)
+                .then(response => response.json())
+                .then(() => {
+                    this.$emit("post-deleted");
+                })
+                .catch(error => console.log(error))
+        },
+        clapPost() {
+            let url = `http://localhost:3000/api/post/${ this.postID }`;
+            let options = {
+                method: "PUT",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("token"),
+                }
+            };
+            fetch(url, options)
+                .then(response => response.json())
+                .then(() => {
+                    this.getPostInfo();
+                })
+                .catch(error => console.log(error))
+        }
+    },
+    mounted() {
+        this.getPostInfo();
+        this.getCommentList();
     }
+}
 </script>
 
 <style lang="css">

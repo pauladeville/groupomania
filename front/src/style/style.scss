@@ -8,7 +8,7 @@ $complement-color: #6BB3A1;
 //ROUGE: #FD2D01
 //BLEU: #091F43 
 
-$box-shadow : 0 0 10px -5px darken($complement-color, 15);
+$box-shadow : 0 0 10px -5px darken($complement-color, 30);
 
 
 body {
@@ -16,7 +16,7 @@ body {
     margin: 0;
     padding: 0;
 	background: $bg-color;
-	background: fixed radial-gradient(lighten($bg-color, 10) 0%, darken($bg-color, 10) 100%);
+	background: fixed radial-gradient(lighten($bg-color, 20) 0%, darken($bg-color, 10) 100%);
 	color: $text-color;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400;
@@ -178,15 +178,10 @@ button {
 	margin: 40px 20px;
 	cursor: pointer;
 	border: none;
-	transform: scale(1);
-	transition: transform 200ms ease-in-out;
-    &:focus {
-		color: $text-color;
-		background-color: darken($complement-color, 20) ;
-		outline: none;
-	}
+	outline: none;
+	transition: background-color 200ms ease-in-out;
 	&:hover {
-		transform: scale(1.05);
+		background-color: darken($complement-color, 20);
 	}
 }
 
@@ -321,6 +316,7 @@ input[type="file"] {
 		-moz-border-radius: 5px;
 		border-radius: 5px;
 		padding: 10px 20px;
+		margin-bottom: 30px;
 		p {
 			font-size: .9em;
 		}
@@ -341,11 +337,21 @@ input[type="file"] {
 	border-radius: 5px;
 	padding: 10px 20px;
 	margin: 30px auto;
+	max-width: none;
 	textarea {
 		height: 50px;
 		width: 90%;
 		max-width: none;
 		margin: 15px auto;
+	}
+	button {
+		width: 93%;
+		max-width: none;
+		margin: 0 auto 20px auto;
+		transition: background-color 200ms ease-in-out;
+		&:hover {
+			background-color: darken($complement-color, 20);
+		}
 	}
 }
 

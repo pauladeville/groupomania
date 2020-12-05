@@ -12,7 +12,7 @@ exports.getAllPosts = (req, res, next) => {
             return res.status(200).json(result);
         } 
     }) 
-}; 
+};
 
 // Obtenir un message
 exports.getOnePost = (req, res, next) => {
@@ -73,7 +73,4 @@ exports.clapPost = (req, res, next) => {
     })
 };
 
-// Créer des commentaires
-exports.createComment = (req, res, next) => {
-};
 
