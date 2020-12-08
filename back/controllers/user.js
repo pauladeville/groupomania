@@ -29,7 +29,7 @@ exports.signup = (req, res, next) => {
                     firstName: req.body.firstName,
                     lastName: req.body.lastName,
                     email: req.body.email,
-                    password: hash,
+                    password: hash
                 };
                 let sqlCheck = `SELECT * FROM User WHERE email = '${userProfile.email}'`;
                 mysql.query(sqlCheck, function(error, result) {
@@ -88,6 +88,7 @@ exports.login = (req, res, next) => {
                 }
                 return res.status(200).json({
                     userID: result[0].userID,
+                    adminRights: result[0].adminRights,
                     token: jwt.sign(
                         { userID: result[0].userID },
                         process.env.TOKEN,

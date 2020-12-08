@@ -70,6 +70,7 @@ export default {
                         if (res.userID && res.token) {
                             localStorage.setItem("userID", res.userID)
                             localStorage.setItem("token", res.token)
+                            localStorage.setItem("adminRights", res.adminRights)
                             console.log(localStorage)
                             this.$router.push("forum");
                         } else {

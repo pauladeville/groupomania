@@ -12,6 +12,7 @@ CREATE TABLE User (
 	email VARCHAR(60) NOT NULL UNIQUE,
 	password VARCHAR(100) NOT NULL,
 	avatarUrl VARCHAR(150) NOT NULL DEFAULT 'http://localhost:3000/images/avatar.png',
+	adminRights TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
 	dateCreation DATETIME NOT NULL,
 	PRIMARY KEY (userID)
 )

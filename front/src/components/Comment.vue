@@ -1,6 +1,13 @@
 <template>
     <div class="comment" :commentID="commentID" :postID="postID">
-        <p class="comment-info">Le {{ convertDate }}, {{ userInfo.firstName }} {{ userInfo.lastName }} a répondu :<img v-if="commentInfo.userID == visitorID" @click="deleteComment" src="../assets/trash.png" alt="Icône de suppression"></p>
+        <p class="comment-info">Le {{ convertDate }}, {{ userInfo.firstName }} {{ userInfo.lastName }} a répondu :
+            <img
+                v-if="commentInfo.userID == visitorID || adminRights == 1"
+                @click="deleteComment"
+                src="../assets/trash.png"
+                alt="Icône de suppression"
+            />
+        </p>
         
 
         <p class="comment-content">" {{ commentInfo.commentText }} "</p>
@@ -30,6 +37,7 @@ export default {
                 lastName: ""
             },
             visitorID: localStorage.getItem("userID"),
+            adminRights: localStorage.getItem("adminRights")
         }
     },
     computed: {

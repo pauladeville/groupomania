@@ -10,7 +10,6 @@
                 <input
                     type="text"
                     id="firstname"
-                    name="firstname"
                     required
                     pattern="^\D*$"
                     placeholder="Renseignez ici votre prénom"
@@ -24,7 +23,6 @@
                 <input
                     type="text"
                     id="lastname"
-                    name="lastname"
                     required
                     pattern="^\D*$"
                     placeholder="Renseignez ici votre nom de famille"
@@ -40,7 +38,6 @@
                     id="email"
                     required
                     placeholder="Entrez une adresse email valide"
-                    name="email"
                     maxlength="60"
                     aria-label="Entrez votre adresse email"
                     v-model="userInfo.email"
@@ -53,12 +50,21 @@
                     id="password"
                     required
                     placeholder="Renseignez votre mot de passe"
-                    name="password"
                     aria-label="Choisissez un mot de passe comprenant 1 minuscule, 1 majuscule et 1 chiffre"
-                    aria-describedby="passwordInfo"
                     v-model="userInfo.password"
                 >
             </fieldset>
+            <fieldset>
+                <label for="repeat-password">Confirmez votre mot de passe *</label>
+                <input
+                    type="password"
+                    id="repeat-password"
+                    required
+                    placeholder="Tapez à nouveau le mot de passe choisi"
+                    aria-label="Tapez à nouveau le mot de passe choisi"
+                >
+            </fieldset>
+
             <p class="alert-msg">{{ errorMessage }} </p>
             <button>Créez votre compte</button>
         </form>
@@ -78,49 +84,48 @@ export default {
                 email: "",
                 password: ""
             },
-            loginUser: {
-                email: "",
-                password: ""
-            },
             errorMessage: ""
         }
     },
     methods: {
         signup() {
-            if(this.userInfo.firstName && this.userInfo.lastName && this.userInfo.email && this.userInfo.password) {
-            //construction de l'objet "profil" à envoyer à l'API
-            let userProfile = {
-                "firstName": this.userInfo.firstName,
-                "lastName": this.userInfo.lastName,
-                "email": this.userInfo.email,
-                "password": this.userInfo.password
-            }
-            let url = "http://localhost:3000/api/user/signup"
-            let options = {
-                method: "POST",
-                body: JSON.stringify(userProfile),
-                headers: {
-                    'Content-Type': 'application/json'
+            if(this.userInfo.password == document.getElementById("repeat-password").value) {
+                //construction de l'objet "profil" à envoyer à l'API
+                let userProfile = {
+                    "firstName": this.userInfo.firstName,
+                    "lastName": this.userInfo.lastName,
+                    "email": this.userInfo.email,
+                    "password": this.userInfo.password
                 }
+                let url = "http://localhost:3000/api/user/signup"
+                let options = {
+                    method: "POST",
+                    body: JSON.stringify(userProfile),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+                fetch(url, options)
+                    .then(res => res.json())
+                    .then((res) => {
+                        //vérifier la création de l'ID et du token et les stocker dans le localStorage
+                        if(res.userID && res.token){
+                            localStorage.setItem("userID", res.userID);
+                            localStorage.setItem("token", res.token);
+                            this.$router.push("forum");
+                        }
+                        else {
+                            //sinon afficher le message d'erreur correspondant sous le formulaire
+                            this.errorMessage = res.message
+                        }
+                    })
+                    .catch(error => {
+                        this.errorMessage = error
+                    })
             }
-            fetch(url, options)
-                .then(res => res.json())
-                .then((res) => {
-                    //vérifier la création de l'ID et du token et les stocker dans le localStorage
-                    if(res.userID && res.token){
-                        localStorage.setItem("userID", res.userID);
-                        localStorage.setItem("token", res.token);
-                        this.$router.push("forum");
-                    }
-                    else {
-                        //sinon afficher le message d'erreur correspondant sous le formulaire
-                        this.errorMessage = res.message
-                    }
-                })
-                .catch(error => {
-                    this.errorMessage = error
-                })
-            }    
+            else {
+                this.errorMessage = "Vous avez entré 2 mots de passe différents"
+            }
         },
     },
     mounted() {

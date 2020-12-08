@@ -10,7 +10,7 @@
                 </div>
                 <div class="post-info-time">
                     <h3>Posté le {{ convertDate }}</h3>
-                    <img v-if="postInfo.userID == visitorID" @click="deletePost" src="../assets/white-trash.png" alt="Icône de suppression">
+                    <img v-if="postInfo.userID == visitorID || adminRights == 1" @click="deletePost" src="../assets/white-trash.png" alt="Icône de suppression">
                 </div>
             </div>
             <div class="post-content">
@@ -77,12 +77,13 @@ export default {
             userInfo : {
                 avatarUrl : "",
                 firstName: "",
-                lastName: ""
+                lastName: "",
             },
             updateMessage: "",
             visitorID: localStorage.getItem("userID"),
             commentList: [],
-            invisibleComs: true
+            invisibleComs: true,
+            adminRights: localStorage.getItem("adminRights")
         }
     },
     computed: {
@@ -134,6 +135,7 @@ export default {
                     this.userInfo.avatarUrl = data[0].avatarUrl;
                     this.userInfo.firstName = data[0].firstName;
                     this.userInfo.lastName = data[0].lastName;
+                    this.userInfo.adminRights = data[0].adminRights;
                 })
                 .catch(error => console.log(error))
         },

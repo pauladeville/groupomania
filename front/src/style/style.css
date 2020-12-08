@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
 body {
   width: 100%;
   margin: 0;
@@ -8,7 +8,7 @@ body {
   font-weight: 400;
   font-size: 16px;
   text-align: center;
-  background: #fff;
+  background: #ffffff;
 }
 
 #container {
@@ -16,7 +16,7 @@ body {
 }
 
 header {
-  border-bottom: 5px solid #FD2D01;
+  border-bottom: 4px solid #FD2D01;
 }
 
 #logo {
@@ -54,7 +54,7 @@ nav a, nav a:hover, nav a:visited, nav a:link {
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
-  box-shadow: 0 7px 7px -7px #FD2D01;
+  box-shadow: 0 6px 7px -7px #FD2D01;
 }
 
 .nav-icon {
@@ -73,7 +73,7 @@ nav a, nav a:hover, nav a:visited, nav a:link {
 }
 .welcome-links.router-link-exact-active, .welcome-links.router-link-exact-active:hover {
   background-color: #FD2D01;
-  color: #FFEDED;
+  color: #ffffff;
   -webkit-border-top-left-radius: 5px;
   -webkit-border-top-right-radius: 5px;
   -moz-border-radius-topleft: 5px;
@@ -97,7 +97,7 @@ form {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  box-shadow: 0 7px 7px -7px #FD2D01;
+  box-shadow: 0 6px 7px -7px #FD2D01;
 }
 
 .welcome-form {
@@ -125,7 +125,7 @@ label {
 }
 
 input {
-  background-color: #FFEDED;
+  background-color: #ffffff;
   border-radius: 5px;
   width: 80%;
   max-width: 410px;
@@ -137,13 +137,13 @@ input {
 }
 
 textarea {
-  background-color: #FFEDED;
+  background-color: #ffffff;
   outline: none;
   border-radius: 5px;
   width: 90%;
   height: 100px;
   border: none;
-  margin-bottom: 35px;
+  margin-bottom: 10px;
   padding: 10px;
   width: 80%;
   max-width: 410px;
@@ -155,7 +155,7 @@ textarea {
 }
 
 button {
-  color: #fff;
+  color: #FD2D01;
   background-color: #FD2D01;
   border-radius: 5px;
   padding: 10px 20px;
@@ -179,7 +179,7 @@ button:hover {
   height: 120px;
   border-radius: 120px;
   margin: 10px auto 50px auto;
-  box-shadow: 0 7px 7px -7px #FD2D01;
+  box-shadow: 0 6px 7px -7px #FD2D01;
 }
 
 input[type=file] {
@@ -217,14 +217,16 @@ input[type=file] {
 .orderby-button {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   width: 250px;
-  height: 50px;
-  padding: 0 20px;
-  margin: 0 auto 90px auto;
+  height: 45px;
+  padding: 0 auto;
+  width: 80%;
+  max-width: 1000px;
+  margin: auto;
   background-color: #FFD7D7;
-  box-shadow: 0 7px 7px -7px #FD2D01;
+  box-shadow: 0 6px 7px -7px #FD2D01;
   color: #FD2D01;
 }
 .orderby-button img {
@@ -239,12 +241,11 @@ input[type=file] {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  box-shadow: 0 7px 7px -7px #FD2D01;
+  box-shadow: 0 6px 7px -7px #FD2D01;
   margin-top: 80px;
 }
 .post h3 {
   font-size: 1em;
-  margin-block: 0;
   margin: 0 10px;
 }
 .post img {
@@ -261,7 +262,7 @@ input[type=file] {
   -webkit-border-radius: 5px 5px 0px 0px;
   -moz-border-radius: 5px 5px 0px 0px;
   border-radius: 5px 5px 0px 0px;
-  color: #FFEDED;
+  color: #ffffff;
   background-color: #FD2D01;
 }
 .post-info-sender {
@@ -274,7 +275,7 @@ input[type=file] {
 .post-info-sender-avatar {
   border-radius: 100px;
   width: 70px;
-  box-shadow: 0 7px 7px -7px #FD2D01;
+  box-shadow: 0 6px 7px -7px #FD2D01;
 }
 .post-info-time {
   display: flex;
@@ -334,7 +335,7 @@ input[type=file] {
 }
 .comment-section div.comment {
   background-color: #FFD7D7;
-  box-shadow: 0 7px 7px -7px #FD2D01;
+  box-shadow: 0 6px 7px -7px #FD2D01;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -350,7 +351,7 @@ input[type=file] {
 
 .new-comment {
   background-color: #FFD7D7;
-  box-shadow: 0 7px 7px -7px #FD2D01;
+  box-shadow: 0 6px 7px -7px #FD2D01;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -362,7 +363,7 @@ input[type=file] {
   height: 50px;
   width: 90%;
   margin: 15px auto;
-  background-color: #FFEDED;
+  background-color: #ffffff;
   box-shadow: none;
 }
 .new-comment button {
@@ -455,7 +456,7 @@ input[type=file] {
     margin-top: 0;
   }
   nav a.welcome-links.router-link-exact-active, nav a.welcome-links.router-link-exact-active:hover {
-    background-color: #FFEDED;
+    background-color: #ffffff;
     color: #ff7171;
     font-weight: bold;
   }
@@ -469,6 +470,10 @@ input[type=file] {
   }
   .new-comment button {
     width: 100%;
+  }
+
+  .orderby-button {
+    height: 60px;
   }
 }
 

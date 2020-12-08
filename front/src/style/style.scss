@@ -4,9 +4,8 @@
 // $accent-color: #9C0124;
 // $complement-color: #6BB3A1;
 
-$bg-color: #FFEDED;
+$bg-color: #ffffff;
 $text-color: #FD2D01;
-$text-color-light: #fff;
 $accent-color: #FD2D01;
 $fade-color: #525252;
 $complement-color: #FFD7D7;
@@ -15,10 +14,9 @@ $complement-color: #FFD7D7;
 //ROUGE: #FD2D01
 //BLEU: #091F43 
 
-$box-shadow : 0 7px 7px -7px $accent-color;
+$box-shadow : 0 6px 7px -7px $accent-color;
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 body {
 	width: 100%;
     margin: 0;
@@ -28,7 +26,7 @@ body {
 	font-weight: 400;
 	font-size: 16px;
 	text-align: center;
-	background: $text-color-light;
+	background: $bg-color;
 }
 
 #container {
@@ -37,7 +35,7 @@ body {
 
 //HEADERS ET NAV
 header {
-	border-bottom: 5px solid $accent-color;
+	border-bottom: 4px solid $accent-color;
 }
 
 #logo{
@@ -167,7 +165,7 @@ textarea {
 	width: 90%;
 	height: 100px;
 	border: none;
-	margin-bottom: 35px;
+	margin-bottom: 10px;
 	padding: 10px;
 	width: 80%;
 	max-width: 410px;
@@ -179,7 +177,7 @@ textarea {
 }
 
 button {
-	color: $text-color-light;
+	color: $text-color;
 	background-color: $accent-color;
 	border-radius: 5px;
 	padding: 10px 20px;
@@ -230,7 +228,7 @@ input[type="file"] {
 	margin-top: 0;
 	background-color: $complement-color;
 	color: $text-color;
-	border: 1px solid $accent-color;
+	border: 1px solid $text-color;
 }
 
 .post-comment-container {
@@ -242,12 +240,15 @@ input[type="file"] {
 .orderby-button {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
 	width: 250px;
-	height: 50px;
-	padding: 0 20px;
-	margin: 0 auto 90px auto;
+	height: 45px;
+	padding: 0 auto;
+	width: 80%;
+	max-width: 1000px;
+	margin: auto;
+
 	background-color: $complement-color;
 	box-shadow: $box-shadow;
 	color: $text-color;
@@ -268,7 +269,6 @@ input[type="file"] {
 	margin-top: 80px;
 	h3 {
 		font-size: 1em;
-		margin-block : 0;
 		margin: 0 10px;
 	}
 	img {
@@ -298,7 +298,6 @@ input[type="file"] {
 			border-radius: 100px;
 			width: 70px;
 			box-shadow: $box-shadow;
-
 		}
 	}
 	&-time {
@@ -333,7 +332,7 @@ input[type="file"] {
 		flex-direction: column;
 		justify-content: space-between;
 		align-items: flex-end;
-		color: $accent-color;
+		color: $text-color;
 		h2 {
 			margin: 0 0 30px 0;
 		}
@@ -497,5 +496,7 @@ input[type="file"] {
 			width: 100%;
 		}
 	}
-
+	.orderby-button {
+		height: 60px;
+	}
 }
