@@ -214,6 +214,10 @@ input[type=file] {
   margin: 30px auto;
 }
 
+button.orderby-button {
+  margin: 0 0 50px 0;
+}
+
 .post {
   background-color: #6BB3A1;
   -webkit-border-radius: 5px;

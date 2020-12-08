@@ -6,12 +6,25 @@
 
     <p class="alert-msg">{{ updateMessage }}</p>
 
-    <Post
-      v-for="post in postList"
-      v-bind:key="post.postID"
-      :postID="post.postID"
-      @post-deleted="getPostsList"
+    <div v-if="mostRecent">
+      <button @click="mostRecent = false" class="orderby-button">Afficher d'abord les plus anciennes</button>
+      <Post
+        v-for="post in descList"
+        v-bind:key="post.postID"
+        :postID="post.postID"
+        @post-deleted="getPostsList"
       />
+    </div>
+
+     <div v-if="!mostRecent">
+      <button @click="mostRecent = true" class="orderby-button">Afficher d'abord les plus récentes</button>
+      <Post
+        v-for="post in ascList"
+        v-bind:key="post.postID"
+        :postID="post.postID"
+        @post-deleted="getPostsList"
+      />
+    </div>
   
   </div>
 </template>
@@ -30,6 +43,21 @@ export default {
     return {
       postList: [],
       updateMessage: "",
+      mostRecent: true,
+    }
+  },
+  computed: {
+    ascList() {
+      let mostAncient = this.postList.slice().sort( (a, b) => {
+        return new Date(a.dateSend).getTime() - new Date(b.dateSend).getTime();
+      });
+      return mostAncient;
+    },
+    descList() {
+      let mostRecent = this.postList.slice().sort( (a, b) => {
+        return new Date(b.dateSend).getTime() - new Date(a.dateSend).getTime();
+      });
+      return mostRecent;
     }
   },
   methods: {
@@ -38,7 +66,7 @@ export default {
       let options = {
           method: "GET",
           headers: {
-              'Authorization': 'Bearer ' + localStorage.getItem("token"),
+            'Authorization': 'Bearer ' + localStorage.getItem("token"),
           }
       };
       fetch(url, options)
@@ -46,6 +74,7 @@ export default {
           .then((data) => {
               if (data[0]) {
                 this.postList = data;
+                console.log(data);
               } 
               else {
                 this.updateMessage = "Soyez le premier à publier !";

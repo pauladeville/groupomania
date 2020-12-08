@@ -3,7 +3,7 @@ const fs = require("fs"); // Permet de gérer les fichiers stockés
 
 // Obtenir tous les messages
 exports.getAllPosts = (req, res, next) => {
-    let sqlGetPosts = "SELECT postID FROM Post";
+    let sqlGetPosts = "SELECT postID, dateSend FROM Post";
     mysql.query(sqlGetPosts, function(error, result) {
         if(error) {
             return res.status(404).json({ message: "Soyez le premier à publier !"});
