@@ -3,13 +3,12 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  background: #E7EFED;
-  background: fixed radial-gradient(white 0%, #c8dbd6 100%);
-  color: #000;
+  color: #FD2D01;
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
   font-size: 16px;
   text-align: center;
+  background: #fff;
 }
 
 #container {
@@ -17,7 +16,7 @@ body {
 }
 
 header {
-  border-bottom: 5px solid #000;
+  border-bottom: 5px solid #FD2D01;
 }
 
 #logo {
@@ -35,12 +34,12 @@ nav {
   padding: 0;
 }
 nav a, nav a:hover, nav a:visited, nav a:link {
-  color: #000;
+  color: #FD2D01;
   text-decoration: none;
 }
 
 #signout, #signout:hover, #signout:visited, #signout:link {
-  color: #9C0124;
+  color: #525252;
   text-decoration: none;
 }
 
@@ -51,30 +50,30 @@ nav a, nav a:hover, nav a:visited, nav a:link {
 }
 
 .nav-links .router-link-active, .nav-links .router-link-active:hover, .nav-links .router-link-active:visited, .nav-links .router-link-active:link {
-  background-color: #6BB3A1;
+  background-color: #FFD7D7;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
-  box-shadow: 0 0 10px -5px #2d584d;
+  box-shadow: 0 7px 7px -7px #FD2D01;
 }
 
 .nav-icon {
   width: 35px;
   margin: 0 20px;
-  padding: 20px 0px;
+  padding: 18px 0px;
 }
 
 .welcome-links {
   text-decoration: none;
   margin: 25px;
   padding: 0 18px;
-  color: #000;
+  color: #FD2D01;
   font-size: 1.5rem;
   font-weight: bold;
 }
 .welcome-links.router-link-exact-active, .welcome-links.router-link-exact-active:hover {
-  background-color: #000;
-  color: #E7EFED;
+  background-color: #FD2D01;
+  color: #FFEDED;
   -webkit-border-top-left-radius: 5px;
   -webkit-border-top-right-radius: 5px;
   -moz-border-radius-topleft: 5px;
@@ -94,11 +93,11 @@ form {
   max-width: 650px;
   margin: 0 auto;
   padding: 70px 20px;
-  background-color: #6BB3A1;
+  background-color: #FFD7D7;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  box-shadow: 0 0 10px -5px #2d584d;
+  box-shadow: 0 7px 7px -7px #FD2D01;
 }
 
 .welcome-form {
@@ -126,7 +125,7 @@ label {
 }
 
 input {
-  background-color: #E7EFED;
+  background-color: #FFEDED;
   border-radius: 5px;
   width: 80%;
   max-width: 410px;
@@ -138,7 +137,7 @@ input {
 }
 
 textarea {
-  background-color: #E7EFED;
+  background-color: #FFEDED;
   outline: none;
   border-radius: 5px;
   width: 90%;
@@ -156,8 +155,8 @@ textarea {
 }
 
 button {
-  color: #E7EFED;
-  background-color: #000;
+  color: #fff;
+  background-color: #FD2D01;
   border-radius: 5px;
   padding: 10px 20px;
   font-size: 0.9rem;
@@ -168,11 +167,11 @@ button {
   transition: background-color 200ms ease-in-out;
 }
 button:hover {
-  background-color: #3e7a6b;
+  background-color: #ffbebe;
 }
 
 #delete-user {
-  background-color: #9C0124;
+  background-color: #525252;
 }
 
 .avatar {
@@ -180,11 +179,11 @@ button:hover {
   height: 120px;
   border-radius: 120px;
   margin: 10px auto 50px auto;
-  box-shadow: 0 0 10px -5px #2d584d;
+  box-shadow: 0 7px 7px -7px #FD2D01;
 }
 
 input[type=file] {
-  color: #535353;
+  color: #525252;
   padding: 8px 5px 5px 8px;
 }
 
@@ -194,18 +193,19 @@ input[type=file] {
 }
 
 #forum-title {
-  margin-bottom: 0;
+  margin-bottom: 90px;
 }
 
 #forum-title ~ p {
-  margin-bottom: 90px;
+  margin-bottom: 0;
+  font-weight: bold;
 }
 
 .toggle-button {
   margin-top: 0;
-  background-color: #6BB3A1;
-  color: #000;
-  border: 1px solid #000;
+  background-color: #FFD7D7;
+  color: #FD2D01;
+  border: 1px solid #FD2D01;
 }
 
 .post-comment-container {
@@ -214,16 +214,32 @@ input[type=file] {
   margin: 30px auto;
 }
 
-button.orderby-button {
-  margin: 0 0 50px 0;
+.orderby-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 250px;
+  height: 50px;
+  padding: 0 20px;
+  margin: 0 auto 90px auto;
+  background-color: #FFD7D7;
+  box-shadow: 0 7px 7px -7px #FD2D01;
+  color: #FD2D01;
+}
+.orderby-button img {
+  margin-left: 20px;
+}
+.orderby-button img.flipped {
+  transform: rotate(180deg);
 }
 
 .post {
-  background-color: #6BB3A1;
+  background-color: #FFD7D7;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  box-shadow: 0 0 10px -5px #2d584d;
+  box-shadow: 0 7px 7px -7px #FD2D01;
   margin-top: 80px;
 }
 .post h3 {
@@ -245,8 +261,8 @@ button.orderby-button {
   -webkit-border-radius: 5px 5px 0px 0px;
   -moz-border-radius: 5px 5px 0px 0px;
   border-radius: 5px 5px 0px 0px;
-  color: #E7EFED;
-  background-color: #000;
+  color: #FFEDED;
+  background-color: #FD2D01;
 }
 .post-info-sender {
   display: flex;
@@ -258,7 +274,7 @@ button.orderby-button {
 .post-info-sender-avatar {
   border-radius: 100px;
   width: 70px;
-  box-shadow: 0 0 10px -5px #2d584d;
+  box-shadow: 0 7px 7px -7px #FD2D01;
 }
 .post-info-time {
   display: flex;
@@ -292,6 +308,7 @@ button.orderby-button {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
+  color: #FD2D01;
 }
 .post-content-text h2 {
   margin: 0 0 30px 0;
@@ -316,8 +333,8 @@ button.orderby-button {
   margin: 30px auto 100px auto;
 }
 .comment-section div.comment {
-  background-color: #6BB3A1;
-  box-shadow: 0 0 10px -5px #2d584d;
+  background-color: #FFD7D7;
+  box-shadow: 0 7px 7px -7px #FD2D01;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -332,8 +349,8 @@ button.orderby-button {
 }
 
 .new-comment {
-  background-color: #6BB3A1;
-  box-shadow: 0 0 10px -5px #2d584d;
+  background-color: #FFD7D7;
+  box-shadow: 0 7px 7px -7px #FD2D01;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -345,7 +362,8 @@ button.orderby-button {
   height: 50px;
   width: 90%;
   margin: 15px auto;
-  background-color: #E7EFED;
+  background-color: #FFEDED;
+  box-shadow: none;
 }
 .new-comment button {
   width: 97%;
@@ -354,7 +372,7 @@ button.orderby-button {
   transition: background-color 200ms ease-in-out;
 }
 .new-comment button:hover {
-  background-color: #3e7a6b;
+  background-color: #ff8b8b;
 }
 
 @media (max-width: 1200px) {
@@ -437,8 +455,8 @@ button.orderby-button {
     margin-top: 0;
   }
   nav a.welcome-links.router-link-exact-active, nav a.welcome-links.router-link-exact-active:hover {
-    background-color: #E7EFED;
-    color: #3e7a6b;
+    background-color: #FFEDED;
+    color: #ff7171;
     font-weight: bold;
   }
 

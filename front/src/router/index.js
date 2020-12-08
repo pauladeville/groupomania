@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Feed from '../views/Feed.vue';
 import Login from '../views/Login.vue';
-import ModifyPost from '../views/ModifyPost.vue';
 import NewPost from '../views/NewPost.vue';
 import SignUp from '../views/SignUp.vue';
 import UserProfile from '../views/UserProfile.vue';
@@ -19,11 +18,6 @@ const routes = [
     path: '/publier',
     name: 'NewPost',
     component: NewPost
-  },
-  {
-    path: '/modifier',
-    name: 'ModifyPost',
-    component: ModifyPost
   },
   {
     path: '/profil',

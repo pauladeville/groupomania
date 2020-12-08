@@ -1,14 +1,21 @@
 // COULEURS
-$bg-color: #E7EFED;
-$text-color: #000;
-$accent-color: #9C0124;
-$complement-color: #6BB3A1;
+// $bg-color: #E7EFED;
+// $text-color: #000;
+// $accent-color: #9C0124;
+// $complement-color: #6BB3A1;
+
+$bg-color: #FFEDED;
+$text-color: #FD2D01;
+$text-color-light: #fff;
+$accent-color: #FD2D01;
+$fade-color: #525252;
+$complement-color: #FFD7D7;
 
 //ROSE : #FFD7D7
 //ROUGE: #FD2D01
 //BLEU: #091F43 
 
-$box-shadow : 0 0 10px -5px darken($complement-color, 30);
+$box-shadow : 0 7px 7px -7px $accent-color;
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap');
 
@@ -16,13 +23,12 @@ body {
 	width: 100%;
     margin: 0;
     padding: 0;
-	background: $bg-color;
-	background: fixed radial-gradient(lighten($bg-color, 20) 0%, darken($bg-color, 10) 100%);
 	color: $text-color;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400;
 	font-size: 16px;
 	text-align: center;
+	background: $text-color-light;
 }
 
 #container {
@@ -31,7 +37,7 @@ body {
 
 //HEADERS ET NAV
 header {
-	border-bottom: 5px solid $text-color;
+	border-bottom: 5px solid $accent-color;
 }
 
 #logo{
@@ -54,7 +60,7 @@ nav {
 }
 
 #signout, #signout:hover, #signout:visited, #signout:link {
-	color: $accent-color;
+	color: $fade-color;
 	text-decoration: none;
 }
 
@@ -75,7 +81,7 @@ nav {
 .nav-icon {
 	width: 35px;
 	margin: 0 20px;
-	padding: 20px 0px;
+	padding: 18px 0px;
 }
 
 .welcome-links {
@@ -173,8 +179,8 @@ textarea {
 }
 
 button {
-	color: $bg-color;
-	background-color: $text-color;
+	color: $text-color-light;
+	background-color: $accent-color;
 	border-radius: 5px;
 	padding: 10px 20px;
 	font-size: .9rem;
@@ -184,12 +190,12 @@ button {
 	outline: none;
 	transition: background-color 200ms ease-in-out;
 	&:hover {
-		background-color: darken($complement-color, 20);
+		background-color: darken($complement-color, 5);
 	}
 }
 
 #delete-user {
-	background-color: $accent-color;
+	background-color: $fade-color;
 }
 
 .avatar {
@@ -201,7 +207,7 @@ button {
 }
 
 input[type="file"] {
-	color: rgb(83, 83, 83);
+	color:$fade-color;
 	padding: 8px 5px 5px 8px;
 }
 
@@ -212,18 +218,19 @@ input[type="file"] {
 
 //FIL D'ACTU
 #forum-title {
-    margin-bottom: 0;
-  }
+    margin-bottom: 90px;
+}
 
 #forum-title ~ p {
-	margin-bottom: 90px;
+	margin-bottom: 0;
+	font-weight: bold;
 }
 
 .toggle-button {
 	margin-top: 0;
 	background-color: $complement-color;
 	color: $text-color;
-	border: 1px solid $text-color;
+	border: 1px solid $accent-color;
 }
 
 .post-comment-container {
@@ -232,9 +239,26 @@ input[type="file"] {
 	margin: 30px auto;
 }
 
-button.orderby-button {
-	margin: 0 0 50px 0;
+.orderby-button {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	width: 250px;
+	height: 50px;
+	padding: 0 20px;
+	margin: 0 auto 90px auto;
+	background-color: $complement-color;
+	box-shadow: $box-shadow;
+	color: $text-color;
+	img {
+		margin-left: 20px;
+		&.flipped {
+			transform: rotate(180deg);
+		}
+	}
 }
+
 .post {
 	background-color: $complement-color;
 	-webkit-border-radius: 5px;
@@ -263,7 +287,7 @@ button.orderby-button {
 	-moz-border-radius: 5px 5px 0px 0px;
 	border-radius: 5px 5px 0px 0px;
 	color: $bg-color;
-	background-color: $text-color;
+	background-color: $accent-color;
 	&-sender {
 		display: flex;
 		flex-direction: row;
@@ -309,6 +333,7 @@ button.orderby-button {
 		flex-direction: column;
 		justify-content: space-between;
 		align-items: flex-end;
+		color: $accent-color;
 		h2 {
 			margin: 0 0 30px 0;
 		}
@@ -363,6 +388,7 @@ button.orderby-button {
 		width: 90%;
 		margin: 15px auto;
 		background-color: $bg-color;
+		box-shadow: none;
 	}
 	button {
 		width: 97%;
@@ -370,7 +396,7 @@ button.orderby-button {
 		margin: 0 auto 20px auto;
 		transition: background-color 200ms ease-in-out;
 		&:hover {
-			background-color: darken($complement-color, 20);
+			background-color: darken($complement-color, 15);
 		}
 	}
 }

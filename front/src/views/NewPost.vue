@@ -34,7 +34,8 @@
                 </textarea>
             </fieldset>
             <p class="alert-msg">{{ updateMessage }}</p>
-            <button type="submit" id="post-upload" >Publier</button>
+            <button type="submit" id="post-upload">Publier</button>
+            <router-link v-if="published" to="/forum" tag="button">Se rendre sur le forum</router-link>
         </form>
     </div>
 </template>
@@ -53,7 +54,8 @@ export default {
                 gifUrl: "",
                 text: ""
             },
-            updateMessage : ""
+            updateMessage : "",
+            published: false,
         }
     },
     methods: {
@@ -74,6 +76,7 @@ export default {
                         this.postInfo = {}
                     }
                     this.updateMessage = res.message;
+                    this.published = true;
                 })
                 .catch(error => {
                     this.errorMessage = error

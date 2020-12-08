@@ -7,7 +7,9 @@
     <p class="alert-msg">{{ updateMessage }}</p>
 
     <div v-if="mostRecent">
-      <button @click="mostRecent = false" class="orderby-button">Afficher d'abord les plus anciennes</button>
+      <button @click="mostRecent = false" class="orderby-button">Afficher d'abord<br>les plus anciennes
+        <img src="../assets/arrow.png" alt="Flèche de tri ascendante" class="flipped">
+      </button>
       <Post
         v-for="post in descList"
         v-bind:key="post.postID"
@@ -17,7 +19,9 @@
     </div>
 
      <div v-if="!mostRecent">
-      <button @click="mostRecent = true" class="orderby-button">Afficher d'abord les plus récentes</button>
+      <button @click="mostRecent = true" class="orderby-button">Afficher d'abord<br>les plus récentes
+        <img src="../assets/arrow.png" alt="Flèche de tri descendante">
+      </button>
       <Post
         v-for="post in ascList"
         v-bind:key="post.postID"
@@ -74,7 +78,6 @@ export default {
           .then((data) => {
               if (data[0]) {
                 this.postList = data;
-                console.log(data);
               } 
               else {
                 this.updateMessage = "Soyez le premier à publier !";
