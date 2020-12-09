@@ -3,12 +3,13 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  color: #FD2D01;
+  color: #091F43;
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
   font-size: 16px;
   text-align: center;
-  background: #ffffff;
+  background: radial-gradient(#091F43, #030a16);
+  background-attachment: fixed;
 }
 
 #container {
@@ -34,7 +35,7 @@ nav {
   padding: 0;
 }
 nav a, nav a:hover, nav a:visited, nav a:link {
-  color: #FD2D01;
+  color: #fff;
   text-decoration: none;
 }
 
@@ -50,11 +51,11 @@ nav a, nav a:hover, nav a:visited, nav a:link {
 }
 
 .nav-links .router-link-active, .nav-links .router-link-active:hover, .nav-links .router-link-active:visited, .nav-links .router-link-active:link {
-  background-color: #FFD7D7;
+  background-color: #FD2D01;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
-  box-shadow: 0 6px 7px -7px #FD2D01;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 .nav-icon {
@@ -67,13 +68,13 @@ nav a, nav a:hover, nav a:visited, nav a:link {
   text-decoration: none;
   margin: 25px;
   padding: 0 18px;
-  color: #FD2D01;
+  color: #fff;
   font-size: 1.5rem;
   font-weight: bold;
 }
 .welcome-links.router-link-exact-active, .welcome-links.router-link-exact-active:hover {
-  background-color: #FD2D01;
-  color: #ffffff;
+  background-color: #fff;
+  color: #091F43;
   -webkit-border-top-left-radius: 5px;
   -webkit-border-top-right-radius: 5px;
   -moz-border-radius-topleft: 5px;
@@ -84,6 +85,7 @@ nav a, nav a:hover, nav a:visited, nav a:link {
 
 h1 {
   text-align: center;
+  color: #fff;
   margin: 90px 0;
   font-size: 2em;
   font-weight: 700;
@@ -93,11 +95,11 @@ form {
   max-width: 650px;
   margin: 0 auto;
   padding: 70px 20px;
-  background-color: #FFD7D7;
+  background-color: #fff;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  box-shadow: 0 6px 7px -7px #FD2D01;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 .welcome-form {
@@ -117,36 +119,43 @@ form {
 
 fieldset {
   border: none;
+  width: 80%;
+  max-width: 410px;
+  margin: auto;
+  height: auto;
 }
 
 label {
   display: block;
   margin: 10px 0;
+  text-align: left;
+  transition: color 200ms ease-in-out;
+  color: #091F43;
 }
 
 input {
-  background-color: #ffffff;
-  border-radius: 5px;
-  width: 80%;
-  max-width: 410px;
+  background-color: transparent;
   height: 25px;
-  margin-bottom: 35px;
-  padding: 5px 10px;
-  border: none;
-  outline: none;
+  margin-bottom: 25px;
+  padding: 5px;
+  border: 0;
+  outline: 0;
+  border-bottom: 2px solid #091F43;
+  width: 100%;
+}
+input:focus {
+  border-bottom: 2px solid #FD2D01;
 }
 
 textarea {
-  background-color: #ffffff;
+  background-color: #c4c4c4;
   outline: none;
   border-radius: 5px;
-  width: 90%;
+  width: 100%;
   height: 100px;
   border: none;
   margin-bottom: 10px;
   padding: 10px;
-  width: 80%;
-  max-width: 410px;
 }
 
 .alert-msg {
@@ -155,23 +164,27 @@ textarea {
 }
 
 button {
-  color: #FD2D01;
-  background-color: #FD2D01;
+  color: #fff;
+  background-color: #091F43;
   border-radius: 5px;
   padding: 10px 20px;
   font-size: 0.9rem;
-  margin: 40px 20px;
+  margin: 50px 20px;
   cursor: pointer;
   border: none;
   outline: none;
-  transition: background-color 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 button:hover {
-  background-color: #ffbebe;
+  background-color: #FD2D01;
 }
 
 #delete-user {
   background-color: #525252;
+  transition: background-color 200ms ease-in-out;
+}
+#delete-user:hover {
+  background-color: #FD2D01;
 }
 
 .avatar {
@@ -179,12 +192,12 @@ button:hover {
   height: 120px;
   border-radius: 120px;
   margin: 10px auto 50px auto;
-  box-shadow: 0 6px 7px -7px #FD2D01;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 input[type=file] {
   color: #525252;
-  padding: 8px 5px 5px 8px;
+  padding: 5px;
 }
 
 #post-upload {
@@ -199,13 +212,20 @@ input[type=file] {
 #forum-title ~ p {
   margin-bottom: 0;
   font-weight: bold;
+  color: #fff;
 }
 
 .toggle-button {
   margin-top: 0;
-  background-color: #FFD7D7;
+  background-color: #fff;
+  color: #091F43;
+  border: 1px solid #091F43;
+  transition: all ease-in-out 200ms;
+}
+.toggle-button:hover {
   color: #FD2D01;
   border: 1px solid #FD2D01;
+  background-color: #fff;
 }
 
 .post-comment-container {
@@ -225,9 +245,14 @@ input[type=file] {
   width: 80%;
   max-width: 1000px;
   margin: auto;
-  background-color: #FFD7D7;
-  box-shadow: 0 6px 7px -7px #FD2D01;
-  color: #FD2D01;
+  background-color: #030a16;
+  border: solid #fff 1px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  color: #fff;
+  font-weight: bold;
+}
+.orderby-button:hover {
+  background-color: #06152d;
 }
 .orderby-button img {
   margin-left: 20px;
@@ -237,11 +262,11 @@ input[type=file] {
 }
 
 .post {
-  background-color: #FFD7D7;
+  background-color: #fff;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  box-shadow: 0 6px 7px -7px #FD2D01;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   margin-top: 80px;
 }
 .post h3 {
@@ -258,12 +283,13 @@ input[type=file] {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  padding: 10px 40px;
+  padding: 8px 20px;
   -webkit-border-radius: 5px 5px 0px 0px;
   -moz-border-radius: 5px 5px 0px 0px;
   border-radius: 5px 5px 0px 0px;
-  color: #ffffff;
-  background-color: #FD2D01;
+  color: #fff;
+  background-color: #030a16;
+  border: 1px solid #fff;
 }
 .post-info-sender {
   display: flex;
@@ -274,8 +300,7 @@ input[type=file] {
 }
 .post-info-sender-avatar {
   border-radius: 100px;
-  width: 70px;
-  box-shadow: 0 6px 7px -7px #FD2D01;
+  width: 60px;
 }
 .post-info-time {
   display: flex;
@@ -309,7 +334,7 @@ input[type=file] {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-  color: #FD2D01;
+  color: #091F43;
 }
 .post-content-text h2 {
   margin: 0 0 30px 0;
@@ -334,8 +359,8 @@ input[type=file] {
   margin: 30px auto 100px auto;
 }
 .comment-section div.comment {
-  background-color: #FFD7D7;
-  box-shadow: 0 6px 7px -7px #FD2D01;
+  background-color: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -350,8 +375,8 @@ input[type=file] {
 }
 
 .new-comment {
-  background-color: #FFD7D7;
-  box-shadow: 0 6px 7px -7px #FD2D01;
+  background-color: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -363,17 +388,13 @@ input[type=file] {
   height: 50px;
   width: 90%;
   margin: 15px auto;
-  background-color: #ffffff;
+  background-color: #c4c4c4;
   box-shadow: none;
 }
 .new-comment button {
   width: 97%;
   max-width: none;
   margin: 0 auto 20px auto;
-  transition: background-color 200ms ease-in-out;
-}
-.new-comment button:hover {
-  background-color: #ff8b8b;
 }
 
 @media (max-width: 1200px) {
@@ -456,9 +477,17 @@ input[type=file] {
     margin-top: 0;
   }
   nav a.welcome-links.router-link-exact-active, nav a.welcome-links.router-link-exact-active:hover {
-    background-color: #ffffff;
+    background-color: #091F43;
     color: #ff7171;
     font-weight: bold;
+  }
+
+  label, input {
+    text-align: center;
+  }
+
+  button#delete-user {
+    margin: 0;
   }
 
   .post h2, .post h3 {

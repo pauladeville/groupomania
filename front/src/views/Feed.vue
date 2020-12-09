@@ -7,7 +7,7 @@
     <p class="alert-msg">{{ updateMessage }}</p>
 
     <div v-if="mostRecent">
-      <button @click="mostRecent = false" class="orderby-button">Les plus récentes en premier
+      <button @click="mostRecent = false" class="orderby-button">Les + récentes d'abord
         <img src="../assets/arrow.png" alt="Flèche de tri descendante">
       </button>
       <Post
@@ -19,7 +19,7 @@
     </div>
 
      <div v-if="!mostRecent">
-      <button @click="mostRecent = true" class="orderby-button">Les plus anciennes en premier
+      <button @click="mostRecent = true" class="orderby-button">Les + anciennes d'abord
         <img src="../assets/arrow.png" alt="Flèche de tri ascendante" class="flipped">
       </button>
       <Post

@@ -4,34 +4,38 @@
         <h1>Ajouter une publication</h1>
         <form v-on:submit.prevent="publish">
             <fieldset>
-                <label for="post-title">Titre *</label>
-                <input
-                    v-model="postInfo.title"
-                    type="text"
-                    id="post-title"
-                    name="post-title"
-                    placeholder="Titre de votre publication"
-                    required />
+                <label for="post-title">Titre *
+                    <input
+                        v-model="postInfo.title"
+                        type="text"
+                        id="post-title"
+                        name="post-title"
+                        placeholder="Titre de votre publication"
+                        required
+                    />
+                </label>
             </fieldset>
             <fieldset>
-                <label for="gif-url">URL du gif *</label>
-                <input
-                    v-model="postInfo.gifUrl"
-                    type="url"
-                    id="gif-url"
-                    placeholder="Lien vers le fichier GIPHY par exemple"
-                    required
+                <label for="gif-url">URL du gif *
+                    <input
+                        v-model="postInfo.gifUrl"
+                        type="url"
+                        id="gif-url"
+                        placeholder="Lien vers le fichier GIPHY par exemple"
+                        required
                     />
+                </label>
                 <img id="preview">
             </fieldset>
             <fieldset>
-                <label for="post-content">Commentaire *</label>
-                <textarea
-                    v-model="postInfo.text"
-                    id="post-content"
-                    name="post-content"
-                    required>
-                </textarea>
+                <label for="post-content">Texte *
+                    <textarea
+                        v-model="postInfo.text"
+                        id="post-content"
+                        name="post-content"
+                        required>
+                    </textarea>
+                </label>
             </fieldset>
             <p class="alert-msg">{{ updateMessage }}</p>
             <button type="submit" id="post-upload">Publier</button>

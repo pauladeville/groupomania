@@ -4,29 +4,34 @@
 // $accent-color: #9C0124;
 // $complement-color: #6BB3A1;
 
-$bg-color: #ffffff;
-$text-color: #FD2D01;
+$bg-color: #091F43;
+$text-color: #fff;
 $accent-color: #FD2D01;
 $fade-color: #525252;
+$light-bg-color: #c4c4c4;
 $complement-color: #FFD7D7;
+$box-color: #fff;
 
 //ROSE : #FFD7D7
 //ROUGE: #FD2D01
 //BLEU: #091F43 
 
-$box-shadow : 0 6px 7px -7px $accent-color;
+$box-shadow : 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);;
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 body {
 	width: 100%;
     margin: 0;
     padding: 0;
-	color: $text-color;
+	color: $bg-color;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400;
 	font-size: 16px;
 	text-align: center;
-	background: $bg-color;
+	background: radial-gradient($bg-color, darken($bg-color, 10));
+	background-attachment: fixed;
+	
+
 }
 
 #container {
@@ -69,7 +74,7 @@ nav {
 }
 
 .nav-links .router-link-active, .nav-links .router-link-active:hover, .nav-links .router-link-active:visited, .nav-links .router-link-active:link {
-	background-color: $complement-color;
+	background-color: $accent-color;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
 	border-radius: 50px;
@@ -103,8 +108,8 @@ nav {
 
 h1 {
 	text-align: center;
+	color: $text-color;
 	margin: 90px 0;
-    // text-transform: uppercase;
 	font-size: 2em;
 	font-weight: 700;
 }
@@ -114,7 +119,7 @@ form {
 	max-width: 650px;
 	margin: 0 auto;
 	padding: 70px 20px;
-	background-color: $complement-color;
+	background-color: $text-color;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -137,38 +142,44 @@ form {
 }
 
 fieldset {
-    border: none;
+	border: none;
+	width: 80%;
+	max-width: 410px;
+	margin: auto;
+	height: auto;
 }
 
 label {
 	display: block;
 	margin: 10px 0;
+	text-align: left;
+	transition: color 200ms ease-in-out;
+	color: $bg-color;
 }
 
 input {
-	background-color: $bg-color;
-	border-radius: 5px;
-	width: 80%;
-	max-width: 410px;
+	background-color: transparent;
 	height: 25px;
-	margin-bottom: 35px;
-	padding: 5px 10px;
-	border: none;
-	outline: none;
-
+	margin-bottom: 25px;
+	padding: 5px;
+	border: 0;
+	outline: 0;
+	border-bottom: 2px solid $bg-color;
+	width: 100%;
+	&:focus {
+		border-bottom: 2px solid $accent-color;
+	}
 }
 
 textarea {
-	background-color: $bg-color;
+	background-color: $light-bg-color;
 	outline: none;
 	border-radius: 5px;
-	width: 90%;
+	width: 100%;
 	height: 100px;
 	border: none;
 	margin-bottom: 10px;
 	padding: 10px;
-	width: 80%;
-	max-width: 410px;
 }
 
 .alert-msg {
@@ -178,22 +189,26 @@ textarea {
 
 button {
 	color: $text-color;
-	background-color: $accent-color;
+	background-color: $bg-color;
 	border-radius: 5px;
 	padding: 10px 20px;
 	font-size: .9rem;
-	margin: 40px 20px;
+	margin: 50px 20px;
 	cursor: pointer;
 	border: none;
 	outline: none;
-	transition: background-color 200ms ease-in-out;
+	transition: all 200ms ease-in-out;
 	&:hover {
-		background-color: darken($complement-color, 5);
+		background-color: $accent-color;
 	}
 }
 
 #delete-user {
 	background-color: $fade-color;
+	transition: background-color 200ms ease-in-out;
+	&:hover {
+		background-color: $accent-color;
+	}
 }
 
 .avatar {
@@ -206,7 +221,7 @@ button {
 
 input[type="file"] {
 	color:$fade-color;
-	padding: 8px 5px 5px 8px;
+	padding: 5px;
 }
 
 #post-upload {
@@ -222,13 +237,20 @@ input[type="file"] {
 #forum-title ~ p {
 	margin-bottom: 0;
 	font-weight: bold;
+	color: $text-color;
 }
 
 .toggle-button {
 	margin-top: 0;
-	background-color: $complement-color;
-	color: $text-color;
-	border: 1px solid $text-color;
+	background-color: $text-color;
+	color: $bg-color;
+	border: 1px solid $bg-color;
+	transition: all ease-in-out 200ms;
+	&:hover {
+		color: $accent-color;
+		border: 1px solid $accent-color;
+		background-color: $text-color;
+	}
 }
 
 .post-comment-container {
@@ -248,10 +270,14 @@ input[type="file"] {
 	width: 80%;
 	max-width: 1000px;
 	margin: auto;
-
-	background-color: $complement-color;
+	background-color: darken($bg-color, 10);
+	border: solid $text-color 1px;
 	box-shadow: $box-shadow;
 	color: $text-color;
+	font-weight: bold;
+	&:hover {
+		background-color: darken($bg-color, 5);
+	}
 	img {
 		margin-left: 20px;
 		&.flipped {
@@ -261,7 +287,7 @@ input[type="file"] {
 }
 
 .post {
-	background-color: $complement-color;
+	background-color: $box-color;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -282,12 +308,13 @@ input[type="file"] {
 	justify-content: space-between;
 	align-items: center;
 	flex-wrap: wrap;
-	padding: 10px 40px;
+	padding: 8px 20px;
 	-webkit-border-radius: 5px 5px 0px 0px;
 	-moz-border-radius: 5px 5px 0px 0px;
 	border-radius: 5px 5px 0px 0px;
-	color: $bg-color;
-	background-color: $accent-color;
+	color: $text-color;
+	background-color: darken($bg-color, 10);
+	border: 1px solid $text-color;
 	&-sender {
 		display: flex;
 		flex-direction: row;
@@ -296,8 +323,7 @@ input[type="file"] {
 		flex-wrap: wrap;
 		&-avatar {
 			border-radius: 100px;
-			width: 70px;
-			box-shadow: $box-shadow;
+			width: 60px;
 		}
 	}
 	&-time {
@@ -332,7 +358,7 @@ input[type="file"] {
 		flex-direction: column;
 		justify-content: space-between;
 		align-items: flex-end;
-		color: $text-color;
+		color: $bg-color;
 		h2 {
 			margin: 0 0 30px 0;
 		}
@@ -357,7 +383,7 @@ input[type="file"] {
 	width: 80%;
 	margin: 30px auto 100px auto;
 	div.comment {
-		background-color: $complement-color;
+		background-color: $text-color;
 		box-shadow: $box-shadow;
 		-webkit-border-radius: 5px;
 		-moz-border-radius: 5px;
@@ -374,7 +400,7 @@ input[type="file"] {
 }
 
 .new-comment {
-	background-color: $complement-color;
+	background-color: $text-color;
 	box-shadow: $box-shadow;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -386,17 +412,13 @@ input[type="file"] {
 		height: 50px;
 		width: 90%;
 		margin: 15px auto;
-		background-color: $bg-color;
+		background-color: $light-bg-color;
 		box-shadow: none;
 	}
 	button {
 		width: 97%;
 		max-width: none;
 		margin: 0 auto 20px auto;
-		transition: background-color 200ms ease-in-out;
-		&:hover {
-			background-color: darken($complement-color, 15);
-		}
 	}
 }
 
@@ -482,6 +504,12 @@ input[type="file"] {
 				font-weight: bold;
 			}
 		}
+	}
+	label, input {
+		text-align: center;
+	}
+	button#delete-user {
+		margin: 0;
 	}
 	.post {
 		h2, h3 {
