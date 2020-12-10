@@ -12,6 +12,7 @@
   * Dossier Front :```npm ci``` ```npm run serve```
 * Créer un fichier ```.env``` dans le dossier back et y préciser les 3 variables d'environnements reçues par mail.
 * Créer la base de données avec le fichier ```Groupomania.sql```
+* Ouvrir l'application sur le serveur local ```http://localhost:8080/```
 
 ### Logins tests
 
