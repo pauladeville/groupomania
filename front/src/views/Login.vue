@@ -1,35 +1,39 @@
 <template>
-    <div id="container">
+    <div class="container welcome-container full-height">
 
         <WelcomeNav />
 
         <h1>Accédez à votre espace personnel</h1>
         <form v-on:submit.prevent="login" class="welcome-form">
             <fieldset>
-                <label for="email">Email *</label>
-                <input
-                    type="email"
-                    id="email"
-                    required
-                    placeholder="Entrez une adresse email valide"
-                    name="email"
-                    maxlength="60"
-                    aria-label="Entrez votre email"
-                    v-model="email" />
+                <label for="email">Email *
+                    <input
+                        type="email"
+                        id="email"
+                        required
+                        placeholder="Entrez une adresse email valide"
+                        name="email"
+                        maxlength="60"
+                        aria-label="Entrez votre email"
+                        v-model="email"
+                    />
+                </label>
             </fieldset>
             <fieldset>
-                <label for="password">Mot de passe *</label>
-                <input
-                    type="password"
-                    id="password"
-                    required
-                    placeholder="Renseignez votre mot de passe"
-                    name="password"
-                    aria-label="Entrez votre mot de passe"
-                    aria-describedby="passwordInfo"
-                    v-model="password" />
+                <label for="password">Mot de passe *
+                    <input
+                        type="password"
+                        id="password"
+                        required
+                        placeholder="Renseignez votre mot de passe"
+                        name="password"
+                        aria-label="Entrez votre mot de passe"
+                        aria-describedby="passwordInfo"
+                        v-model="password"
+                    />
+                </label>
             </fieldset>
-            <p class="alert-msg">{{ errorMessage }}</p>
+            <p v-if="errorMessage.lenght >= 1" class="alert-msg">{{ errorMessage }}</p>
             <button>Se Connecter</button>
         </form>
     </div>
@@ -88,6 +92,6 @@ export default {
 }
 </script>
 
-<style lang="css">
-  @import '../style/style.css'
+<style scoped lang="css">
+    @import '../style/style.css';
 </style>

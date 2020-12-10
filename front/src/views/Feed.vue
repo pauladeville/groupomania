@@ -1,13 +1,11 @@
 <template>
-  <div id="container">
+  <div class="container">
     <HomeNav />
     <h1 id="forum-title">Fil d'actualité</h1>
+    <h1 v-if="updateMessage.length >= 1" class="alert-msg">{{ updateMessage }}</h1>
     <p v-if="postList.length >= 1">{{ postList.length }} publication<span v-if="postList.length >= 2">s</span></p>
-
-    <p class="alert-msg">{{ updateMessage }}</p>
-
-    <div v-if="mostRecent">
-      <button @click="mostRecent = false" class="orderby-button">Les + récentes d'abord
+    <div v-if="mostRecent" class="post-comment-container">
+      <button @click="mostRecent = false" v-if="postList.length >= 1" class="orderby-button">Les + récentes d'abord
         <img src="../assets/arrow.png" alt="Flèche de tri descendante">
       </button>
       <Post
@@ -17,9 +15,8 @@
         @post-deleted="getPostsList"
       />
     </div>
-
-     <div v-if="!mostRecent">
-      <button @click="mostRecent = true" class="orderby-button">Les + anciennes d'abord
+     <div v-if="!mostRecent" class="post-comment-container">
+      <button @click="mostRecent = true" v-if="postList.length >= 1" class="orderby-button">Les + anciennes d'abord
         <img src="../assets/arrow.png" alt="Flèche de tri ascendante" class="flipped">
       </button>
       <Post
@@ -29,7 +26,6 @@
         @post-deleted="getPostsList"
       />
     </div>
-  
   </div>
 </template>
 
@@ -78,8 +74,9 @@ export default {
           .then((data) => {
               if (data[0]) {
                 this.postList = data;
-              } 
+              }
               else {
+                this.postList = data;
                 this.updateMessage = "Soyez le premier à publier !";
               }
           })

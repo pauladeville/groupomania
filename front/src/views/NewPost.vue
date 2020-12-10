@@ -1,5 +1,5 @@
 <template>
-    <div id="container">
+    <div class="container">
         <HomeNav />
         <h1>Ajouter une publication</h1>
         <form v-on:submit.prevent="publish">
@@ -37,7 +37,7 @@
                     </textarea>
                 </label>
             </fieldset>
-            <p class="alert-msg">{{ updateMessage }}</p>
+            <p class="alert-msg" v-if="updateMessage.length >= 1">{{ updateMessage }}</p>
             <button type="submit" id="post-upload">Publier</button>
             <router-link v-if="published" to="/forum" tag="button">Se rendre sur le forum</router-link>
         </form>

@@ -1,8 +1,8 @@
 <template>
-    <div id="container">
+    <div class="container">
         <HomeNav />
         <h1>Modifier votre profil</h1>
-        <form id="profile-form">
+        <form>
             <fieldset>
                 <img class="avatar" :src="userProfile.avatarUrl">
                 <label for="new-avatar-url">Changer de photo de profil</label>

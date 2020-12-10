@@ -1,9 +1,7 @@
 <template>
   <header>
-    <h1>
-      <img src="../assets/logo-groupomania.png" id="logo" alt="Logo de Groupomania" />
-    </h1>
-    <nav>
+      <img src="../assets/logo-groupomania.png" id="logo-welcome" alt="Logo de Groupomania" />
+    <nav class="welcome-nav">
       <router-link to="/" class="welcome-links">Se connecter</router-link>
       <router-link to="/inscription" class="welcome-links">S'inscrire</router-link>
     </nav>
@@ -18,9 +16,5 @@ export default {
 
 <style lang="css" scoped>
   @import '../style/style.css';
-  nav {
-    display: inline-block;
-    margin-bottom: 0;
-    padding-bottom: 0;
-  }
+
 </style>

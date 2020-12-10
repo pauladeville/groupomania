@@ -1,6 +1,6 @@
 <template>
 
-    <div class="post-comment-container">
+    <div>
 
         <div class="post" :postID="postID">
             <div class="post-info">
@@ -24,14 +24,14 @@
                     <div class="post-claps">
                         <img v-if="postInfo.claps >= 1" @click="clapPost" src="../assets/clap.png" alt="Icône d'applaudissements">
                         <img v-else src="../assets/unclap.png" @click="clapPost" alt="Icône en cas d'absence d'applaudissement">
-                        <p>{{ postInfo.claps }}</p>
+                        <p v-if="postInfo.claps >= 1">{{ postInfo.claps }}</p>
                     </div>
                 </div>
             </div>
             <button v-if="!invisibleComs" @click="invisibleComs = true" class="toggle-button" aria-hidden="true">Masquer les commentaires</button>
             <button v-if="invisibleComs" @click="invisibleComs = false" class="toggle-button" aria-hidden="true">Afficher les commentaires</button>
-
         </div>
+
         <div class="comment-section" v-show="!invisibleComs">
             <Comment
                 v-for="comment in commentList"

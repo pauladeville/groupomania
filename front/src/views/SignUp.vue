@@ -1,71 +1,73 @@
 <template>
-    <div id="container">
-
+    <div class="container welcome-container">
         <WelcomeNav />
-
         <h1>Nouveau sur Groupomania ?</h1>
         <form v-on:submit.prevent="signup" class="welcome-form">
             <fieldset>
-                <label for="firstname">Prénom *</label>
-                <input
-                    type="text"
-                    id="firstname"
-                    required
-                    pattern="^\D*$"
-                    placeholder="Renseignez ici votre prénom"
-                    maxlength="30"
-                    aria-label="Entrez votre prénom"
-                    v-model="userInfo.firstName"
-                >
+                <label for="firstname">Prénom *
+                    <input
+                        type="text"
+                        id="firstname"
+                        required
+                        pattern="^\D*$"
+                        placeholder="Renseignez ici votre prénom"
+                        maxlength="30"
+                        aria-label="Entrez votre prénom"
+                        v-model="userInfo.firstName"
+                    />
+                </label>
             </fieldset>
             <fieldset>
-                <label for="lastname">Nom *</label>
-                <input
-                    type="text"
-                    id="lastname"
-                    required
-                    pattern="^\D*$"
-                    placeholder="Renseignez ici votre nom de famille"
-                    maxlength="30"
-                    aria-label="Entrez votre nom"
-                    v-model="userInfo.lastName"
-                    >
+                <label for="lastname">Nom *
+                    <input
+                        type="text"
+                        id="lastname"
+                        required
+                        pattern="^\D*$"
+                        placeholder="Renseignez ici votre nom de famille"
+                        maxlength="30"
+                        aria-label="Entrez votre nom"
+                        v-model="userInfo.lastName"
+                    />
+                </label>
             </fieldset>
             <fieldset>
-                <label for="email">Email *</label>
-                <input
-                    type="email"
-                    id="email"
-                    required
-                    placeholder="Entrez une adresse email valide"
-                    maxlength="60"
-                    aria-label="Entrez votre adresse email"
-                    v-model="userInfo.email"
-                >
+                <label for="email">Email *
+                    <input
+                        type="email"
+                        id="email"
+                        required
+                        placeholder="Entrez une adresse email valide"
+                        maxlength="60"
+                        aria-label="Entrez votre adresse email"
+                        v-model="userInfo.email"
+                    />
+                </label>
             </fieldset>
             <fieldset>
-                <label for="password">Mot de passe *</label>
-                <input
-                    type="password"
-                    id="password"
-                    required
-                    placeholder="Renseignez votre mot de passe"
-                    aria-label="Choisissez un mot de passe comprenant 1 minuscule, 1 majuscule et 1 chiffre"
-                    v-model="userInfo.password"
-                >
+                <label for="password">Mot de passe *
+                    <input
+                        type="password"
+                        id="password"
+                        required
+                        placeholder="Renseignez votre mot de passe"
+                        aria-label="Choisissez un mot de passe comprenant 1 minuscule, 1 majuscule et 1 chiffre"
+                        v-model="userInfo.password"
+                    />
+                </label>
             </fieldset>
             <fieldset>
-                <label for="repeat-password">Confirmez votre mot de passe *</label>
-                <input
-                    type="password"
-                    id="repeat-password"
-                    required
-                    placeholder="Tapez à nouveau le mot de passe choisi"
-                    aria-label="Tapez à nouveau le mot de passe choisi"
-                >
+                <label for="repeat-password">Confirmez votre mot de passe *
+                    <input
+                        type="password"
+                        id="repeat-password"
+                        required
+                        placeholder="Tapez à nouveau le mot de passe choisi"
+                        aria-label="Tapez à nouveau le mot de passe choisi"
+                    />
+                </label>
             </fieldset>
-
-            <p class="alert-msg">{{ errorMessage }} </p>
+            <p v-if="errorMessage.lenght >= 1" class="alert-msg">{{ errorMessage }} </p>
             <button>Créez votre compte</button>
         </form>
     </div>
@@ -136,5 +138,8 @@ export default {
 </script>
 
 <style lang="css">
-  @import '../style/style.css'
+  @import '../style/style.css';
+  #container {
+	height: auto;
+  }
 </style>
