@@ -15,4 +15,4 @@ router.get("/:id", auth, userCtrl.profile);
 router.put("/:id", authId, userCtrl.modify);
 router.post("/:id", authId, multer, userCtrl.avatar)
 
-module.exports = router; 
+module.exports = router;

@@ -33,7 +33,7 @@
                     />
                 </label>
             </fieldset>
-            <p v-if="errorMessage.lenght >= 1" class="alert-msg">{{ errorMessage }}</p>
+            <p v-if="errorMessage.length >= 1" class="alert-msg">{{ errorMessage }}</p>
             <button>Se Connecter</button>
         </form>
     </div>
