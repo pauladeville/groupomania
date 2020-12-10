@@ -1,4 +1,4 @@
-const mysql = require('../dbConnect').connection;
+const db = require('../dbConnect');
 
 // Créer des commentaires
 exports.createComment = (req, res, next) => {
@@ -6,7 +6,7 @@ exports.createComment = (req, res, next) => {
     let postID = req.params["id"];
     let userID = res.locals.userID;
     let sqlNewComment = `INSERT INTO Comment (userID, postID, commentText, dateSend) VALUES (${userID}, ${postID}, "${commentText}", NOW())`;
-    mysql.query(sqlNewComment, function(error, result) {
+    db.query(sqlNewComment, function(error, result) {
         if(error) {
             return res.status(501).json(error); 
         } if(result) {
@@ -19,7 +19,7 @@ exports.createComment = (req, res, next) => {
 exports.getAllComments = (req, res, next) => {
     let postID = req.params["id"];
     let sqlGetComments = `SELECT postID, commentID FROM Comment WHERE postID = ${ postID }`;
-    mysql.query(sqlGetComments, function(error, result) {
+    db.query(sqlGetComments, function(error, result) {
         if(error) {
             return res.status(404).json(error);
         }
@@ -34,7 +34,7 @@ exports.getOneComment = (req, res, next) => {
     let postID = req.params["id"];
     let commentID = req.params["ref"];
     let sqlGetComment = `SELECT * FROM Comment WHERE postID = ${ postID } && commentID = ${ commentID }`;
-    mysql.query(sqlGetComment, function(error, result) {
+    db.query(sqlGetComment, function(error, result) {
         if(error) {
             return res.status(404).json(error);
         }
@@ -49,7 +49,7 @@ exports.deleteComment = (req, res, next) => {
     let postID = req.params["id"];
     let commentID = req.params["ref"];
     let sqlDeleteCom = `DELETE FROM Comment WHERE postID=${postID} && commentID=${commentID}`;
-    mysql.query(sqlDeleteCom, function(error, result) {
+    db.query(sqlDeleteCom, function(error, result) {
         if(error) {
             return res.status(500).json(error);
         } else {

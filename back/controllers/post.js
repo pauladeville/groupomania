@@ -1,10 +1,9 @@
-const mysql = require('../dbConnect').connection;
-const fs = require("fs"); // Permet de gérer les fichiers stockés
+const db = require('../dbConnect');
 
 // Obtenir tous les messages
 exports.getAllPosts = (req, res, next) => {
     let sqlGetPosts = "SELECT postID, dateSend FROM Post";
-    mysql.query(sqlGetPosts, function(error, result) {
+    db.query(sqlGetPosts, function(error, result) {
         if(error) {
             return res.status(404).json({ message: "Soyez le premier à publier !"});
         }
@@ -18,7 +17,7 @@ exports.getAllPosts = (req, res, next) => {
 exports.getOnePost = (req, res, next) => {
     let postID = req.params["id"];
     let sqlGetPost = `SELECT * FROM Post WHERE postID=${postID}`;
-    mysql.query(sqlGetPost, function(error, result) {
+    db.query(sqlGetPost, function(error, result) {
         if(error) {
             return res.status(404).json({ message: "Cette publication a été supprimée"});
         }
@@ -38,7 +37,7 @@ exports.createPost = (req, res, next) => {
     };
     let userID = res.locals.userID;
     let sqlNewPost = `INSERT INTO Post (userID, gifUrl, postTitle, postText, dateSend) VALUES (${userID}, '${newPost.gifUrl}', "${newPost.title}", "${newPost.text}", NOW())`;
-    mysql.query(sqlNewPost, function(error, result) {
+    db.query(sqlNewPost, function(error, result) {
         if(error) {
             return res.status(501).json({ message: "Votre message n'a pas été publié. Veuillez réessayer dans quelques instants." }); 
         } else {
@@ -51,7 +50,7 @@ exports.createPost = (req, res, next) => {
 exports.deletePost = (req, res, next) => {
     let postID = req.params["id"];
     let sqlDelete = `DELETE FROM Post WHERE postID=${postID}`;
-    mysql.query(sqlDelete, function(error, result) {
+    db.query(sqlDelete, function(error, result) {
         if(error) {
             return res.status(500).json(error);
         } else {
@@ -64,7 +63,7 @@ exports.deletePost = (req, res, next) => {
 exports.clapPost = (req, res, next) => {
     let postID = req.params["id"];
     let sqlClap = `UPDATE Post SET claps = claps + 1 WHERE postID=${postID}`;
-    mysql.query(sqlClap, function(error, result) {
+    db.query(sqlClap, function(error, result) {
         if(error) {
             return res.status(501).json(error)
         } if(result) {

@@ -1,4 +1,4 @@
-const mysql = require('../dbConnect').connection; //Connexion à la bd
+const db = require('../dbConnect'); //Connexion à la bd
 const dotenv = require("dotenv").config();
 const bcrypt = require('bcrypt'); // Pour crypter le mot de passe
 const jwt = require('jsonwebtoken'); // Génère un token sécurisé
@@ -32,7 +32,7 @@ exports.signup = (req, res, next) => {
                     password: hash
                 };
                 let sqlCheck = `SELECT * FROM User WHERE email = '${userProfile.email}'`;
-                mysql.query(sqlCheck, function(error, result) {
+                db.query(sqlCheck, function(error, result) {
                     if(error) {
                         return res.status(501).json({ message: "Erreur du serveur. Veuillez réésayer plus tard."})
                     }
@@ -42,7 +42,7 @@ exports.signup = (req, res, next) => {
                         let sqlCreateUser =
                         `INSERT INTO User (firstName, lastName, email, password, dateCreation)
                         VALUES ('${userProfile.firstName}', '${userProfile.lastName}', '${userProfile.email}', '${userProfile.password}', NOW())`;
-                        mysql.query(sqlCreateUser, function(error, result) {
+                        db.query(sqlCreateUser, function(error, result) {
                             if(error) {
                                 return res.status(501).json({ message:'Erreur de notre serveur. Veuillez réessayer dans quelques instants.'})
                             } if(result) {
@@ -72,7 +72,7 @@ exports.login = (req, res, next) => {
     const passwordLogin = req.body.password;
     //recherche mySQL
     let sqlLogin = "SELECT * FROM User WHERE email=?";
-    mysql.query(sqlLogin, [emailLogin], function(error, result) {
+    db.query(sqlLogin, [emailLogin], function(error, result) {
         if(error) {
             return res.status(500).json({ message: "Erreur sur notre serveur. Veuillez réessayer plus tard." });
         }
@@ -105,7 +105,7 @@ exports.login = (req, res, next) => {
 exports.profile = (req, res, next) => {
     let userID = req.params["id"];
     let sqlGet = "SELECT * FROM User WHERE userID=?";
-    mysql.query(sqlGet, [userID], function(error, result) {
+    db.query(sqlGet, [userID], function(error, result) {
         if(error) {
             return res.status(500).json(error.message);
         }
@@ -125,7 +125,7 @@ exports.modify = (req, res, next) => {
     console.log(updatedProfile); 
     let sqlModify = "UPDATE User SET firstName = IFNULL(?, firstName), lastName = IFNULL (?, lastName) WHERE userID = ?";
     let values = [updatedProfile.firstName, updatedProfile.lastName, userID];
-    mysql.query(sqlModify, values, function(error, result) {
+    db.query(sqlModify, values, function(error, result) {
         if (error) {
             res.status(500).json(error.message);
         }
@@ -135,7 +135,7 @@ exports.modify = (req, res, next) => {
         else {
             // si la MaJ a été effectuée, renvoyer toutes les données
             let sqlGet = "SELECT * FROM User WHERE userID=?";
-            mysql.query(sqlGet, [userID], function(error, result) {
+            db.query(sqlGet, [userID], function(error, result) {
                 if (error) {
                     res.status(500).json(error.message);
                 } else {
@@ -152,7 +152,7 @@ exports.avatar = (req, res, next) => {
     const userID = req.params["id"];
     //recherche de l'avatar actuel pour pouvoir le supprimer 
     let sqlExUrl = "SELECT avatarUrl FROM User WHERE userID=?";
-    mysql.query(sqlExUrl, [userID], function(error, result) {
+    db.query(sqlExUrl, [userID], function(error, result) {
         if(error){
             return res.status(500).json(error)
         } else {
@@ -163,7 +163,7 @@ exports.avatar = (req, res, next) => {
                     if(error) throw error;
                 })
             } 
-            mysql.query(sqlChangeAvatar, [newAvartarUrl, userID], function (error, result) {
+            db.query(sqlChangeAvatar, [newAvartarUrl, userID], function (error, result) {
                 if(error) {
                     return res.status(501).json({message: "La modification n'a pas pu aboutir"})
                 } else {
@@ -178,7 +178,7 @@ exports.avatar = (req, res, next) => {
 exports.delete = (req, res, next) => {
     let userID = req.params["id"];
     let sqlFindAvatar = `SELECT avatarUrl FROM User WHERE userID=${userID}`;
-    mysql.query(sqlFindAvatar, function(error, result) {
+    db.query(sqlFindAvatar, function(error, result) {
         if(error){
             return res.status(500).json(error)
         } else {
@@ -191,7 +191,7 @@ exports.delete = (req, res, next) => {
         }
     });
     let sqlDelete = "DELETE FROM User WHERE userID=?";
-    mysql.query(sqlDelete, [userID], function(error, result) {
+    db.query(sqlDelete, [userID], function(error, result) {
         if(error) {
             return res.status(500).json(error.message);
         } else {
