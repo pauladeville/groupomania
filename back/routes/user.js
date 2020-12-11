@@ -7,12 +7,12 @@ const authId = require("../middleware/auth-id");
 const auth = require("../middleware/auth");
 const multer = require("../middleware/multer-config");
 
-//Application des fonctions pour chaque route + authentification pour toutes les routes + gestion des fichiers entrants pour les routes concernées (post / put)
+//Application des fonctions et authentification pour chaque route
 router.post("/signup", userCtrl.signup);
 router.post("/login", userCtrl.login);
-router.delete("/:id", authId, userCtrl.delete);
 router.get("/:id", auth, userCtrl.profile);
 router.put("/:id", authId, userCtrl.modify);
 router.post("/:id", authId, multer, userCtrl.avatar)
+router.delete("/:id", authId, userCtrl.delete);
 
 module.exports = router;

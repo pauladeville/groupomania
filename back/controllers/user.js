@@ -1,20 +1,21 @@
 const db = require('../dbConnect'); //Connexion à la bd
 const dotenv = require("dotenv").config();
-const bcrypt = require('bcrypt'); // Pour crypter le mot de passe
-const jwt = require('jsonwebtoken'); // Génère un token sécurisé
-const fs = require('fs'); // Permet de gérer les fichiers stockés
+const bcrypt = require('bcrypt'); //Pour crypter le mot de passe
+const jwt = require('jsonwebtoken'); //Génère un token sécurisé
+const fs = require('fs'); //Permet de gérer les fichiers stockés
 const passwordValidator = require("password-validator");
 const emailValidator = require("email-validator");
 
 //Création du schéma de mot de passe
 const passwordSchema = new passwordValidator();
 passwordSchema
-    .is().min(5) // 5 caractères min
-    .is().max(20) // 12 caractères max
-    .has().not().spaces() // Pas d'espace
+    .is().min(5) //5 caractères min
+    .is().max(20) //12 caractères max
+    .has().not().spaces() //Pas d'espace
 
-// Création de l'utilisateur et hashage du mot de passe
+//Création de l'utilisateur et hashage du mot de passe
 exports.signup = (req, res, next) => {
+    //Validation des inputs
     if (!emailValidator.validate((req.body.email))) {
         return res.status(400).json({
             message: "Assurez-vous d'avoir entré une adresse email valide"
@@ -33,6 +34,7 @@ exports.signup = (req, res, next) => {
                     email: req.body.email,
                     password: hash
                 };
+                //Vérification de l'absence de ligne avec le même email dans la BDD
                 let sqlCheck = `SELECT * FROM User WHERE email = '${userProfile.email}'`;
                 db.query(sqlCheck, function(error, result) {
                     if (error) {
@@ -45,6 +47,7 @@ exports.signup = (req, res, next) => {
                             message: "Un compte a déjà été créé avec cet email !"
                         })
                     } else {
+                        //Création de la nouvelle ligne utilisateur avec l'objet userProfile
                         let sqlCreateUser =
                             `INSERT INTO User (firstName, lastName, email, password, dateCreation)
                             VALUES ('${userProfile.firstName}', '${userProfile.lastName}', '${userProfile.email}', '${userProfile.password}', NOW())`;
@@ -55,6 +58,7 @@ exports.signup = (req, res, next) => {
                                 })
                             }
                             if (result) {
+                                //Renvoi d'un objet contenant le userID et le token sécurisé
                                 res.status(201).json({
                                     userID: result.insertId,
                                     token: jwt.sign({
@@ -78,12 +82,12 @@ exports.signup = (req, res, next) => {
     }
 };
 
-// Login de l'utilisateur
+//Login de l'utilisateur
 exports.login = (req, res, next) => {
-    //récupérer les identifiants transmis par le front
+    //Récupération des identifiants transmis par le front
     const emailLogin = req.body.email;
     const passwordLogin = req.body.password;
-    //recherche mySQL
+    //Recherche de la ligne correspondante dans la BDD
     let sqlLogin = "SELECT * FROM User WHERE email=?";
     db.query(sqlLogin, [emailLogin], function(error, result) {
         if (error) {
@@ -91,12 +95,13 @@ exports.login = (req, res, next) => {
                 message: "Erreur sur notre serveur. Veuillez réessayer plus tard."
             });
         } else if (result.length == 0) {
+            //Si la ligne n'existe pas encore, informer le visiteur
             return res.status(404).json({
                 message: "Vous n'êtes pas encore inscrit"
             })
         }
-        //si le mot de passe correspond, renvoyer un token
         else {
+            //Si la ligne existe, vérification du mot de passe
             bcrypt.compare(passwordLogin, result[0].password)
                 .then(valid => {
                     if (!valid) {
@@ -104,6 +109,7 @@ exports.login = (req, res, next) => {
                             message: "Votre mot de passe est incorrect."
                         })
                     }
+                    //Si le mdp a bien la même origine, renvoi d'un objet contenant userID, token et l'absence d'adminRights
                     return res.status(200).json({
                         userID: result[0].userID,
                         adminRights: result[0].adminRights,
@@ -121,7 +127,7 @@ exports.login = (req, res, next) => {
     })
 };
 
-// Récupérer le profil d'un utilisateur
+//Récupérer le profil d'un utilisateur
 exports.profile = (req, res, next) => {
     let userID = req.params["id"];
     let sqlGet = `SELECT * FROM User WHERE userID=${userID}`;
@@ -135,14 +141,16 @@ exports.profile = (req, res, next) => {
     })
 };
 
-// Modifier un profil
+//Modifier un profil
 exports.modify = (req, res, next) => {
+    //Récupération du userID (search params) et des info à modifier (objet transmis)
     let userID = req.params["id"]
     let updatedProfile = {
         firstName: req.body.firstName,
         lastName: req.body.lastName
     };
     console.log(updatedProfile);
+    //Modifier la ligne user avec les infos transmises (sinon garder la valeur inchangée)
     let sqlModify =
         `UPDATE User
         SET firstName = IFNULL(?, firstName),
@@ -158,7 +166,7 @@ exports.modify = (req, res, next) => {
                 message: "La modification n'a pas pu aboutir"
             });
         } else {
-            // si la MaJ a été effectuée, renvoyer toutes les données
+            //si la MaJ a été effectuée, renvoyer toutes les données user
             let sqlGet = `SELECT * FROM User WHERE userID=${userID}`;
             db.query(sqlGet, function(error, result) {
                 if (error) {
@@ -174,20 +182,24 @@ exports.modify = (req, res, next) => {
 
 //Met à jour l'avatar depuis la page profil
 exports.avatar = (req, res, next) => {
+    //Reconstruction de l'URL de l'image à partir de son nom de fichier
     const newAvartarUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
     const userID = req.params["id"];
-    //recherche de l'avatar actuel pour pouvoir le supprimer 
+    //Recherche de l'avatar actuel pour pouvoir le supprimer
     let sqlExUrl = `SELECT avatarUrl FROM User WHERE userID=${userID}`;
     db.query(sqlExUrl, function(error, result) {
         if (error) {
             return res.status(500).json(error)
         } if (result) {
+            //Extraction du nom du fichier depuis l'URL stockée dans la BDD
             let exAvatarName = result[0].avatarUrl.split("/images/")[1];
+            //S'il ne s'agit pas de l'image par défaut (à conserver), supprimer l'ancienne image
             if (exAvatarName != "avatar.png") {
                 fs.unlink(`images/${exAvatarName}`, (error) => {
                     if (error) throw error;
                 })
             }
+            //Mettre à jour avec la nouvelle URL
             let sqlChangeAvatar = `UPDATE User SET avatarUrl='${newAvartarUrl}' WHERE userID=${userID}`;
             db.query(sqlChangeAvatar, function(error) {
                 if (error) {
@@ -202,15 +214,17 @@ exports.avatar = (req, res, next) => {
     })
 };
 
-// Suppresion d'un utilisateur
+//Suppresion d'un utilisateur
 exports.delete = (req, res, next) => {
     let userID = req.params["id"];
+    //Recherche de la ligne de l'utilisateur concerné
     let sqlFindAvatar = `SELECT avatarUrl FROM User WHERE userID=${userID}`;
     db.query(sqlFindAvatar, function(error, result) {
         if (error) {
             return res.status(500).json(error)
         }
         if (result) {
+            //Supprimer son image de profil (s'il ne s'agit pas de l'image par défaut, à conserver)
             let avatarName = result[0].avatarUrl.split("/images/")[1];
             if (avatarName != "avatar.png") {
                 fs.unlink(`images/${avatarName}`, (error) => {
@@ -219,6 +233,7 @@ exports.delete = (req, res, next) => {
             }
         }
     });
+    //Supprimer toute la ligne de la BDD
     let sqlDelete = `DELETE FROM User WHERE userID=${userID}`;
     db.query(sqlDelete, function(error) {
         if (error) {

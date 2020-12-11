@@ -1,10 +1,14 @@
 const db = require('../dbConnect');
 
-// Créer un commentaire
+//Créer un commentaire
 exports.createComment = (req, res, next) => {
+    //Contenu du commentaire dans l'objet envoyé par le front
     let commentText = req.body.commentText;
+    //PostID dans l'URL de la requête
     let postID = req.params["id"];
+    //UserID est une variable de la requête (ajouté lors de l'authentification de celle-ci)
     let userID = res.locals.userID;
+    //Création de la ligne dans la BDD
     let sqlNewComment =
         `INSERT INTO Comment (userID, postID, commentText, dateSend)
         VALUES (${userID}, ${postID}, "${commentText}", NOW())`;
@@ -18,7 +22,7 @@ exports.createComment = (req, res, next) => {
     })
 };
 
-// Récupérer la liste des commentaires pour un post
+//Renvoi d'une liste des commentaires pour un post
 exports.getAllComments = (req, res, next) => {
     let postID = req.params["id"];
     let sqlGetComments =
@@ -34,7 +38,7 @@ exports.getAllComments = (req, res, next) => {
     })
 };
 
-// Récupérer un commentaire
+//Renvoi des données d'un commentaire
 exports.getOneComment = (req, res, next) => {
     let postID = req.params["id"];
     let commentID = req.params["ref"];
@@ -51,7 +55,7 @@ exports.getOneComment = (req, res, next) => {
     })
 };
 
-// Supprimer un message 
+//Supprimer un commentaire 
 exports.deleteComment = (req, res, next) => {
     let postID = req.params["id"];
     let commentID = req.params["ref"];

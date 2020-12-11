@@ -112,7 +112,7 @@ export default {
             fetch(url, options)
                 .then(res => res.json())
                 .then(data => {
-                    // récupérer le profil mis à jour
+                    //récupérer le profil mis à jour
                     this.userProfile = data[0];
                     //réinitialiser les champs de formulaire
                     this.newProfile = {}

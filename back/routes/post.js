@@ -5,7 +5,7 @@ const postCtrl = require("../controllers/post");
 //Importation des middleware d'authentification et de gestion des fichiers entrants
 const auth = require("../middleware/auth");
 
-//Application des fonctions pour chaque route + authentification pour toutes les routes + gestion des fichiers entrants pour les routes concernées (post / put)
+//Application des fonctions et authentification pour chaque route
 router.get("/", auth, postCtrl.getAllPosts);
 router.get("/:id", auth, postCtrl.getOnePost);
 router.post("/", auth, postCtrl.createPost); 

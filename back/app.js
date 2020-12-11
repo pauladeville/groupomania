@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 //Transformation des requêtes en objets JavaScript utilisables
 app.use(bodyParser.json());
 
-// Protège contre les failles XSS
+//Protège contre les failles XSS
 app.use(sanitize());
 
 //Dossier images statique (avec un path dynamique)
