@@ -1,35 +1,77 @@
 <template>
-
     <div>
-
         <div class="post" :postID="postID">
             <div class="post-info">
                 <div class="post-info-sender">
-                    <img class="post-info-sender-avatar" :src="userInfo.avatarUrl" alt="Avatar de l'utilisateur">
-                    <h3 class="post-info-sender-name">{{ userInfo.firstName }} {{ userInfo.lastName }} </h3>
+                    <img
+                        class="post-info-sender-avatar"
+                        :src="userInfo.avatarUrl"
+                        alt="Avatar de l'utilisateur"
+                    />
+                    <h3
+                        class="post-info-sender-name">
+                        {{ userInfo.firstName }}
+                        {{ userInfo.lastName }}
+                    </h3>
                 </div>
                 <div class="post-info-time">
                     <h3>Posté le {{ convertDate }}</h3>
-                    <img v-if="postInfo.userID == visitorID || adminRights == 1" @click="deletePost" src="../assets/white-trash.png" alt="Icône de suppression">
+                    <img
+                        v-if="postInfo.userID == visitorID || adminRights == 1"
+                        @click="deletePost"
+                        src="../assets/white-trash.png"
+                        alt="Icône de suppression"
+                    />
                 </div>
             </div>
+
             <div class="post-content">
-                <p v-if="updateMessage.length >= 1" class="alert-msg">{{ updateMessage }}</p>
-                <img class="post-content-gif" :src="postInfo.gifUrl" alt="Gif publié par l'utilisateur">
+                <p
+                    v-if="updateMessage.length >= 1"
+                    class="alert-msg">
+                    {{ updateMessage }}
+                </p>
+                <img
+                    class="post-content-gif"
+                    :src="postInfo.gifUrl"
+                    alt="Gif publié par l'utilisateur"
+                />
                 <div class="post-content-text">
                     <div>
                         <h2>{{ postInfo.title }}</h2>
                         <p>{{ postInfo.text }}</p>
                     </div>
                     <div class="post-claps">
-                        <img v-if="postInfo.claps >= 1" @click="clapPost" src="../assets/clap.png" alt="Icône d'applaudissements">
-                        <img v-else src="../assets/unclap.png" @click="clapPost" alt="Icône en cas d'absence d'applaudissement">
+                        <img
+                            v-if="postInfo.claps >= 1"
+                            @click="clapPost"
+                            src="../assets/clap.png"
+                            alt="Icône accompagnant le nombre d'applaudissements"
+                        />
+                        <img
+                            v-else
+                            src="../assets/unclap.png"
+                            @click="clapPost"
+                            alt="Icône signifiant l'absence d'applaudissement"
+                        />
                         <p v-if="postInfo.claps >= 1">{{ postInfo.claps }}</p>
                     </div>
                 </div>
             </div>
-            <button v-if="!invisibleComs" @click="invisibleComs = true" class="toggle-button" aria-hidden="true">Masquer les commentaires</button>
-            <button v-if="invisibleComs" @click="invisibleComs = false" class="toggle-button" aria-hidden="true">Afficher les commentaires</button>
+            <button
+                v-if="!invisibleComs"
+                @click="invisibleComs = true"
+                class="toggle-button"
+                aria-hidden="true"
+                >Masquer les commentaires
+            </button>
+            <button
+                v-if="invisibleComs"
+                @click="invisibleComs = false"
+                class="toggle-button"
+                aria-hidden="true"
+                >Afficher les commentaires
+            </button>
         </div>
 
         <div class="comment-section" v-show="!invisibleComs">
@@ -46,7 +88,6 @@
             />
         </div>
     </div>
-
 </template>
 
 <script>
@@ -193,5 +234,5 @@ export default {
 </script>
 
 <style lang="css">
-  @import '../style/style.css'
+@import '../style/style.css'
 </style>

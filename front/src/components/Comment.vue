@@ -8,8 +8,6 @@
                 alt="Icône de suppression"
             />
         </p>
-        
-
         <p class="comment-content">" {{ commentInfo.commentText }} "</p>
     </div>
 </template>        
@@ -110,15 +108,5 @@ export default {
 </script>
 
 <style lang="css">
-  @import '../style/style.css';
-  .comment-info {
-      position: relative;
-  }
-  .comment img {
-      width: 20px;
-      cursor: pointer;
-      display: inline-block;
-      position: absolute;
-      right: 0;
-  }
+@import '../style/style.css';
 </style>

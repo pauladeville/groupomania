@@ -25,8 +25,8 @@ body {
 }
 
 header {
-  border-bottom: 4px solid #FD2D01;
-  background-color: #091F43;
+  border-bottom: 4px solid #fd2d01;
+  background-color: #091f43;
   position: absolute;
   top: 0;
   width: 100%;
@@ -47,12 +47,18 @@ nav {
   flex-wrap: wrap;
   padding: 20px;
 }
-nav a, nav a:hover, nav a:visited, nav a:link {
+nav a,
+nav a:hover,
+nav a:visited,
+nav a:link {
   color: #fff;
   text-decoration: none;
 }
 
-#signout, #signout:hover, #signout:visited, #signout:link {
+#signout,
+#signout:hover,
+#signout:visited,
+#signout:link {
   color: #525252;
   text-decoration: none;
 }
@@ -63,8 +69,11 @@ nav a, nav a:hover, nav a:visited, nav a:link {
   padding: 30px;
 }
 
-.nav-links .router-link-active, .nav-links .router-link-active:hover, .nav-links .router-link-active:visited, .nav-links .router-link-active:link {
-  background-color: #FD2D01;
+.nav-links .router-link-active,
+.nav-links .router-link-active:hover,
+.nav-links .router-link-active:visited,
+.nav-links .router-link-active:link {
+  background-color: #fd2d01;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
@@ -92,7 +101,7 @@ nav a, nav a:hover, nav a:visited, nav a:link {
   font-weight: bold;
 }
 .welcome-links.router-link-exact-active, .welcome-links.router-link-exact-active:hover {
-  background-color: #FD2D01;
+  background-color: #fd2d01;
   color: #fff;
   -webkit-border-top-left-radius: 10px;
   -webkit-border-top-right-radius: 10px;
@@ -108,7 +117,12 @@ h1 {
   margin: 90px 30px;
   font-size: 2em;
   font-weight: 700;
-  padding-top: 220px;
+  padding-top: 200px;
+}
+
+h2 {
+  font-weight: bold;
+  padding-top: 10px;
 }
 
 form {
@@ -121,7 +135,8 @@ form {
   border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
-form label, form input {
+form label,
+form input {
   text-align: center;
 }
 
@@ -151,7 +166,7 @@ label {
   margin: 10px 0;
   text-align: left;
   transition: color 200ms ease-in-out;
-  color: #091F43;
+  color: #091f43;
 }
 
 input {
@@ -160,11 +175,11 @@ input {
   padding: 5px;
   border: 0;
   outline: 0;
-  border-bottom: 2px solid #091F43;
+  border-bottom: 2px solid #091f43;
   width: 95%;
 }
 input:focus {
-  border-bottom: 2px solid #FD2D01;
+  border-bottom: 2px solid #fd2d01;
 }
 
 textarea {
@@ -182,12 +197,12 @@ textarea {
   font-weight: bold;
   margin: 20px 40px 40px 40px;
   padding-top: 20px;
-  color: #FD2D01;
+  color: #fd2d01;
 }
 
 button {
   color: #fff;
-  background-color: #091F43;
+  background-color: #091f43;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -200,7 +215,7 @@ button {
   transition: all 200ms ease-in-out;
 }
 button:hover {
-  background-color: #FD2D01;
+  background-color: #fd2d01;
 }
 
 #delete-user {
@@ -208,7 +223,7 @@ button:hover {
   transition: background-color 200ms ease-in-out;
 }
 #delete-user:hover {
-  background-color: #FD2D01;
+  background-color: #fd2d01;
 }
 
 .avatar {
@@ -248,13 +263,13 @@ input[type=file] {
 .toggle-button {
   margin-top: 0;
   background-color: #fff;
-  color: #091F43;
-  border: 1px solid #091F43;
+  color: #091f43;
+  border: 1px solid #091f43;
   transition: all ease-in-out 200ms;
 }
 .toggle-button:hover {
-  color: #FD2D01;
-  border: 1px solid #FD2D01;
+  color: #fd2d01;
+  border: 1px solid #fd2d01;
   background-color: #fff;
 }
 
@@ -274,14 +289,14 @@ input[type=file] {
   padding: 0 auto;
   max-width: 1000px;
   margin: auto;
-  background-color: #091F43;
+  background-color: #091f43;
   border: solid #fff 1px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   color: #fff;
   font-weight: bold;
 }
 .orderby-button:hover {
-  background-color: #091F43;
+  background-color: #091f43;
 }
 .orderby-button img {
   margin-left: 20px;
@@ -318,7 +333,7 @@ input[type=file] {
   -moz-border-radius: 5px 5px 0px 0px;
   border-radius: 5px 5px 0px 0px;
   color: #fff;
-  background-color: #091F43;
+  background-color: #091f43;
 }
 .post-info-sender {
   display: flex;
@@ -370,7 +385,7 @@ input[type=file] {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-  color: #091F43;
+  color: #091f43;
 }
 .post-content-text h2 {
   margin: 0 0 30px 0;
@@ -390,7 +405,7 @@ input[type=file] {
   cursor: pointer;
 }
 .post-claps p {
-  color: #FD2D01;
+  color: #fd2d01;
 }
 
 .comment-section {
@@ -399,7 +414,7 @@ input[type=file] {
 }
 .comment-section div.comment {
   background-color: #fff;
-  color: #091F43;
+  color: #091f43;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -412,6 +427,14 @@ input[type=file] {
 }
 .comment-section div.comment .comment-info {
   font-weight: bold;
+  position: relative;
+}
+.comment-section div.comment .comment-info img {
+  width: 20px;
+  cursor: pointer;
+  display: inline-block;
+  position: absolute;
+  right: 0;
 }
 
 .new-comment {
@@ -517,7 +540,7 @@ input[type=file] {
   }
 
   .container {
-    background: #091F43;
+    background: #091f43;
     padding-bottom: 1px;
   }
 
@@ -543,7 +566,12 @@ input[type=file] {
     width: auto;
   }
 
-  h1, p, label, input#email, input#password, button {
+  h1,
+p,
+label,
+input,
+input,
+button {
     font-size: 0.9em;
   }
 
@@ -555,12 +583,14 @@ input[type=file] {
     margin-top: 0;
   }
   nav a.welcome-links.router-link-exact-active, nav a.welcome-links.router-link-exact-active:hover {
-    background-color: #091F43;
-    color: #FD2D01;
+    background-color: #091f43;
+    color: #fd2d01;
     font-weight: bold;
   }
 
-  label, input, textarea {
+  label,
+input,
+textarea {
     text-align: center;
     width: 95%;
   }
@@ -577,7 +607,8 @@ input[type=file] {
     margin: 0;
   }
 
-  .post h2, .post h3 {
+  .post h2,
+.post h3 {
     font-size: 0.9em;
   }
 

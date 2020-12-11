@@ -1,8 +1,6 @@
 <template>
     <div class="container welcome-container full-height">
-
-        <WelcomeNav />
-
+        <WelcomeNav></WelcomeNav>
         <h1>Accédez à votre espace personnel</h1>
         <form v-on:submit.prevent="login" class="welcome-form">
             <fieldset>
@@ -82,7 +80,7 @@ export default {
                             this.errorMessage = res.message
                         }
                     })
-                    .catch(error => console.log(error))
+                .catch(error => console.log(error))
             }
         }
     },
@@ -92,6 +90,6 @@ export default {
 }
 </script>
 
-<style scoped lang="css">
-    @import '../style/style.css';
+<style lang="css">
+@import "../style/style.css";
 </style>

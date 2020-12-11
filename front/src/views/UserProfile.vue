@@ -1,20 +1,40 @@
 <template>
     <div class="container">
-        <HomeNav />
+        <HomeNav></HomeNav>
         <h1>Modifier votre profil</h1>
         <form>
             <fieldset>
-                <img class="avatar" :src="userProfile.avatarUrl">
-                <label for="new-avatar-url">Changer de photo de profil</label>
-                <input v-on:change="updateAvatar" id="new-avatar-url" type="file" accept="image/*" />
+                <img
+                    class="avatar"
+                    :src="userProfile.avatarUrl"
+                />
+                <label for="new-avatar-url">Changer de photo de profil
+                    <input
+                        v-on:change="updateAvatar"
+                        id="new-avatar-url"
+                        type="file"
+                        accept="image/*"
+                    />
+                </label>
             </fieldset>
             <fieldset>
-                <label for="new-first-name">Votre prénom n'est pas <span class="bold-text">{{ userProfile.firstName }}</span> ?
-                <input v-model="newProfile.firstName" id="new-first-name" placeholder="Votre vrai prénom" /></label>
+                <label for="new-first-name">Votre prénom n'est pas
+                    <span class="bold-text">{{ userProfile.firstName }}</span> ?
+                    <input
+                        v-model="newProfile.firstName"
+                        id="new-first-name"
+                        placeholder="Votre vrai prénom"
+                    />
+                </label>
             </fieldset>
             <fieldset>
-                <label for="new-last-name">Votre nom n'est pas <span class="bold-text">{{ userProfile.lastName }}</span> ?
-                <input v-model="newProfile.lastName" id="new-last-name" placeholder="Votre vrai nom" /></label>
+                <label for="new-last-name">Votre nom n'est pas
+                    <span class="bold-text">{{ userProfile.lastName }}</span> ?
+                    <input v-model="newProfile.lastName"
+                        id="new-last-name"
+                        placeholder="Votre vrai nom"
+                    />
+                </label>
             </fieldset>
             <p v-if="updateMessage.length >= 1" class="alert-msg">{{ updateMessage }}</p>
             <button @click="modifyProfile" id="modify-user">Modifier votre profil</button>

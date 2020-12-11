@@ -1,6 +1,6 @@
 <template>
     <div class="container welcome-container">
-        <WelcomeNav />
+        <WelcomeNav></WelcomeNav>
         <h1>Nouveau sur Groupomania ?</h1>
         <form v-on:submit.prevent="signup" class="welcome-form">
             <fieldset>
@@ -67,7 +67,7 @@
                     />
                 </label>
             </fieldset>
-            <p v-if="errorMessage.length >= 1" class="alert-msg">{{ errorMessage }} </p>
+            <p v-if="errorMessage.length >= 1" class="alert-msg">{{ errorMessage }}</p>
             <button>Créez votre compte</button>
         </form>
     </div>
@@ -121,9 +121,9 @@ export default {
                             this.errorMessage = res.message
                         }
                     })
-                    .catch(error => {
-                        this.errorMessage = error
-                    })
+                .catch(error => {
+                    this.errorMessage = error
+                })
             }
             else {
                 this.errorMessage = "Vous avez entré 2 mots de passe différents"
@@ -133,13 +133,9 @@ export default {
     mounted() {
         localStorage.clear();
     }
-
 }
 </script>
 
 <style lang="css">
-  @import '../style/style.css';
-  #container {
-	height: auto;
-  }
+@import "../style/style.css";
 </style>

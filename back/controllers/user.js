@@ -9,18 +9,20 @@ const emailValidator = require("email-validator");
 //Création du schéma de mot de passe
 const passwordSchema = new passwordValidator();
 passwordSchema
-    .is().min(5) // 6 caractères min
+    .is().min(5) // 5 caractères min
     .is().max(20) // 12 caractères max
     .has().not().spaces() // Pas d'espace
 
 // Création de l'utilisateur et hashage du mot de passe
 exports.signup = (req, res, next) => {
-    //Messages d'erreur si champ non validé
-    if(!emailValidator.validate((req.body.email))) {
-        return res.status(400).json({ message: "Assurez-vous d'avoir entré une adresse email valide"})        
-    }
-    else if (!passwordSchema.validate((req.body.password))) {
-        return res.status(400).json({ message: "Votre mot de passe doit contenir au moins 5 caractères"})        
+    if (!emailValidator.validate((req.body.email))) {
+        return res.status(400).json({
+            message: "Assurez-vous d'avoir entré une adresse email valide"
+        })
+    } else if (!passwordSchema.validate((req.body.password))) {
+        return res.status(400).json({
+            message: "Votre mot de passe doit contenir au moins 5 caractères"
+        })
     } else {
         //Hashage x10 du mdp + salage
         bcrypt.hash(req.body.password, 10)
@@ -33,38 +35,49 @@ exports.signup = (req, res, next) => {
                 };
                 let sqlCheck = `SELECT * FROM User WHERE email = '${userProfile.email}'`;
                 db.query(sqlCheck, function(error, result) {
-                    if(error) {
-                        return res.status(501).json({ message: "Erreur du serveur. Veuillez réésayer plus tard."})
+                    if (error) {
+                        return res.status(501).json({
+                            message: "Erreur du serveur. Veuillez réésayer plus tard."
+                        })
                     }
-                    if(result[0]) {
-                        return res.status(401).json({ message: "Un compte a déjà été créé avec cet email !"})
+                    if (result[0]) {
+                        return res.status(401).json({
+                            message: "Un compte a déjà été créé avec cet email !"
+                        })
                     } else {
                         let sqlCreateUser =
-                        `INSERT INTO User (firstName, lastName, email, password, dateCreation)
-                        VALUES ('${userProfile.firstName}', '${userProfile.lastName}', '${userProfile.email}', '${userProfile.password}', NOW())`;
+                            `INSERT INTO User (firstName, lastName, email, password, dateCreation)
+                            VALUES ('${userProfile.firstName}', '${userProfile.lastName}', '${userProfile.email}', '${userProfile.password}', NOW())`;
                         db.query(sqlCreateUser, function(error, result) {
-                            if(error) {
-                                return res.status(501).json({ message:'Erreur de notre serveur. Veuillez réessayer dans quelques instants.'})
-                            } if(result) {
+                            if (error) {
+                                return res.status(501).json({
+                                    message: 'Erreur de notre serveur. Veuillez réessayer dans quelques instants.'
+                                })
+                            }
+                            if (result) {
                                 res.status(201).json({
                                     userID: result.insertId,
-                                    token: jwt.sign(
-                                        { userID: result.insertId },
-                                        process.env.TOKEN,
-                                        { expiresIn: "24h" }
+                                    token: jwt.sign({
+                                            userID: result.insertId
+                                        },
+                                        process.env.TOKEN, {
+                                            expiresIn: "24h"
+                                        }
                                     )
                                 })
                             }
                         })
                     }
-                }) 
+                })
             })
             .catch(error => {
-                return res.status(501).json({ message:'Erreur de notre serveur. Veuillez réésayer plus tard.'})
-            }) 
+                return res.status(501).json({
+                    message: 'Erreur de notre serveur. Veuillez réésayer plus tard.'
+                })
+            })
     }
 };
-                
+
 // Login de l'utilisateur
 exports.login = (req, res, next) => {
     //récupérer les identifiants transmis par le front
@@ -73,30 +86,37 @@ exports.login = (req, res, next) => {
     //recherche mySQL
     let sqlLogin = "SELECT * FROM User WHERE email=?";
     db.query(sqlLogin, [emailLogin], function(error, result) {
-        if(error) {
-            return res.status(500).json({ message: "Erreur sur notre serveur. Veuillez réessayer plus tard." });
-        }
-        else if(result.length == 0) {
-            return res.status(404).json({ message: "Vous n'êtes pas encore inscrit"})
+        if (error) {
+            return res.status(500).json({
+                message: "Erreur sur notre serveur. Veuillez réessayer plus tard."
+            });
+        } else if (result.length == 0) {
+            return res.status(404).json({
+                message: "Vous n'êtes pas encore inscrit"
+            })
         }
         //si le mot de passe correspond, renvoyer un token
         else {
             bcrypt.compare(passwordLogin, result[0].password)
-            .then(valid => {
-                if(!valid) {
-                    return res.status(401).json({ message: "Votre mot de passe est incorrect." })
-                }
-                return res.status(200).json({
-                    userID: result[0].userID,
-                    adminRights: result[0].adminRights,
-                    token: jwt.sign(
-                        { userID: result[0].userID },
-                        process.env.TOKEN,
-                        { expiresIn: "24h" }
-                    )
+                .then(valid => {
+                    if (!valid) {
+                        return res.status(401).json({
+                            message: "Votre mot de passe est incorrect."
+                        })
+                    }
+                    return res.status(200).json({
+                        userID: result[0].userID,
+                        adminRights: result[0].adminRights,
+                        token: jwt.sign({
+                            userID: result[0].userID
+                            },
+                            process.env.TOKEN, {
+                                expiresIn: "24h"
+                            }
+                        )
+                    })
                 })
-            })
-            .catch(error => res.status(500).json(error))
+                .catch(error => res.status(500).json(error))
         }
     })
 };
@@ -104,16 +124,16 @@ exports.login = (req, res, next) => {
 // Récupérer le profil d'un utilisateur
 exports.profile = (req, res, next) => {
     let userID = req.params["id"];
-    let sqlGet = "SELECT * FROM User WHERE userID=?";
-    db.query(sqlGet, [userID], function(error, result) {
-        if(error) {
+    let sqlGet = `SELECT * FROM User WHERE userID=${userID}`;
+    db.query(sqlGet, function(error, result) {
+        if (error) {
             return res.status(500).json(error.message);
         }
-        else {
+        if (result) {
             return res.status(200).json(result);
         }
     })
-}; 
+};
 
 // Modifier un profil
 exports.modify = (req, res, next) => {
@@ -122,24 +142,30 @@ exports.modify = (req, res, next) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName
     };
-    console.log(updatedProfile); 
-    let sqlModify = "UPDATE User SET firstName = IFNULL(?, firstName), lastName = IFNULL (?, lastName) WHERE userID = ?";
-    let values = [updatedProfile.firstName, updatedProfile.lastName, userID];
+    console.log(updatedProfile);
+    let sqlModify =
+        `UPDATE User
+        SET firstName = IFNULL(?, firstName),
+        lastName = IFNULL (?, lastName)
+        WHERE userID =${userID}`;
+    let values = [updatedProfile.firstName, updatedProfile.lastName];
     db.query(sqlModify, values, function(error, result) {
         if (error) {
             res.status(500).json(error.message);
         }
         if (result.affectedRows == 0) {
-            res.status(400).json({ message: "La modification n'a pas pu aboutir" });
-        }
-        else {
+            res.status(400).json({
+                message: "La modification n'a pas pu aboutir"
+            });
+        } else {
             // si la MaJ a été effectuée, renvoyer toutes les données
-            let sqlGet = "SELECT * FROM User WHERE userID=?";
-            db.query(sqlGet, [userID], function(error, result) {
+            let sqlGet = `SELECT * FROM User WHERE userID=${userID}`;
+            db.query(sqlGet, function(error, result) {
                 if (error) {
                     res.status(500).json(error.message);
-                } else {
-                    res.status(200).json(result); 
+                }
+                if (result) {
+                    res.status(200).json(result);
                 }
             })
         }
@@ -151,21 +177,23 @@ exports.avatar = (req, res, next) => {
     const newAvartarUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
     const userID = req.params["id"];
     //recherche de l'avatar actuel pour pouvoir le supprimer 
-    let sqlExUrl = "SELECT avatarUrl FROM User WHERE userID=?";
-    db.query(sqlExUrl, [userID], function(error, result) {
-        if(error){
+    let sqlExUrl = `SELECT avatarUrl FROM User WHERE userID=${userID}`;
+    db.query(sqlExUrl, function(error, result) {
+        if (error) {
             return res.status(500).json(error)
-        } else {
+        } if (result) {
             let exAvatarName = result[0].avatarUrl.split("/images/")[1];
-            let sqlChangeAvatar = "UPDATE User SET avatarUrl=? WHERE userID=?";
-            if(exAvatarName != "avatar.png") {
+            if (exAvatarName != "avatar.png") {
                 fs.unlink(`images/${exAvatarName}`, (error) => {
-                    if(error) throw error;
+                    if (error) throw error;
                 })
-            } 
-            db.query(sqlChangeAvatar, [newAvartarUrl, userID], function (error, result) {
-                if(error) {
-                    return res.status(501).json({message: "La modification n'a pas pu aboutir"})
+            }
+            let sqlChangeAvatar = `UPDATE User SET avatarUrl='${newAvartarUrl}' WHERE userID=${userID}`;
+            db.query(sqlChangeAvatar, function(error) {
+                if (error) {
+                    return res.status(501).json({
+                        message: "La modification n'a pas pu aboutir"
+                    })
                 } else {
                     return res.status(201).json(newAvartarUrl)
                 }
@@ -179,20 +207,21 @@ exports.delete = (req, res, next) => {
     let userID = req.params["id"];
     let sqlFindAvatar = `SELECT avatarUrl FROM User WHERE userID=${userID}`;
     db.query(sqlFindAvatar, function(error, result) {
-        if(error){
+        if (error) {
             return res.status(500).json(error)
-        } else {
+        }
+        if (result) {
             let avatarName = result[0].avatarUrl.split("/images/")[1];
-            if(avatarName != "avatar.png") {
+            if (avatarName != "avatar.png") {
                 fs.unlink(`images/${avatarName}`, (error) => {
-                    if(error) throw error;
+                    if (error) throw error;
                 })
             }
         }
     });
-    let sqlDelete = "DELETE FROM User WHERE userID=?";
-    db.query(sqlDelete, [userID], function(error, result) {
-        if(error) {
+    let sqlDelete = `DELETE FROM User WHERE userID=${userID}`;
+    db.query(sqlDelete, function(error) {
+        if (error) {
             return res.status(500).json(error.message);
         } else {
             return res.status(200).json();

@@ -1,11 +1,11 @@
 <template>
-    <div class="container">
-        <HomeNav />
-        <h1>Ajouter une publication</h1>
-        <form v-on:submit.prevent="publish">
-            <fieldset>
-                <label for="post-title">Titre *
-                    <input
+	<div class="container">
+		<HomeNav></HomeNav>
+		<h1>Ajouter une publication</h1>
+		<form v-on:submit.prevent="publish">
+			<fieldset>
+				<label for="post-title">Titre *
+					<input
                         v-model="postInfo.title"
                         type="text"
                         id="post-title"
@@ -13,35 +13,34 @@
                         placeholder="Titre de votre publication"
                         required
                     />
-                </label>
-            </fieldset>
-            <fieldset>
-                <label for="gif-url">URL du gif *
-                    <input
+				</label>
+			</fieldset>
+			<fieldset>
+				<label for="gif-url">URL du gif *
+					<input
                         v-model="postInfo.gifUrl"
                         type="url"
                         id="gif-url"
                         placeholder="Lien vers le fichier GIPHY par exemple"
                         required
                     />
-                </label>
-                <img id="preview">
-            </fieldset>
-            <fieldset>
-                <label for="post-content">Texte *
-                    <textarea
+				</label>
+			</fieldset>
+			<fieldset>
+				<label for="post-content">Texte *
+					<textarea
                         v-model="postInfo.text"
                         id="post-content"
                         name="post-content"
                         required>
                     </textarea>
-                </label>
-            </fieldset>
-            <p class="alert-msg" v-if="updateMessage.length >= 1">{{ updateMessage }}</p>
-            <button type="submit" id="post-upload">Publier</button>
-            <router-link v-if="published" to="/forum" tag="button">Se rendre sur le forum</router-link>
-        </form>
-    </div>
+				</label>
+			</fieldset>
+			<p class="alert-msg" v-if="updateMessage.length >= 1">{{ updateMessage }}</p>
+			<button type="submit" id="post-upload">Publier</button>
+			<router-link v-if="published" to="/forum" tag="button">Se rendre sur le forum</router-link>
+		</form>
+	</div>
 </template>
 
 <script>
@@ -82,14 +81,14 @@ export default {
                     this.updateMessage = res.message;
                     this.published = true;
                 })
-                .catch(error => {
-                    this.errorMessage = error
-                })
+            .catch(error => {
+                this.errorMessage = error
+            })
         }
     }
 }
 </script>
 
 <style lang="css">
-  @import '../style/style.css'
+@import '../style/style.css'
 </style>

@@ -1,6 +1,16 @@
 <template>
-    <form v-on:submit.prevent="publish" :postID="postID" class="new-comment">
-        <textarea v-model="newComment.commentText" class="new-comment" placeholder="Votre commentaire bienveillant" rows="3" cols="10" required></textarea>
+    <form
+        v-on:submit.prevent="publish"
+        :postID="postID"
+        class="new-comment">
+        <textarea
+            v-model="newComment.commentText"
+            class="new-comment"
+            placeholder="Votre commentaire bienveillant"
+            rows="3"
+            cols="10"
+            required>
+        </textarea>
         <button>Commenter cette publication</button>
     </form>
 </template>
@@ -46,5 +56,5 @@ export default {
 </script>
 
 <style lang="css">
-  @import '../style/style.css'
+@import '../style/style.css'
 </style>
